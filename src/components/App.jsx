@@ -3,7 +3,42 @@ import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
 
 export default class App extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      filters: {
+        sort_by: "vote_average.desc",
+        primary_release_year: "0",
+      },
+      page: 1,
+      total_pages: "",
+    }
+
+  }
+  onChangeFilters = (event) => {
+    const newFilters = {
+      ...this.state.filters,
+      [event.target.name]: event.target.value
+    };
+    this.setState({
+      filters: newFilters
+    })
+  };
+
+  onChangePage = (page) => {
+    this.setState({
+      page
+    });
+  };
+  getTotalPages = (totalPages) => {
+    this.setState({
+      total_pages: totalPages
+    })
+  };
+
   render() {
+    const {filters, page, total_pages } = this.state;
     return (
       <div className="container">
         <div className="row mt-4">
@@ -11,12 +46,21 @@ export default class App extends React.Component {
             <div className="card" style={{ width: "100%" }}>
               <div className="card-body">
                 <h3>Фильтры:</h3>
-                <Filters />
+                <Filters
+                  filters={filters}
+                  onChangeFilters={this.onChangeFilters}
+                  onChangePage={this.onChangePage}
+                  total_pages={total_pages}
+                  page={page} />
               </div>
             </div>
           </div>
           <div className="col-8">
-            <MoviesList />
+            <MoviesList
+              filters={filters}
+              changePage={this.onChangePage}
+              getTotalPages={this.getTotalPages}
+              page={page} />
           </div>
         </div>
       </div>

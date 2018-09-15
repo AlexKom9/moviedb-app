@@ -21,12 +21,11 @@ export default class MovieList extends Component {
       })
       .then(data => {
         console.log(data);
+        getTotalPages(data.total_pages);
         this.setState({
           movies: data.results,
-          // total_pages: data.total_pages
         });
-        console.log(getTotalPages);
-        getTotalPages(data.total_pages);
+
       })
   };
 

@@ -1,6 +1,8 @@
 import React from "react";
 import SortBy from './SortBy'
+import PrimaryRealise from './PrimaryRealise'
 import Paginator from './Paginator'
+
 
 export default class Filters extends React.Component {
   render() {
@@ -10,20 +12,10 @@ export default class Filters extends React.Component {
         <SortBy
           sort_by={sort_by}
           onChangeFilters={onChangeFilters}/>
-        <div className="form-group">
-          <label htmlFor="sort_by">Год релиза :</label>
-          <select
-            className="form-control"
-            id="primary_release_year"
-            name="primary_release_year"
-            value={primary_release_year}
-            onChange={onChangeFilters}>
-            <option value="0">Выберите год</option>
-            <option value="2018">2018</option>
-            <option value="2005">2005</option>
-            <option value="1996">1996</option>
-          </select>
-        </div>
+
+        <PrimaryRealise
+          primary_release_year={primary_release_year}
+          onChangeFilters={onChangeFilters}/>
 
         <Paginator
           page={page}

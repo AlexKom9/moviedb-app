@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../../api/api";
 import _ from "lodash"
+import queryString from "query-string"
 
 export default class MovieList extends Component {
   constructor() {
@@ -13,14 +14,37 @@ export default class MovieList extends Component {
 
   getMovies = (filters, page) => {
     const {getTotalPages} = this.props;
-    const {sort_by, primary_release_year} = filters;
-    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU&sort_by=${sort_by}&page=${page}&primary_release_year=${primary_release_year}`;
+    const {sort_by, primary_release_year, genre} = filters;
+
+    let genreString = '';
+    console.log(genre);
+
+    for (let i = 0; i < genre.length; i++) {
+      genreString = genreString + `&with_genres=${genre[i]}`
+    }
+
+    const queryStringParams = {
+      api_key: API_KEY_3,
+      sort_by: sort_by,
+      language: 'ru-RU',
+      page: page,
+      primary_release_year: primary_release_year,
+    };
+    //make it by hands
+    // const getQueryStringParams = object => {
+    //   let string = "";
+    //   for (let key in object){
+    //     string = string + `&${key}=${object[key]}`;
+    //   }
+    //   return '?' + string.substring(1, string.length)
+    // };
+    const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}${genreString}`;
+
     fetch(link)
       .then(response => {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         getTotalPages(data.total_pages);
         this.setState({
           movies: data.results,
@@ -34,8 +58,10 @@ export default class MovieList extends Component {
   //  question
   }
 
-
   componentDidUpdate(prevProps) {
+    console.log(this.props.filters);
+    console.log(prevProps.filters);
+
     if(!_.isEqual(this.props.filters, prevProps.filters)){
       this.props.changePage(1);
       this.getMovies(this.props.filters, 1);
@@ -46,7 +72,6 @@ export default class MovieList extends Component {
   }
 
   render() {
-    console.log('render');
     const { movies } = this.state;
     return (
       <div className="row">

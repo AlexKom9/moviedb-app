@@ -36,34 +36,11 @@ export default class App extends React.Component {
       page
     });
   };
+
   getTotalPages = totalPages => {
     this.setState({
       total_pages: totalPages
     });
-  };
-  onchangeGenre = genreId => {
-    console.log(genreId);
-
-    const { with_genres } = this.state.filters;
-    if (!with_genres.includes(Number(genreId))) {
-      this.setState(prevState => ({
-        filters: {
-          ...prevState.filters,
-          with_genres: [...prevState.filters.with_genres, Number(genreId)]
-        }
-      }));
-    } else {
-      // const newGenre = ;
-
-      this.setState(prevState => ({
-        filters: {
-          ...prevState.filters,
-          with_genres: with_genres.filter(id => {
-            return id != genreId;
-          })
-        }
-      }));
-    }
   };
 
   render() {

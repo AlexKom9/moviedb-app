@@ -29,12 +29,12 @@ export default class Genres extends React.Component {
       onChangeFilters
     } = this.props;
 
-    const currenId = event.target.id;
+    const currentId = event.target.id;
     let value = [];
-    if (with_genres.includes(currenId)) {
-      value = with_genres.filter(id => id !== currenId);
+    if (with_genres.includes(currentId)) {
+      value = with_genres.filter(id => id !== currentId);
     } else {
-      value = [...with_genres, currenId];
+      value = [...with_genres, currentId];
     }
     onChangeFilters({
       target: {

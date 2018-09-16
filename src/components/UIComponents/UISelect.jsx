@@ -1,19 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import UILabel from "./UILabele";
+import _ from "lodash";
 
 export default class UISelect extends React.Component {
   //todo: hw
   static propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired,
-    value: PropTypes.isRequired
+    id: PropTypes.string.isRequired
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !_.isEqual(nextProps, this.props);
+  }
+
   render() {
-    const { id, name, value, onChange, label, options } = this.props;
-    console.log(this.props.children);
+    const { id, name, value, onChange, label } = this.props;
+    console.log("render UISelect");
     return (
       <div className="form-group">
         <UILabel id={id}>{label}</UILabel>

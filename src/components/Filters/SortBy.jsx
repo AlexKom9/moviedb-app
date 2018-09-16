@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 
-export default class SortBy extends React.Component {
+export default class SortBy extends React.PureComponent {
   static propTypes = {
     onChangeFilters: PropTypes.func.isRequired
   };
@@ -27,6 +27,7 @@ export default class SortBy extends React.Component {
   };
   render() {
     const {onChangeFilters, sort_by, options} = this.props;
+    console.log('render SortBy');
     return (
       <div className="form-group">
         <label htmlFor="sort_by">Сортировать по:</label>

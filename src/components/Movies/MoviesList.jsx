@@ -60,9 +60,6 @@ export default class MovieList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.filters);
-    console.log(prevProps.filters);
-
     if (!_.isEqual(this.props.filters, prevProps.filters)) {
       this.props.changePage(1);
       this.getMovies(this.props.filters, 1);

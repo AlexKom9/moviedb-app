@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import UISelect from "../UIComponents/UISelect";
+// import _ from 'lodash'
 
-export default class PrimaryRealise extends React.Component {
+export default class PrimaryRealise extends React.PureComponent {
   static propTypes = {
     onChangeFilters: PropTypes.func.isRequired,
   };
@@ -27,6 +28,12 @@ export default class PrimaryRealise extends React.Component {
       }
     ]
   };
+
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !_.isEqual(nextProps, this.props)
+  // }
+
 
   render() {
     const { onChangeFilters, primary_release_year, options } = this.props;

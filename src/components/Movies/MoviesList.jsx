@@ -15,13 +15,12 @@ export default class MovieList extends Component {
 
   getMovies = (filters, page) => {
     const { getTotalPages } = this.props;
-    const { sort_by, primary_release_year, genre } = filters;
+    const { sort_by, primary_release_year, with_genres } = filters;
 
     let genreString = "";
-    console.log(genre);
 
-    for (let i = 0; i < genre.length; i++) {
-      genreString = genreString + `&with_genres=${genre[i]}`;
+    for (let i = 0; i < with_genres.length; i++) {
+      genreString = genreString + `&with_genres=${with_genres[i]}`;
     }
 
     const queryStringParams = {

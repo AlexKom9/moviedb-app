@@ -7,7 +7,7 @@ import Ganres from "./Genres";
 export default class Filters extends React.Component {
   render() {
     const {
-      filters: { sort_by, primary_release_year, genres },
+      filters: { sort_by, primary_release_year },
       page,
       total_pages,
       onChangeFilters,
@@ -23,7 +23,7 @@ export default class Filters extends React.Component {
           onChangeFilters={onChangeFilters}
         />
 
-        <Ganres onChangeGenre={onChangeGenre} genres={genres} />
+        <Ganres onChangeGenre={onChangeGenre}/>
 
         <Paginator
           page={page}

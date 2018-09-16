@@ -26,8 +26,8 @@ export default class Genres extends React.Component {
 
   changeHandler = (event) => {
     const {onChangeGenre} = this.props;
-    const name = event.target.id;
-    onChangeGenre(name);
+    const id = event.target.id;
+    onChangeGenre(id);
   };
 
   render() {

@@ -6,71 +6,68 @@ const initialState = {
   filters: {
     sort_by: "vote_average.desc",
     primary_release_year: "0",
-    genre: [],
+    with_genres: []
   },
   page: 1,
-  total_pages: "",
+  total_pages: ""
 };
 
 export default class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
       ...initialState
-    }
+    };
   }
 
-  onChangeFilters = (event) => {
+  onChangeFilters = event => {
     const newFilters = {
       ...this.state.filters,
       [event.target.name]: event.target.value
     };
     this.setState({
       filters: newFilters
-    })
+    });
   };
 
-  onChangePage = (page) => {
+  onChangePage = page => {
     this.setState({
       page
     });
   };
-  getTotalPages = (totalPages) => {
+  getTotalPages = totalPages => {
     this.setState({
       total_pages: totalPages
-    })
+    });
   };
-  onchangeGenre = (genreId) => {
+  onchangeGenre = genreId => {
     console.log(genreId);
-    const { genre } = this.state.filters;
-    console.log(genre);
-    let newFilters = {...this.state.filters};
-    let newGenre = [...this.state.filters.genre];
 
-    if ( !genre.includes(Number(genreId))){
-      this.setState( prevState => ({
+    const { with_genres } = this.state.filters;
+    if (!with_genres.includes(Number(genreId))) {
+      this.setState(prevState => ({
         filters: {
           ...prevState.filters,
-          genre: [...prevState.filters.genre, Number(genreId)]
+          with_genres: [...prevState.filters.with_genres, Number(genreId)]
         }
-      }))
+      }));
     } else {
-      const newGenre = genre.filter((id) => {
-       return (id != genreId)
-      });
+      // const newGenre = ;
 
-      this.setState( prevState => ({
+      this.setState(prevState => ({
         filters: {
           ...prevState.filters,
-          genre: newGenre
+          with_genres: with_genres.filter(id => {
+            return id != genreId;
+          })
         }
-      }))
-   }
+      }));
+    }
   };
 
   render() {
-    const {filters, page, total_pages } = this.state;
+    const { filters, page, total_pages } = this.state;
     return (
       <div className="container">
         <div className="row mt-4">
@@ -81,10 +78,14 @@ export default class App extends React.Component {
                 <div className="mb-4">
                   <button
                     className="btn btn-light"
-                    onClick={() => this.setState({
-                      ...initialState
-                    })}
-                  >Очистить фильры</button>
+                    onClick={() =>
+                      this.setState({
+                        ...initialState
+                      })
+                    }
+                  >
+                    Очистить фильры
+                  </button>
                 </div>
                 <Filters
                   filters={filters}
@@ -92,7 +93,8 @@ export default class App extends React.Component {
                   onChangePage={this.onChangePage}
                   onChangeGenre={this.onchangeGenre}
                   total_pages={total_pages}
-                  page={page} />
+                  page={page}
+                />
               </div>
             </div>
           </div>
@@ -101,7 +103,8 @@ export default class App extends React.Component {
               filters={filters}
               changePage={this.onChangePage}
               getTotalPages={this.getTotalPages}
-              page={page} />
+              page={page}
+            />
           </div>
         </div>
       </div>

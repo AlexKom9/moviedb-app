@@ -91,7 +91,7 @@ export default class App extends React.Component {
                   filters={filters}
                   onChangeFilters={this.onChangeFilters}
                   onChangePage={this.onChangePage}
-                  onChangeGenre={this.onchangeGenre}
+                  // onChangeGenre={this.onchangeGenre}
                   total_pages={total_pages}
                   page={page}
                 />

@@ -7,6 +7,7 @@ export default class PrimaryRealise extends React.PureComponent {
   static propTypes = {
     onChangeFilters: PropTypes.func.isRequired,
   };
+
   static defaultProps = {
     options: [
       {

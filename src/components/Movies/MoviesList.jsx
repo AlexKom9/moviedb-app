@@ -1,34 +1,35 @@
 import React, { Component } from "react";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../../api/api";
-import _ from "lodash"
-import queryString from "query-string"
+import _ from "lodash";
+import queryString from "query-string";
 
 export default class MovieList extends Component {
   constructor() {
     super();
+
     this.state = {
-      movies: [],
-    }
+      movies: []
+    };
   };
 
   getMovies = (filters, page) => {
-    const {getTotalPages} = this.props;
-    const {sort_by, primary_release_year, genre} = filters;
+    const { getTotalPages } = this.props;
+    const { sort_by, primary_release_year, genre } = filters;
 
-    let genreString = '';
+    let genreString = "";
     console.log(genre);
 
     for (let i = 0; i < genre.length; i++) {
-      genreString = genreString + `&with_genres=${genre[i]}`
+      genreString = genreString + `&with_genres=${genre[i]}`;
     }
 
     const queryStringParams = {
       api_key: API_KEY_3,
       sort_by: sort_by,
-      language: 'ru-RU',
+      language: "ru-RU",
       page: page,
-      primary_release_year: primary_release_year,
+      primary_release_year: primary_release_year
     };
     //make it by hands
     // const getQueryStringParams = object => {
@@ -38,7 +39,9 @@ export default class MovieList extends Component {
     //   }
     //   return '?' + string.substring(1, string.length)
     // };
-    const link = `${API_URL}/discover/movie?${queryString.stringify(queryStringParams)}${genreString}`;
+    const link = `${API_URL}/discover/movie?${queryString.stringify(
+      queryStringParams
+    )}${genreString}`;
 
     fetch(link)
       .then(response => {
@@ -47,27 +50,26 @@ export default class MovieList extends Component {
       .then(data => {
         getTotalPages(data.total_pages);
         this.setState({
-          movies: data.results,
+          movies: data.results
         });
-
-      })
+      });
   };
 
   componentDidMount() {
-    this.getMovies(this.props.filters, this.props.page)
-  //  question
+    this.getMovies(this.props.filters, this.props.page);
+    //  question
   }
 
   componentDidUpdate(prevProps) {
     console.log(this.props.filters);
     console.log(prevProps.filters);
 
-    if(!_.isEqual(this.props.filters, prevProps.filters)){
+    if (!_.isEqual(this.props.filters, prevProps.filters)) {
       this.props.changePage(1);
       this.getMovies(this.props.filters, 1);
     }
-    if(this.props.page !== prevProps.page){
-      this.getMovies(this.props.filters, this.props.page)
+    if (this.props.page !== prevProps.page) {
+      this.getMovies(this.props.filters, this.props.page);
     }
   }
 

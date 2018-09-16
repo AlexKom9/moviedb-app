@@ -8,7 +8,6 @@ export default class Genres extends React.Component {
     this.state = {
       genres: [],
     }
-
   }
 
   componentDidMount(){

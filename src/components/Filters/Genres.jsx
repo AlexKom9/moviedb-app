@@ -1,32 +1,30 @@
-import React from "react";
+import React from 'react';
 // import { API_URL, API_KEY_3 } from "../../api/api";
 
 export default class Genres extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      allGenres: []
+      allGenres: [],
     };
   }
 
   componentDidMount() {
-    let link = `https://api.themoviedb.org/3/genre/movie/list?api_key=942fe0c9aeb6728941df8e74f3fbce09&language=ru-RU`;
+    const link = 'https://api.themoviedb.org/3/genre/movie/list?api_key=942fe0c9aeb6728941df8e74f3fbce09&language=ru-RU';
     fetch(link)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
+      .then(response => response.json())
+      .then((data) => {
         console.log(data);
         this.setState({
-          allGenres: data.genres
+          allGenres: data.genres,
         });
       });
   }
 
-  changeHandler = event => {
+  changeHandler = (event) => {
     const {
       filters: { with_genres },
-      onChangeFilters
+      onChangeFilters,
     } = this.props;
 
     const currentId = event.target.id;
@@ -38,9 +36,9 @@ export default class Genres extends React.Component {
     }
     onChangeFilters({
       target: {
-        name: "with_genres",
-        value: value
-      }
+        name: 'with_genres',
+        value,
+      },
     });
   };
 

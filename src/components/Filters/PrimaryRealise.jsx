@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import UISelect from "../UIComponents/UISelect";
+import React from 'react';
+import PropTypes from 'prop-types';
+import UISelect from '../UIComponents/UISelect';
 // import _ from 'lodash'
 
 export default class PrimaryRealise extends React.PureComponent {
@@ -11,23 +11,23 @@ export default class PrimaryRealise extends React.PureComponent {
   static defaultProps = {
     options: [
       {
-        label: "Выберите год",
-        value: "0",
-        image: './lol.jpg'
+        label: 'Выберите год',
+        value: '0',
+        image: './lol.jpg',
       },
       {
-        label: "2018",
-        value: "2018"
+        label: '2018',
+        value: '2018',
       },
       {
-        label: "2005",
-        value: "2005"
+        label: '2005',
+        value: '2005',
       },
       {
-        label: "1991",
-        value: "1991"
-      }
-    ]
+        label: '1991',
+        value: '1991',
+      },
+    ],
   };
 
 
@@ -44,13 +44,13 @@ export default class PrimaryRealise extends React.PureComponent {
         name="primary_release_year"
         value={primary_release_year}
         onChange={onChangeFilters}
-        label={() => <p>Год релиза:</p> }
+        label={() => <p>Год релиза:</p>}
         // options={options}
       >
         {options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
-            {/*{option.image && <img src={option.image} />}*/}
+            {/* {option.image && <img src={option.image} />} */}
           </option>
         ))}
       </UISelect>

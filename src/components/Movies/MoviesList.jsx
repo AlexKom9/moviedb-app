@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import MovieItem from "./MovieItem";
-import { API_URL, API_KEY_3 } from "../../api/api";
 import _ from "lodash";
 import queryString from "query-string";
+import MovieItem from "./MovieItem";
+import { API_URL, API_KEY_3 } from "../../api/api";
 
 export default class MovieList extends Component {
   constructor() {
@@ -11,7 +11,7 @@ export default class MovieList extends Component {
     this.state = {
       movies: []
     };
-  };
+  }
 
   getMovies = (filters, page) => {
     const { getTotalPages } = this.props;
@@ -20,17 +20,17 @@ export default class MovieList extends Component {
     let genreString = "";
 
     for (let i = 0; i < with_genres.length; i++) {
-      genreString = genreString + `&with_genres=${with_genres[i]}`;
+      genreString += `&with_genres=${with_genres[i]}`;
     }
 
     const queryStringParams = {
       api_key: API_KEY_3,
-      sort_by: sort_by,
+      sort_by,
       language: "ru-RU",
-      page: page,
-      primary_release_year: primary_release_year
+      page,
+      primary_release_year
     };
-    //make it by hands
+    // make it by hands
     // const getQueryStringParams = object => {
     //   let string = "";
     //   for (let key in object){
@@ -43,9 +43,7 @@ export default class MovieList extends Component {
     )}${genreString}`;
 
     fetch(link)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         getTotalPages(data.total_pages);
         this.setState({
@@ -73,13 +71,11 @@ export default class MovieList extends Component {
     const { movies } = this.state;
     return (
       <div className="row">
-        {movies.map(movie => {
-          return (
-            <div key={movie.id} className="col-6 mb-4">
-              <MovieItem item={movie} />
-            </div>
-          );
-        })}
+        {movies.map(movie => (
+          <div key={movie.id} className="col-6 mb-4">
+            <MovieItem item={movie} />
+          </div>
+        ))}
       </div>
     );
   }

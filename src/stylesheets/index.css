@@ -1,8 +1,6 @@
 body {
-  background: #fdfdfd;
-}
+  background: rgba(128, 128, 128, 0.1); }
 
 ul {
-	list-style: none;
-	padding-left: 0;
-}
+  list-style: none;
+  padding-left: 0; }

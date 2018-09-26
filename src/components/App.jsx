@@ -2,6 +2,10 @@ import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
 import Header from "./Header/Header";
+import {API_KEY_3, API_URL, fetchApi} from "../api/api";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const initialState = {
   filters: {
@@ -18,7 +22,6 @@ const initialState = {
 export default class App extends React.Component {
   constructor() {
     super();
-
     this.state = {
       ...initialState
     };
@@ -46,19 +49,38 @@ export default class App extends React.Component {
     });
   };
 
-  updateUser = user => {
+  updateUser = (user) => {
     console.log(user);
     this.setState({
       user: user
     });
   };
 
-  updateSessionId = id => {
-    console.log("session_id: ", id);
+  updateSessionId = (session_id) => {
+    console.log("session_id: ", session_id);
+    cookies.set("session_id", session_id, {
+      path: "/",
+      maxAge: 2592000,
+    });
     this.setState({
-      session_id: id
+      session_id: session_id
     });
   };
+
+  componentDidMount(){
+    const session_id = cookies.get('session_id');
+    // console.log('session_id from cookies -- ', session_id);
+    if (session_id){
+      fetchApi(
+        `${API_URL}/account?api_key=${API_KEY_3}&session_id=${
+          session_id
+          }`
+      ).then(user => {
+        this.updateUser(user);
+      });
+
+    }
+  }
 
   render() {
     const { filters, page, total_pages, user } = this.state;

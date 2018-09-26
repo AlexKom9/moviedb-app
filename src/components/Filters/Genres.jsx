@@ -44,6 +44,10 @@ export default class Genres extends React.Component {
 
   render() {
     const { allGenres } = this.state;
+    const {
+      filters: { with_genres }
+    } = this.props;
+    console.log(with_genres, allGenres[0]);
     return (
       <div className="mb-4">
         <ul>
@@ -55,6 +59,7 @@ export default class Genres extends React.Component {
                   className="custom-control-input"
                   id={genre.id}
                   onChange={this.changeHandler}
+                  checked={with_genres.includes(String(genre.id))}
                 />
                 <label className="custom-control-label" htmlFor={genre.id}>
                   {genre.name}

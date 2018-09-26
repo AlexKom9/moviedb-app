@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import Login from "./Login";
+import Login from "./Login/Login";
+import User from "./User"
 import PropTypes from "prop-types";
 
 class Header extends Component {
+  // static propTypes = {
+  //   user: PropTypes.isRequired
+  // };
+
   render() {
+    const { updateUser, updateSessionId, user } = this.props;
     return (
       <nav className="navbar navbar-dark bg-primary">
         <div className="container">
@@ -14,7 +20,7 @@ class Header extends Component {
               </a>
             </li>
           </ul>
-          <Login/>
+          {user ? <User user={user}/>: <Login updateUser={updateUser} updateSessionId={updateSessionId}/> }
         </div>
       </nav>
     );

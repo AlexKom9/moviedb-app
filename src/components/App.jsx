@@ -1,7 +1,7 @@
 import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
-import Header from "./Header"
+import Header from "./Header/Header";
 
 const initialState = {
   filters: {
@@ -10,7 +10,9 @@ const initialState = {
     with_genres: []
   },
   page: 1,
-  total_pages: ""
+  total_pages: "",
+  user: null,
+  session_id: null
 };
 
 export default class App extends React.Component {
@@ -44,12 +46,25 @@ export default class App extends React.Component {
     });
   };
 
+  updateUser = user => {
+    console.log(user);
+    this.setState({
+      user: user
+    });
+  };
+
+  updateSessionId = id => {
+    console.log("session_id: ", id);
+    this.setState({
+      session_id: id
+    });
+  };
+
   render() {
-    const { filters, page, total_pages } = this.state;
+    const { filters, page, total_pages, user } = this.state;
     return (
       <div>
-        {/*TODO: HEADER*/}
-        <Header/>
+        <Header updateUser={this.updateUser} updateSessionId={this.updateSessionId} user={user} />
         <div className="container">
           <div className="row mt-4">
             <div className="col-4">

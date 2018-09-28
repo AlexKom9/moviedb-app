@@ -3,6 +3,8 @@ import _ from "lodash";
 import queryString from "query-string";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../../api/api";
+import PropTypes from 'prop-types';
+
 
 export default class MovieList extends Component {
   constructor() {
@@ -12,6 +14,13 @@ export default class MovieList extends Component {
       movies: []
     };
   }
+
+  static propTypes = {
+    filters: PropTypes.object.isRequired,
+    getTotalPages: PropTypes.func.isRequired,
+    changePage: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+  };
 
   getMovies = (filters, page) => {
     const { getTotalPages } = this.props;
@@ -30,18 +39,9 @@ export default class MovieList extends Component {
       page,
       primary_release_year
     };
-    // make it by hands
-    // const getQueryStringParams = object => {
-    //   let string = "";
-    //   for (let key in object){
-    //     string = string + `&${key}=${object[key]}`;
-    //   }
-    //   return '?' + string.substring(1, string.length)
-    // };
     const link = `${API_URL}/discover/movie?${queryString.stringify(
       queryStringParams
     )}${genreString}`;
-
     fetch(link)
       .then(response => response.json())
       .then(data => {
@@ -54,7 +54,6 @@ export default class MovieList extends Component {
 
   componentDidMount() {
     this.getMovies(this.props.filters, this.props.page);
-    //  question
   }
 
   componentDidUpdate(prevProps) {

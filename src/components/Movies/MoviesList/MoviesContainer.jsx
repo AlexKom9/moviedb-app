@@ -13,7 +13,7 @@ export default class MoviesContainer extends Component {
     this.state = {
       movies: []
     };
-  }
+  };
 
   static propTypes = {
     filters: PropTypes.object.isRequired,

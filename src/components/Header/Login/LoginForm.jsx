@@ -1,6 +1,7 @@
 import React from "react";
 import { AppContext } from "../../App";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
+import PropTypes from "prop-types";
 
 class LoginForm extends React.Component {
   state = {
@@ -219,11 +220,21 @@ class LoginForm extends React.Component {
   }
 }
 
+LoginForm.propTypes = {
+  updateUser: PropTypes.func.isRequired,
+  updateSessionId: PropTypes.func.isRequired
+};
+
 const LoginFormContainer = props => {
   console.log(props);
   return (
     <AppContext.Consumer>
-      {context => <LoginForm updateUser={context.updateUser} updateSessionId={context.updateSessionId} />}
+      {context => (
+        <LoginForm
+          updateUser={context.updateUser}
+          updateSessionId={context.updateSessionId}
+        />
+      )}
     </AppContext.Consumer>
   );
 };

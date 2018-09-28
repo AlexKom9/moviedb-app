@@ -1,7 +1,8 @@
 import React from "react";
+import { AppContext } from "../../App";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   state = {
     username: "",
     password: "",
@@ -23,7 +24,7 @@ export default class LoginForm extends React.Component {
     }));
   };
 
-  handleBlur = (event) => {
+  handleBlur = event => {
     console.log("on blur");
     const errors = this.validateFields();
     // console.log('errors -- ',errors);
@@ -34,27 +35,25 @@ export default class LoginForm extends React.Component {
       this.setState(prevState => ({
         errors: {
           ...prevState.errors,
-          [name]: errorByName,
+          [name]: errorByName
         }
       }));
     }
   };
 
   validateFields = () => {
-
     const errors = {};
-    if (this.state.username === "" ) {
+    if (this.state.username === "") {
       errors.username = "Not empty";
     }
 
-    if (this.state.password !== this.state.repeatPassword){
-      errors.repeatPassword = "Password must be the same"
+    if (this.state.password !== this.state.repeatPassword) {
+      errors.repeatPassword = "Password must be the same";
     }
 
-    if (this.state.password.length < 5){
-      errors.password = "Password must be at least 5 character"
+    if (this.state.password.length < 5) {
+      errors.password = "Password must be at least 5 character";
     }
-
 
     return errors;
   };
@@ -105,12 +104,14 @@ export default class LoginForm extends React.Component {
             data.session_id
           }`
         ).then(user => {
-          this.setState({
-            submitting: false
-          }, () => {
-            this.props.updateUser(user);
-          });
-
+          this.setState(
+            {
+              submitting: false
+            },
+            () => {
+              this.props.updateUser(user);
+            }
+          );
         });
       })
       .catch(error => {
@@ -140,7 +141,13 @@ export default class LoginForm extends React.Component {
   };
 
   render() {
-    const { username, password, repeatPassword, errors, submitting } = this.state;
+    const {
+      username,
+      password,
+      repeatPassword,
+      errors,
+      submitting
+    } = this.state;
     return (
       <div className="form-login-container">
         <form className="form-login">
@@ -209,5 +216,18 @@ export default class LoginForm extends React.Component {
         </form>
       </div>
     );
-  };
+  }
+}
+
+const LoginFormContainer = props => {
+  console.log(props);
+  return (
+    <AppContext.Consumer>
+      {context => <LoginForm updateUser={context.updateUser} updateSessionId={context.updateSessionId} />}
+    </AppContext.Consumer>
+  );
 };
+
+LoginFormContainer.displayName = "LoginFormContainer";
+
+export default LoginFormContainer;

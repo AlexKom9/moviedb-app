@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { API_URL, API_KEY_3, API_KEY_4 } from "../../../api/api";
 import { Modal, ModalBody } from "reactstrap";
 import LoginForm from "./LoginForm";
 
@@ -21,7 +19,6 @@ class Login extends Component {
   };
 
   render() {
-    const { updateUser, updateSessionId } = this.props;
     return (
       <div>
         <button
@@ -33,7 +30,7 @@ class Login extends Component {
         </button>
         <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
           <ModalBody>
-            <LoginForm updateUser={updateUser} updateSessionId={updateSessionId}/>
+            <LoginForm/>
           </ModalBody>
         </Modal>
       </div>

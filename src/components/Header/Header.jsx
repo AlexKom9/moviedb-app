@@ -21,7 +21,7 @@ class Header extends Component {
               </a>
             </li>
           </ul>
-          {user ? <User/>: <Login updateUser={updateUser} updateSessionId={updateSessionId}/> }
+          {user ? <User/>: <Login/> }
         </div>
       </nav>
     );

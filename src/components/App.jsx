@@ -83,7 +83,13 @@ export default class App extends React.Component {
   render() {
     const { filters, page, total_pages, user } = this.state;
     return (
-      <AppContext.Provider value={{ user: user, updateUser: this.updateUser }}>
+      <AppContext.Provider
+        value={{
+          user: user,
+          updateUser: this.updateUser,
+          updateSessionId: this.updateSessionId
+        }}
+      >
         <Header
           updateUser={this.updateUser}
           updateSessionId={this.updateSessionId}

@@ -1,6 +1,6 @@
 import React from "react";
 import Filters from "./Filters/Filters";
-import MoviesContainer from "./Movies/MoviesContainer";
+import MoviesContainer from "./Movies/MoviesList/MoviesContainer";
 import Header from "./Header/Header";
 import {API_KEY_3, API_URL, fetchApi} from "../api/api";
 import Cookies from 'universal-cookie';

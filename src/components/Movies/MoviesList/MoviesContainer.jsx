@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import queryString from "query-string";
-import { API_URL, API_KEY_3 } from "../../api/api";
+import { API_URL, API_KEY_3 } from "../../../api/api";
 import PropTypes from 'prop-types';
 import MoviesList from './MoviesList';
 
@@ -14,6 +14,7 @@ export default class MoviesContainer extends Component {
       movies: []
     };
   }
+
   static propTypes = {
     filters: PropTypes.object.isRequired,
     getTotalPages: PropTypes.func.isRequired,

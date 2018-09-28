@@ -2,9 +2,11 @@ import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesContainer from "./Movies/MoviesList/MoviesContainer";
 import Header from "./Header/Header";
-import {API_KEY_3, API_URL, fetchApi} from "../api/api";
-import Cookies from 'universal-cookie';
+import { API_KEY_3, API_URL, fetchApi } from "../api/api";
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
+
+export const AppContext = React.createContext();
 
 const initialState = {
   filters: {
@@ -24,7 +26,7 @@ export default class App extends React.Component {
     this.state = {
       ...initialState
     };
-  };
+  }
 
   onChangeFilters = event => {
     const newFilters = {
@@ -48,44 +50,45 @@ export default class App extends React.Component {
     });
   };
 
-  updateUser = (user) => {
+  updateUser = user => {
     console.log(user);
     this.setState({
       user: user
     });
   };
 
-  updateSessionId = (session_id) => {
+  updateSessionId = session_id => {
     console.log("session_id: ", session_id);
     cookies.set("session_id", session_id, {
       path: "/",
-      maxAge: 2592000,
+      maxAge: 2592000
     });
     this.setState({
       session_id: session_id
     });
   };
 
-  componentDidMount(){
-    const session_id = cookies.get('session_id');
+  componentDidMount() {
+    const session_id = cookies.get("session_id");
     // console.log('session_id from cookies -- ', session_id);
-    if (session_id){
+    if (session_id) {
       fetchApi(
-        `${API_URL}/account?api_key=${API_KEY_3}&session_id=${
-          session_id
-          }`
+        `${API_URL}/account?api_key=${API_KEY_3}&session_id=${session_id}`
       ).then(user => {
         this.updateUser(user);
       });
-
     }
   }
 
   render() {
     const { filters, page, total_pages, user } = this.state;
     return (
-      <div>
-        <Header updateUser={this.updateUser} updateSessionId={this.updateSessionId} user={user} />
+      <AppContext.Provider value={{ user: user, updateUser: this.updateUser }}>
+        <Header
+          updateUser={this.updateUser}
+          updateSessionId={this.updateSessionId}
+          user={user}
+        />
         <div className="container">
           <div className="row mt-4">
             <div className="col-4">
@@ -124,7 +127,7 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </AppContext.Provider>
     );
   }
 }

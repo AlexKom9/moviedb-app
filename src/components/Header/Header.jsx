@@ -10,6 +10,7 @@ class Header extends Component {
 
   render() {
     const { updateUser, updateSessionId, user } = this.props;
+    // console.log(User)
     return (
       <nav className="navbar navbar-dark bg-primary">
         <div className="container">
@@ -20,7 +21,7 @@ class Header extends Component {
               </a>
             </li>
           </ul>
-          {user ? <User user={user}/>: <Login updateUser={updateUser} updateSessionId={updateSessionId}/> }
+          {user ? <User/>: <Login updateUser={updateUser} updateSessionId={updateSessionId}/> }
         </div>
       </nav>
     );

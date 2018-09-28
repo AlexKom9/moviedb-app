@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SortBy from './SortBy';
 import PrimaryRealise from './PrimaryRealise';
 import Paginator from './Paginator';
-import Ganres from './Genres';
+import GanresContainer from './Genres/GenresContainer';
 
 export default class Filters extends Component {
   render() {
@@ -23,7 +23,7 @@ export default class Filters extends Component {
           onChangeFilters={onChangeFilters}
         />
 
-        <Ganres filters={filters} onChangeFilters={onChangeFilters} />
+        <GanresContainer filters={filters} onChangeFilters={onChangeFilters} />
 
         <Paginator
           page={page}

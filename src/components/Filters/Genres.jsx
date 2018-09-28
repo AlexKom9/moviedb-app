@@ -6,7 +6,7 @@ export default class Genres extends React.Component {
     super();
     this.state = {
       allGenres: [],
-    };
+    }
   }
 
   componentDidMount() {

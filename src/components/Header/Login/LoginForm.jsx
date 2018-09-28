@@ -25,23 +25,25 @@ export default class LoginForm extends React.Component {
 
   handleBlur = (event) => {
     console.log("on blur");
-    const errors = this.validateFields(event.target.name);
-    if (Object.keys(errors).length > 0) {
+    const errors = this.validateFields();
+    // console.log('errors -- ',errors);
+    const name = event.target.name;
+    const errorByName = errors[name];
+    // console.log('errorByName --- ',errorByName);
+    if (errorByName) {
       this.setState(prevState => ({
         errors: {
           ...prevState.errors,
-          ...errors
+          [name]: errorByName,
         }
       }));
     }
   };
 
-  validateFields = (Fieldname) => {
+  validateFields = () => {
+
     const errors = {};
-    // switch (Fieldname){
-    //   case 'repeatPassword':
-    // }
-    if (this.state.username === "") {
+    if (this.state.username === "" ) {
       errors.username = "Not empty";
     }
 
@@ -103,10 +105,12 @@ export default class LoginForm extends React.Component {
             data.session_id
           }`
         ).then(user => {
-          this.props.updateUser(user);
           this.setState({
             submitting: false
+          }, () => {
+            this.props.updateUser(user);
           });
+
         });
       })
       .catch(error => {

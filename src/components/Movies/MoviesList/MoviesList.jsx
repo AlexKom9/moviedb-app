@@ -1,6 +1,7 @@
 import React from "react";
 import MovieItem from "../MovieItem";
 import PropTypes from "prop-types";
+import MoviesHOC from "./MoviesHOC"
 
 const MovieList = ({ movies = [] }) => (
   <div className="row">
@@ -16,4 +17,4 @@ MovieList.propTypes = {
   movies: PropTypes.array.isRequired
 };
 
-export default MovieList;
+export default MoviesHOC(MovieList);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Login from "./Login/Login";
 import User from "./User"
+import HeaderMenu from './HeaderMenu'
 import PropTypes from "prop-types";
 
 class Header extends Component {

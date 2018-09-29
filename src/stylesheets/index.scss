@@ -10,3 +10,19 @@ ul {
 .invalid-feedback {
   display: block;
 }
+
+.dropdown-menu {
+  display: block;
+  right: 0;
+  left: unset;
+}
+
+.head-user {
+  position: relative;
+}
+.user-head__menu {
+  right: 0;
+  position: absolute;
+  top: 120%;
+}
+

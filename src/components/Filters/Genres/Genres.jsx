@@ -1,5 +1,6 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import GenresHOC from "./GenresHOC";
 
 const Genres = ({ allGenres, onChange, with_genres }) => (
   <div className="mb-4">
@@ -33,7 +34,6 @@ Genres.propTypes = {
   with_genres: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired
 };
-Genres.displayName = 'Genres';
+Genres.displayName = "Genres";
 
-
-export default Genres
+export default GenresHOC(Genres);

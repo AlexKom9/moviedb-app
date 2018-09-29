@@ -225,8 +225,7 @@ LoginForm.propTypes = {
   updateSessionId: PropTypes.func.isRequired
 };
 
-const LoginFormContainer = props => {
-  console.log(props);
+const LoginFormContainer = () => {
   return (
     <AppContext.Consumer>
       {context => (

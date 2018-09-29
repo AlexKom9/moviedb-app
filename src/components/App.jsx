@@ -1,7 +1,7 @@
 import React from "react";
 import Filters from "./Filters/Filters";
 // import MoviesContainer from "./Movies/MoviesList/MoviesContainer";
-import MoviesList from './Movies/MoviesList/MoviesList'
+import MoviesList from "./Movies/MoviesList/MoviesList";
 import Header from "./Header/Header";
 import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
@@ -73,6 +73,9 @@ export default class App extends React.Component {
     const session_id = cookies.get("session_id");
     // console.log('session_id from cookies -- ', session_id);
     if (session_id) {
+      this.setState({
+        session_id: session_id
+      });
       fetchApi(
         `${API_URL}/account?api_key=${API_KEY_3}&session_id=${session_id}`
       ).then(user => {

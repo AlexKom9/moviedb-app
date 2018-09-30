@@ -7,9 +7,9 @@ const Header = ({user}) => (
     <div className="container">
       <ul className="navbar-nav">
         <li className="nav-item active">
-          <a href="#" className="nav-link">
+          <span className="nav-link">
             Home
-          </a>
+          </span>
         </li>
       </ul>
       {user ? <User /> : <Login />}

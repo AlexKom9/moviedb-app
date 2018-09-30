@@ -29,12 +29,14 @@ export default Component => class GenresContainer extends React.Component {
   }
 
   changeHandler = event => {
+    console.log(event);
     const {
       filters: { with_genres },
       onChangeFilters
     } = this.props;
 
     const currentId = event.target.id;
+
     let value = [];
     if (with_genres.includes(currentId)) {
       value = with_genres.filter(id => id !== currentId);

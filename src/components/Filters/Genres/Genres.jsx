@@ -1,24 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import GenresHOC from "./GenresHOC";
+import UICheckBox from "../../UIComponents/UICheckbox";
 
 const Genres = ({ allGenres, onChange, with_genres }) => (
   <div className="mb-4">
     <ul>
       {allGenres.map(genre => (
         <li key={genre.id}>
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id={genre.id}
-              onChange={onChange}
-              checked={with_genres.includes(String(genre.id))}
-            />
-            <label className="custom-control-label" htmlFor={genre.id}>
-              {genre.name}
-            </label>
-          </div>
+          <UICheckBox
+            id={genre.id}
+            labelText={genre.name}
+            onChange={onChange}
+            checked={with_genres.includes(String(genre.id))}
+          />
         </li>
       ))}
     </ul>

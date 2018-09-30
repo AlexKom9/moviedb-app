@@ -4,7 +4,7 @@ import { API_KEY_3, API_URL, fetchApi } from "../../api/api";
 import {AppContext} from "../App";
 
 class HeaderMenu extends React.Component {
-  LogOut = () => {
+  logOut = () => {
     const {session_id, updateSessionId} = this.props;
     fetchApi(`${API_URL}/authentication/session?api_key=${API_KEY_3}`, {
       method: "Delete",
@@ -28,7 +28,7 @@ class HeaderMenu extends React.Component {
         <h6 className="dropdown-header">Меню</h6>
 
         <div className="dropdown-divider" />
-        <span className="dropdown-item" onClick={this.LogOut}>
+        <span className="dropdown-item" onClick={this.logOut}>
           Выйти
         </span>
       </div>

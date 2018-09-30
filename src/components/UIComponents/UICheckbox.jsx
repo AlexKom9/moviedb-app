@@ -26,9 +26,6 @@ class UICheckBox extends PureComponent {
 
   render() {
     const { id, labelText } = this.props;
-    // if (this.props.id === 99)          {
-    //   console.log("render")
-    // }
     return (
       <div className="custom-control custom-checkbox">
         <input

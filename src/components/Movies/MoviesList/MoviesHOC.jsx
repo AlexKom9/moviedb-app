@@ -5,7 +5,7 @@ import { API_URL, API_KEY_3 } from "../../../api/api";
 import PropTypes from "prop-types";
 
 export default Component =>
-  class MoviesContainer extends React.Component {
+  class MoviesHOC extends React.Component {
     constructor() {
       super();
 

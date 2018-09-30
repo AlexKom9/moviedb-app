@@ -32,6 +32,12 @@ class User extends React.Component {
     }
   }
 
+  closeMenu(){
+    this.setState({
+      showMenu: false
+    })
+  };
+
   render() {
     const { user } = this.props;
     const { showMenu } = this.state;
@@ -49,7 +55,7 @@ class User extends React.Component {
             this.setState({ showMenu: !this.state.showMenu });
           }}
         />
-        <div className="user-head__menu">{showMenu && <HeaderMenu />}</div>
+        <div className="user-head__menu">{showMenu && <HeaderMenu closeMenu={this.closeMenu}/>}</div>
       </div>
     );
   }

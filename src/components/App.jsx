@@ -71,7 +71,7 @@ export default class App extends React.Component {
     } else {
       this.setState({
         session_id: null,
-        user: false
+        user: null
       });
       cookies.remove("session_id");
     }

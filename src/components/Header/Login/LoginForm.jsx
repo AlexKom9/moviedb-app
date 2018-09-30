@@ -1,5 +1,4 @@
 import React from "react";
-import { AppContext } from "../../App";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
 import PropTypes from "prop-types";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC"

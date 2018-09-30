@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import _ from "lodash";
 import queryString from "query-string";
 import { API_URL, API_KEY_3 } from "../../../api/api";

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { API_KEY_3, API_URL, fetchApi } from "../../api/api";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
@@ -34,7 +33,5 @@ class HeaderMenu extends React.Component {
     );
   }
 }
-
-HeaderMenu.propTypes = {};
 
 export default AppConsumerHOC(HeaderMenu);

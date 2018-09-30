@@ -19,23 +19,3 @@ export default Component =>
       );
     }
   };
-
-// const AppContextConsumer = Component => {
-//   console.log(AppContext);
-//   return (
-//     <AppContext.Consumer>
-//       {context => (
-//         <Component
-//           session_id={context.session_id}
-//           updateSessionId={context.updateSessionId}
-//           user={context.user}
-//           updateUser={context.updateUser}
-//         />
-//       )}
-//     </AppContext.Consumer>
-//   );
-// };
-
-// AppContextConsumer.displayName = "AppContextConsumer";
-//
-// export default AppContextConsumer;

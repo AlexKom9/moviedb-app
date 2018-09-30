@@ -2,6 +2,7 @@ import React from "react";
 import { AppContext } from "../../App";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
 import PropTypes from "prop-types";
+import AppConsumerHOC from "../../HOC/AppConsumerHOC"
 
 class LoginForm extends React.Component {
   state = {
@@ -225,19 +226,5 @@ LoginForm.propTypes = {
   updateSessionId: PropTypes.func.isRequired
 };
 
-const LoginFormContainer = () => {
-  return (
-    <AppContext.Consumer>
-      {context => (
-        <LoginForm
-          updateUser={context.updateUser}
-          updateSessionId={context.updateSessionId}
-        />
-      )}
-    </AppContext.Consumer>
-  );
-};
 
-LoginFormContainer.displayName = "LoginFormContainer";
-
-export default LoginFormContainer;
+export default AppConsumerHOC(LoginForm);

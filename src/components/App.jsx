@@ -45,6 +45,16 @@ export default class App extends React.Component {
     });
   };
 
+  // testFun() {
+  //   console.log("es5-- ", this);
+  //   this.setState({
+  //     yo: "yo"
+  //   });
+  // }
+  // testFunction = () => {
+  //   console.log("arrow -- ", this);
+  // };
+
   getTotalPages = totalPages => {
     this.setState({
       total_pages: totalPages
@@ -59,7 +69,7 @@ export default class App extends React.Component {
   };
 
   updateSessionId = session_id => {
-    if(session_id){
+    if (session_id) {
       console.log("session_id: ", session_id);
       cookies.set("session_id", session_id, {
         path: "/",
@@ -75,7 +85,6 @@ export default class App extends React.Component {
       });
       cookies.remove("session_id");
     }
-
   };
 
   componentDidMount() {
@@ -94,6 +103,9 @@ export default class App extends React.Component {
 
   render() {
     const { filters, page, total_pages, user } = this.state;
+    // this.testFunction();
+    // this.testFun();
+
     return (
       <AppContext.Provider
         value={{
@@ -103,6 +115,7 @@ export default class App extends React.Component {
           session_id: this.state.session_id
         }}
       >
+        <div onClick={this.testFun}>Hello</div>
         <Header
           updateUser={this.updateUser}
           updateSessionId={this.updateSessionId}

@@ -1,7 +1,9 @@
 import React from "react";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
 import PropTypes from "prop-types";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC"
+import AppConsumerHOC from "../../HOC/AppConsumerHOC";
+import CallApi from '../../../api/api'
+
 
 class LoginForm extends React.Component {
   state = {
@@ -63,25 +65,32 @@ class LoginForm extends React.Component {
     this.setState({
       submitting: true
     });
-    fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
+    CallApi.get("/authentication/token/new?")
+      // fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
       .then(data => {
-        console.log("login --", this.state.username);
-        console.log("password --", this.state.password);
-        return fetchApi(
-          `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-          {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-              username: this.state.username,
-              password: this.state.password,
-              request_token: data.request_token
-            })
+        return CallApi.post("/authentication/token/validate_with_login?", {
+          body: {
+            username: this.state.username,
+            password: this.state.password,
+            request_token: data.request_token
           }
-        );
+        });
+
+        // return fetchApi(
+        //   `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
+        //   {
+        //     method: "POST",
+        //     mode: "cors",
+        //     headers: {
+        //       "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //       username: this.state.username,
+        //       password: this.state.password,
+        //       request_token: data.request_token
+        //     })
+        //   }
+        // );
       })
       .then(data => {
         return fetchApi(
@@ -224,6 +233,5 @@ LoginForm.propTypes = {
   updateUser: PropTypes.func.isRequired,
   updateSessionId: PropTypes.func.isRequired
 };
-
 
 export default AppConsumerHOC(LoginForm);

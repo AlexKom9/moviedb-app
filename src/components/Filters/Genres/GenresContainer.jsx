@@ -1,7 +1,7 @@
 import React from "react";
 import Genres from "./Genres";
 import PropTypes from "prop-types";
-// import { API_URL, API_KEY_3 } from "../../api/api";
+import CallApi from "../../../api/api";
 
 export default class GenresContainer extends React.Component {
   constructor(props) {
@@ -17,10 +17,7 @@ export default class GenresContainer extends React.Component {
   };
 
   componentDidMount() {
-    const link =
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=942fe0c9aeb6728941df8e74f3fbce09&language=ru-RU";
-    fetch(link)
-      .then(response => response.json())
+    CallApi.get('/genre/movie/list?')
       .then(data => {
         this.setState({
           allGenres: data.genres

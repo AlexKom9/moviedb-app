@@ -3,6 +3,7 @@ import _ from "lodash";
 import queryString from "query-string";
 import { API_URL, API_KEY_3 } from "../../../api/api";
 import PropTypes from "prop-types";
+import CallApi from '../../../api/api'
 
 export default Component =>
   class MoviesHOC extends React.Component {
@@ -32,17 +33,12 @@ export default Component =>
       }
 
       const queryStringParams = {
-        api_key: API_KEY_3,
         sort_by,
         language: "ru-RU",
         page,
         primary_release_year
       };
-      const link = `${API_URL}/discover/movie?${queryString.stringify(
-        queryStringParams
-      )}${genreString}`;
-      fetch(link)
-        .then(response => response.json())
+      CallApi.get('/discover/movie?', {params: queryStringParams})
         .then(data => {
           getTotalPages(data.total_pages);
           this.setState({

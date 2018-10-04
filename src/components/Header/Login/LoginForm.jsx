@@ -2,8 +2,7 @@ import React from "react";
 import { API_URL, API_KEY_3, fetchApi } from "../../../api/api";
 import PropTypes from "prop-types";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
-import CallApi from '../../../api/api'
-
+import CallApi from "../../../api/api";
 
 class LoginForm extends React.Component {
   state = {
@@ -66,7 +65,6 @@ class LoginForm extends React.Component {
       submitting: true
     });
     CallApi.get("/authentication/token/new?")
-      // fetchApi(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
       .then(data => {
         return CallApi.post("/authentication/token/validate_with_login?", {
           body: {
@@ -75,54 +73,25 @@ class LoginForm extends React.Component {
             request_token: data.request_token
           }
         });
-
-        // return fetchApi(
-        //   `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
-        //   {
-        //     method: "POST",
-        //     mode: "cors",
-        //     headers: {
-        //       "Content-type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //       username: this.state.username,
-        //       password: this.state.password,
-        //       request_token: data.request_token
-        //     })
-        //   }
-        // );
       })
       .then(data => {
-        return fetchApi(
-          `${API_URL}/authentication/session/new?api_key=${API_KEY_3}`,
-          {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-              request_token: data.request_token
-            })
-          }
-        );
+        return CallApi.post("/authentication/session/new?", {
+          body: { request_token: data.request_token }
+        });
       })
       .then(data => {
         this.props.updateSessionId(data.session_id);
-        return fetchApi(
-          `${API_URL}/account?api_key=${API_KEY_3}&session_id=${
-            data.session_id
-          }`
-        ).then(user => {
-          this.setState(
-            {
-              submitting: false
-            },
-            () => {
-              this.props.updateUser(user);
-            }
-          );
-        });
+        CallApi.get("/account?", { params: { session_id: data.session_id } });
+      })
+      .then(user => {
+        this.setState(
+          {
+            submitting: false
+          },
+          () => {
+            this.props.updateUser(user);
+          }
+        );
       })
       .catch(error => {
         console.log("error", error);

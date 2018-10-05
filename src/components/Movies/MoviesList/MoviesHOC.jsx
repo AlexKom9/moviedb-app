@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import CallApi from '../../../api/api'
+import CallApi from "../../../api/api";
 
 export default Component =>
   class MoviesHOC extends React.Component {
@@ -29,6 +29,7 @@ export default Component =>
       for (let i = 0; i < with_genres.length; i++) {
         genreString += `&with_genres=${with_genres[i]}`;
       }
+      //TODO: Add with_genres query param
 
       const queryStringParams = {
         sort_by,
@@ -36,13 +37,14 @@ export default Component =>
         page,
         primary_release_year
       };
-      CallApi.get('/discover/movie?', {params: queryStringParams})
-        .then(data => {
+      CallApi.get(`/discover/movie?`, { params: queryStringParams }).then(
+        data => {
           getTotalPages(data.total_pages);
           this.setState({
             movies: data.results
           });
-        });
+        }
+      );
     };
 
     componentDidMount() {

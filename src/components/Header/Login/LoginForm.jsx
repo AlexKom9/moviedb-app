@@ -80,9 +80,10 @@ class LoginForm extends React.Component {
       })
       .then(data => {
         this.props.updateSessionId(data.session_id);
-        CallApi.get("/account?", { params: { session_id: data.session_id } });
+        return CallApi.get("/account?", { params: { session_id: data.session_id } });
       })
       .then(user => {
+        console.log(user);
         this.setState(
           {
             submitting: false

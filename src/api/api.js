@@ -36,10 +36,13 @@ export default class CallApi {
       language: "ru-RU",
       ...params
     };
-    // url = /discover/movie?
+    // url = "/discover/movie"
     // params = {
-    //
-    // }
+    //language: "ru-RU",
+    // sort_by: sort_by,
+    // page: page,
+    // primary_release_year: primary_release_year
+    //}
     return fetchApi(
       `${API_URL}${url}${queryString.stringify(queryStringParams)}`,
       {

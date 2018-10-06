@@ -1,15 +1,23 @@
 import React from "react";
-import Filters from "./Filters/Filters";
-import MoviesList from "./Movies/MoviesList/MoviesList";
 import Header from "./Header/Header";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
+import MoviePage from "./pages/MoviePage/MoviePage";
+
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
 import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart as fasFaHeart, faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons'
-import { faHeart as farFaHeart, faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faHeart as fasFaHeart,
+  faBookmark as fasBookmark
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart as farFaHeart,
+  faBookmark as farBookmark
+} from "@fortawesome/free-regular-svg-icons";
 
 const cookies = new Cookies();
-
 
 library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
@@ -50,16 +58,6 @@ export default class App extends React.Component {
       page
     });
   };
-
-  // testFun() {
-  //   console.log("es5-- ", this);
-  //   this.setState({
-  //     yo: "yo"
-  //   });
-  // }
-  // testFunction = () => {
-  //   console.log("arrow -- ", this);
-  // };
 
   getTotalPages = totalPages => {
     this.setState({
@@ -108,64 +106,28 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { filters, page, total_pages, user } = this.state;
-    // this.testFunction();
-    // this.testFun();
+    const { user, session_id } = this.state;
 
     return (
-      <AppContext.Provider
-        value={{
-          user: user,
-          updateUser: this.updateUser,
-          updateSessionId: this.updateSessionId,
-          session_id: this.state.session_id
-        }}
-      >
-        <div onClick={this.testFun}>Hello</div>
-        <Header
-          updateUser={this.updateUser}
-          updateSessionId={this.updateSessionId}
-          user={user}
-        />
-        <div className="container">
-          <div className="row mt-4">
-            <div className="col-4">
-              <div className="card" style={{ width: "100%" }}>
-                <div className="card-body">
-                  <h3>Фильтры:</h3>
-                  <div className="mb-4">
-                    <button
-                      className="btn btn-light"
-                      onClick={() =>
-                        this.setState({
-                          ...initialState
-                        })
-                      }
-                    >
-                      Очистить фильры
-                    </button>
-                  </div>
-                  <Filters
-                    filters={filters}
-                    onChangeFilters={this.onChangeFilters}
-                    onChangePage={this.onChangePage}
-                    total_pages={total_pages}
-                    page={page}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-8">
-              <MoviesList
-                filters={filters}
-                changePage={this.onChangePage}
-                getTotalPages={this.getTotalPages}
-                page={page}
-              />
-            </div>
-          </div>
-        </div>
-      </AppContext.Provider>
+      <BrowserRouter>
+        <AppContext.Provider
+          value={{
+            user: user,
+            updateUser: this.updateUser,
+            updateSessionId: this.updateSessionId,
+            session_id: session_id
+          }}
+        >
+          <Header
+            updateUser={this.updateUser}
+            updateSessionId={this.updateSessionId}
+            user={user}
+          />
+          <Route exact path="/" component={MoviesPage}/>
+          <Route path="/movie/:id" component={MoviePage}/>
+
+        </AppContext.Provider>
+      </BrowserRouter>
     );
   }
 }

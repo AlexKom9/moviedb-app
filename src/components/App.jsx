@@ -42,29 +42,6 @@ export default class App extends React.Component {
       ...initialState
     };
   }
-
-  onChangeFilters = event => {
-    const newFilters = {
-      ...this.state.filters,
-      [event.target.name]: event.target.value
-    };
-    this.setState({
-      filters: newFilters
-    });
-  };
-
-  onChangePage = page => {
-    this.setState({
-      page
-    });
-  };
-
-  getTotalPages = totalPages => {
-    this.setState({
-      total_pages: totalPages
-    });
-  };
-
   updateUser = user => {
     console.log(user);
     this.setState({

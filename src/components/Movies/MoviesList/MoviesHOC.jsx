@@ -11,7 +11,7 @@ export default Component =>
         super();
         this.state = {
           movies: [],
-          favor_movies: [],
+          favorite_movies: [],
           watch_list: []
         };
       }
@@ -50,7 +50,7 @@ export default Component =>
         );
       };
 
-      getFavorMovies = () => {
+      getFavoriteMovies = () => {
         const queryStringParams = {
           session_id: this.props.session_id
         };
@@ -58,20 +58,7 @@ export default Component =>
           params: queryStringParams
         }).then(data => {
           this.setState({
-            favor_movies: data.results
-          });
-        });
-      };
-
-      getWatchList = () => {
-        const queryStringParams = {
-          session_id: this.props.session_id
-        };
-        CallApi.get(`/account/${this.props.user.id}/watchlist/movies?`, {
-          params: queryStringParams
-        }).then(data => {
-          this.setState({
-            watch_list: data.results
+            favorite_movies: data.results
           });
         });
       };
@@ -79,8 +66,7 @@ export default Component =>
       componentDidMount() {
         this.getMovies(this.props.filters, this.props.page);
         if (this.props.session_id) {
-          this.getFavorMovies();
-          this.getWatchList();
+          this.getFavoriteMovies();
         }
       }
 
@@ -100,13 +86,12 @@ export default Component =>
           ) &&
           _.get(this.props, "user.id")
         ) {
-          this.getFavorMovies();
-          this.getWatchList();
+          this.getFavoriteMovies();
         }
       }
 
       render() {
-        const { movies, favorite_movies, watch_list } = this.state;
+        const { movies, favorite_movies } = this.state;
         // console.log(this.props);
         console.log("render MoviesHOC");
         return (
@@ -114,7 +99,6 @@ export default Component =>
             {...this.props}
             movies={movies}
             favorite_movies={favorite_movies}
-            watch_list={watch_list}
           />
         );
       }

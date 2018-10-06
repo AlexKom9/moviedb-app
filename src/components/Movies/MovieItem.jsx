@@ -14,11 +14,11 @@ class MovieItem extends React.Component {
     this.changeLike = this.changeLike.bind(this);
   };
 
-  static getDerivedStateFromProps(props){
-    return {
-      like: props.like
-    }
-  }
+  // static getDerivedStateFromProps(props){
+  //   return {
+  //     like: props.like
+  //   }
+  // }
 
   changeLike() {
     const { session_id } = this.props;
@@ -42,21 +42,13 @@ class MovieItem extends React.Component {
 
   };
 
-  // changeWatch() {
-  //   this.setState({
-  //     to_watch: !this.state.to_watch
-  //   });
-  //   const queryStringParams = {
-  //     session_id: this.props.session_id
-  //   };
-  //
-  //   const body = {
-  //     "media_type": "movie",
-  //     "media_id": this.props.item.id,
-  //     "favorite": this.state.to_watch
-  //   };
-  //   CallApi.post(`/account/${this.props.user.id}/watchlist/movies?`, { params: queryStringParams, body: body });
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.like !== this.props.like) {
+      this.setState({
+        like: this.props.like
+      });
+    }
+  }
 
   render() {
     const { item } = this.props;
@@ -84,9 +76,6 @@ class MovieItem extends React.Component {
           </div>
           <span>{this.props.like}</span>
 
-          {/*<div className="movie-item__watch float-right mr-2" onClick={this.changeWatch}>*/}
-            {/*<FontAwesomeIcon icon={[to_watch ? "fas": "far", "bookmark"]} />*/}
-          {/*</div>*/}
         </div>
       </div>
     );

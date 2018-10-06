@@ -3,7 +3,7 @@ import MovieItem from "../MovieItem";
 import PropTypes from "prop-types";
 import MoviesHOC from "./MoviesHOC";
 
-const MovieList = ({ movies = [], favor_movies = [], watch_list = [] }) => {
+const MovieList = ({ movies = [], favorite_movies = [] }) => {
   return (
     <div className="row">
       {movies.map(movie => (
@@ -11,7 +11,7 @@ const MovieList = ({ movies = [], favor_movies = [], watch_list = [] }) => {
           <MovieItem
             item={movie}
             like={
-              favor_movies.findIndex(
+              favorite_movies.findIndex(
                 favorMovie => favorMovie.id === movie.id
               ) !== -1
             }

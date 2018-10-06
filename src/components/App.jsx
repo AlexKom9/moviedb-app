@@ -1,11 +1,17 @@
 import React from "react";
 import Filters from "./Filters/Filters";
-// import MoviesContainer from "./Movies/MoviesList/MoviesContainer";
 import MoviesList from "./Movies/MoviesList/MoviesList";
 import Header from "./Header/Header";
 import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHeart as fasFaHeart, faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as farFaHeart, faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+
 const cookies = new Cookies();
+
+
+library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
 export const AppContext = React.createContext();
 

@@ -2,42 +2,68 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
-import CallApi from '../../api/api'
+import CallApi from "../../api/api";
 
 class MovieItem extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      booked: false,
-      favor: false
+      to_watch: false,
+      like: props.like
     };
-    this.changeFavor = this.changeFavor.bind(this);
-    this.changeBooked = this.changeBooked.bind(this);
+    this.changeLike = this.changeLike.bind(this);
+  };
+
+  static getDerivedStateFromProps(props){
+    return {
+      like: props.like
+    }
   }
 
-  changeFavor() {
+  changeLike() {
     const { session_id } = this.props;
 
     if (!session_id) {
     }
-
     this.setState({
-      favor: !this.state.favor
+      like: !this.state.like
+    }, () => {
+      const queryStringParams = {
+        session_id: this.props.session_id
+      };
+
+      const body = {
+        "media_type": "movie",
+        "media_id": this.props.item.id,
+        "favorite": this.state.like
+      };
+      CallApi.post(`/account/${this.props.user.id}/favorite?`, { params: queryStringParams, body: body });
     });
-  }
 
-    changeBooked() {
-      this.setState({
-        booked: !this.state.booked
-      });
-    }
+  };
 
+  // changeWatch() {
+  //   this.setState({
+  //     to_watch: !this.state.to_watch
+  //   });
+  //   const queryStringParams = {
+  //     session_id: this.props.session_id
+  //   };
+  //
+  //   const body = {
+  //     "media_type": "movie",
+  //     "media_id": this.props.item.id,
+  //     "favorite": this.state.to_watch
+  //   };
+  //   CallApi.post(`/account/${this.props.user.id}/watchlist/movies?`, { params: queryStringParams, body: body });
+  // }
 
-
-    export default class MovieItem extends React.Component {
   render() {
-    const { item, session_id } = this.props;
-    console.log(session_id);
+    const { item } = this.props;
+    const {like} = this.state;
+
+
+    console.log(this.props);
     return (
       <div className="card" style={{ width: "100%" }}>
         <img
@@ -53,13 +79,14 @@ class MovieItem extends React.Component {
             {item.vote_average}
           </div>
 
-          <div className="movie-item__favor" onClick={this.changeFavor}>
-            <FontAwesomeIcon icon={["fas", "heart"]} />
+          <div className="movie-item__like float-right" onClick={this.changeLike}>
+            <FontAwesomeIcon icon={[like ? "fas": "far", "heart"]} />
           </div>
+          <span>{this.props.like}</span>
 
-          <div className="movie-item__bookmaktr" onClick={this.changeBooked}>
-            <FontAwesomeIcon icon={["fas", "bookmark"]} />
-          </div>
+          {/*<div className="movie-item__watch float-right mr-2" onClick={this.changeWatch}>*/}
+            {/*<FontAwesomeIcon icon={[to_watch ? "fas": "far", "bookmark"]} />*/}
+          {/*</div>*/}
         </div>
       </div>
     );

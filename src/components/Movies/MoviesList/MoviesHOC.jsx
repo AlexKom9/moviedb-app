@@ -54,7 +54,7 @@ export default Component =>
         const queryStringParams = {
           session_id: this.props.session_id
         };
-        CallApi.get("/account/{account_id}/favorite/movies?", {
+        CallApi.get(`/account/${this.props.user.id}/favorite/movies?`, {
           params: queryStringParams
         }).then(data => {
           this.setState({
@@ -67,7 +67,7 @@ export default Component =>
         const queryStringParams = {
           session_id: this.props.session_id
         };
-        CallApi.get("/account/{account_id}/watchlist/movies?", {
+        CallApi.get(`/account/${this.props.user.id}/watchlist/movies?`, {
           params: queryStringParams
         }).then(data => {
           this.setState({
@@ -94,8 +94,11 @@ export default Component =>
         }
         //TODO: optimize
         if (
-          prevProps.session_id !== this.props.session_id &&
-          this.props.session_id
+          !_.isEqual(
+            _.get(prevProps, "user.id"),
+            _.get(this.props, "user.id")
+          ) &&
+          _.get(this.props, "user.id")
         ) {
           this.getFavorMovies();
           this.getWatchList();
@@ -109,7 +112,6 @@ export default Component =>
         return (
           <Component
             {...this.props}
-            // session_id={context.session_id}
             movies={movies}
             favorite_movies={favorite_movies}
             watch_list={watch_list}

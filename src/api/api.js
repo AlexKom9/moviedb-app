@@ -55,6 +55,7 @@ export default class CallApi {
   }
   static post(url, options = {}) {
     const { params = {}, body = {} } = options;
+    console.log(params, body)
     const queryStringParams = {
       api_key: API_KEY_3,
       language: "ru-RU",
@@ -72,6 +73,7 @@ export default class CallApi {
       }
     );
   }
+
   static delete(url, options = {}) {
     const { params = {}, body = {} } = options;
     const queryStringParams = {

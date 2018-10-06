@@ -92,7 +92,7 @@ export default class App extends React.Component {
             user: user,
             updateUser: this.updateUser,
             updateSessionId: this.updateSessionId,
-            session_id: session_id
+            session_id: session_id,
           }}
         >
           <Header

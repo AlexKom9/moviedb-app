@@ -60,9 +60,11 @@ class LoginForm extends React.Component {
   };
 
   onSubmit = () => {
+    console.log(this.props)
     this.setState({
       submitting: true
     });
+    let session_id = null;
     CallApi.get("/authentication/token/new?")
       .then(data => {
         return CallApi.post("/authentication/token/validate_with_login?", {
@@ -79,7 +81,8 @@ class LoginForm extends React.Component {
         });
       })
       .then(data => {
-        this.props.updateSessionId(data.session_id);
+        // this.props.updateSessionId(data.session_id);
+        session_id = data.session_id;
         return CallApi.get("/account?", { params: { session_id: data.session_id } });
       })
       .then(user => {
@@ -89,7 +92,7 @@ class LoginForm extends React.Component {
             submitting: false
           },
           () => {
-            this.props.updateUser(user);
+            this.props.updateAuth(user, session_id);
           }
         );
       })
@@ -118,6 +121,10 @@ class LoginForm extends React.Component {
       this.onSubmit();
     }
   };
+
+  componentWillUnmount(){
+    this.props.hideLoginForm();
+  }
 
   render() {
     const {
@@ -199,8 +206,8 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  updateUser: PropTypes.func.isRequired,
-  updateSessionId: PropTypes.func.isRequired
+  // updateUser: PropTypes.func.isRequired,
+  // updateSessionId: PropTypes.func.isRequired
 };
 
 export default AppConsumerHOC(LoginForm);

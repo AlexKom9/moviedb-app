@@ -1,22 +1,12 @@
 import React, { Component } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import LoginForm from "./LoginForm";
+import AppConsumerHOC from '../../HOC/AppConsumerHOC'
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false
-    };
-
-    this.toggleModal = this.toggleModal.bind(this);
   }
-
-  toggleModal = () => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal
-    }));
-  };
 
   render() {
     return (
@@ -24,11 +14,12 @@ class Login extends Component {
         <button
           className="btn btn-success"
           type="button"
-          onClick={this.toggleModal}
+          onClick={this.props.toggleLoginForm}
         >
           Login
         </button>
-        <Modal isOpen={this.state.showModal} toggle={this.toggleModal}>
+
+        <Modal isOpen={this.props.showLoginForm} toggle={this.props.toggleLoginForm}>
           <ModalBody>
             <LoginForm/>
           </ModalBody>
@@ -40,4 +31,4 @@ class Login extends Component {
 
 Login.propTypes = {};
 
-export default Login;
+export default AppConsumerHOC(Login);

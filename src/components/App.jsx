@@ -4,6 +4,7 @@ import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import AccountFavorites from "./pages/AcountPage/AccountFavorites";
 
 import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
@@ -33,8 +34,10 @@ const initialState = {
   page: 1,
   total_pages: "",
   user: null,
-  session_id: null,
+  session_id: cookies.get("session_id"),
   favorite_movies: [],
+  isAuth: false,
+  showLoginForm: false
 };
 
 export default class App extends React.Component {
@@ -46,14 +49,18 @@ export default class App extends React.Component {
   }
   updateUser = user => {
     console.log(user);
-    this.setState({
-      user: user
-    }, this.getFavoriteMovies);
+    this.setState(
+      {
+        user: user,
+        isAuth: true
+      },
+      this.getFavoriteMovies
+    );
   };
 
   updateSessionId = session_id => {
     if (session_id) {
-      console.log("session_id: ", session_id);
+      // console.log("session_id: ", session_id);
       cookies.set("session_id", session_id, {
         path: "/",
         maxAge: 2592000
@@ -70,8 +77,28 @@ export default class App extends React.Component {
     }
   };
 
-  getFavoriteMovies = () => {
+  updateAuth = (user, session_id) => {
+    cookies.set("session_id", session_id, {
+      path: "/",
+      maxAge: 2592000
+    });
+    this.setState({
+      session_id,
+      user,
+      isAuth: true
+    });
+  };
 
+  logOut = (user, session_id) => {
+    cookies.remove("session_id");
+    this.setState({
+      session_id: null,
+      user: null,
+      isAuth: false
+    });
+  };
+
+  getFavoriteMovies = () => {
     const queryStringParams = {
       session_id: this.state.session_id
     };
@@ -85,23 +112,31 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    const session_id = cookies.get("session_id");
+    const { session_id } = this.state;
     if (session_id) {
-      this.setState({
-        session_id: session_id
-      });
       fetchApi(
         `${API_URL}/account?api_key=${API_KEY_3}&session_id=${session_id}`
       ).then(user => {
-        this.updateUser(user);
+        this.updateAuth(user, session_id);
       });
     }
   }
 
-  render() {
-    const { user, session_id } = this.state;
+  toggleLoginForm = () => {
+    this.setState({
+      showLoginForm: !this.state.showLoginForm
+    });
+  };
 
-    return (
+  hideLoginForm = () => {
+    this.setState({
+      showLoginForm: false
+    });
+  };
+
+  render() {
+    const { user, session_id, isAuth } = this.state;
+    return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider
           value={{
@@ -109,7 +144,13 @@ export default class App extends React.Component {
             updateUser: this.updateUser,
             updateSessionId: this.updateSessionId,
             session_id: session_id,
-            favorite_movies: this.state.favorite_movies
+            favorite_movies: this.state.favorite_movies,
+            isAuth: this.state.isAuth,
+            updateAuth: this.updateAuth,
+            logOut: this.logOut,
+            showLoginForm: this.state.showLoginForm,
+            toggleLoginForm: this.toggleLoginForm,
+            hideLoginForm: this.hideLoginForm
           }}
         >
           <Header
@@ -117,11 +158,13 @@ export default class App extends React.Component {
             updateSessionId={this.updateSessionId}
             user={user}
           />
-          <Route exact path="/" component={MoviesPage}/>
-          <Route path="/movie/:id" component={MoviePage}/>
-
+          <Route exact path="/" component={MoviesPage} />
+          <Route path="/movie/:id" component={MoviePage} />
+          <Route path="/account/favorites" component={AccountFavorites} />
         </AppContext.Provider>
       </BrowserRouter>
+    ) : (
+      <p>Loading...</p>
     );
   }
 }

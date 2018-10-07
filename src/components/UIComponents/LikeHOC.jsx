@@ -48,7 +48,8 @@ export default (Component, key) =>
           );
         } else {
           //TODO: OPEN MODAL !!!
-          console.log("else");
+          // console.log("else");
+          this.props.toggleLoginForm();
         }
       }
 

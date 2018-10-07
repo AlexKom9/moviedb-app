@@ -51,25 +51,25 @@ export default (Component, key) =>
         );
       };
 
-      getFavoriteMovies = () => {
-        const queryStringParams = {
-          session_id: this.props.session_id
-        };
-        CallApi.get(`/account/${this.props.user.id}/favorite/movies?`, {
-          params: queryStringParams
-        }).then(data => {
-          this.setState({
-            favorite_movies: data.results
-          });
-        });
-      };
+      // getFavoriteMovies = () => {
+      //   const queryStringParams = {
+      //     session_id: this.props.session_id
+      //   };
+      //   CallApi.get(`/account/${this.props.user.id}/favorite/movies?`, {
+      //     params: queryStringParams
+      //   }).then(data => {
+      //     this.setState({
+      //       favorite_movies: data.results
+      //     });
+      //   });
+      // };
 
       componentDidMount() {
-        this.getMovies(this.props.filters, this.props.page);
-        if (this.props.session_id) {
-          this.getFavoriteMovies();
-        }
-      }
+              this.getMovies(this.props.filters, this.props.page);
+              // if (this.props.session_id) {
+              //   this.getFavoriteMovies();
+              // }
+            }
 
       componentDidUpdate(prevProps) {
         if (!_.isEqual(this.props.filters, prevProps.filters)) {
@@ -80,15 +80,15 @@ export default (Component, key) =>
           this.getMovies(this.props.filters, this.props.page);
         }
         //TODO: optimize
-        if (
-          !_.isEqual(
-            _.get(prevProps, "user.id"),
-            _.get(this.props, "user.id")
-          ) &&
-          _.get(this.props, "user.id")
-        ) {
-          this.getFavoriteMovies();
-        }
+        // if (
+        //   !_.isEqual(
+        //     _.get(prevProps, "user.id"),
+        //     _.get(this.props, "user.id")
+        //   ) &&
+        //   _.get(this.props, "user.id")
+        // ) {
+        //   this.getFavoriteMovies();
+        // }
       }
 
       render() {
@@ -99,7 +99,6 @@ export default (Component, key) =>
           <Component
             {...this.props}
             movies={movies}
-            favorite_movies={favorite_movies}
           />
         );
       }

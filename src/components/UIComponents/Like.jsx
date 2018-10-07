@@ -1,21 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CallApi from "../../api/api";
+import _ from 'lodash'
+import LikeHOC from './LikeHOC'
 
 class Like extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      liked: false
-    }
-  }
-  render(state = this.state) {
-    const { like } = state;
+    render() {
+    const { liked, changeLike } = this.props;
     return (
-      <div>
-        <FontAwesomeIcon icon={[like ? "fas": "far", "heart"]} />
+      <div onClick={changeLike}>
+        <FontAwesomeIcon icon={[liked ? "fas" : "far", "heart"]} />
       </div>
     );
   }
 }
 
-export default Like;
+export default LikeHOC(Like)

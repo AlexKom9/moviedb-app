@@ -13,6 +13,7 @@ export default Component =>
               updateSessionId={context.updateSessionId}
               user={context.user}
               updateUser={context.updateUser}
+              favorite_movies={context.favorite_movies}
             />
           )}
         </AppContext.Consumer>

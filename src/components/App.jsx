@@ -16,6 +16,7 @@ import {
   faHeart as farFaHeart,
   faBookmark as farBookmark
 } from "@fortawesome/free-regular-svg-icons";
+import CallApi from "../api/api";
 
 const cookies = new Cookies();
 
@@ -32,7 +33,8 @@ const initialState = {
   page: 1,
   total_pages: "",
   user: null,
-  session_id: null
+  session_id: null,
+  favorite_movies: [],
 };
 
 export default class App extends React.Component {
@@ -46,7 +48,7 @@ export default class App extends React.Component {
     console.log(user);
     this.setState({
       user: user
-    });
+    }, this.getFavoriteMovies);
   };
 
   updateSessionId = session_id => {
@@ -66,6 +68,20 @@ export default class App extends React.Component {
       });
       cookies.remove("session_id");
     }
+  };
+
+  getFavoriteMovies = () => {
+
+    const queryStringParams = {
+      session_id: this.state.session_id
+    };
+    CallApi.get(`/account/${this.state.user.id}/favorite/movies?`, {
+      params: queryStringParams
+    }).then(data => {
+      this.setState({
+        favorite_movies: data.results
+      });
+    });
   };
 
   componentDidMount() {
@@ -93,6 +109,7 @@ export default class App extends React.Component {
             updateUser: this.updateUser,
             updateSessionId: this.updateSessionId,
             session_id: session_id,
+            favorite_movies: this.state.favorite_movies
           }}
         >
           <Header

@@ -10,11 +10,6 @@ const MovieList = ({ movies = [], favorite_movies = [] }) => {
         <div key={movie.id} className="col-6 mb-4">
           <MovieItem
             item={movie}
-            like={
-              favorite_movies.findIndex(
-                favorMovie => favorMovie.id === movie.id
-              ) !== -1
-            }
           />
         </div>
       ))}
@@ -26,4 +21,4 @@ MovieList.propTypes = {
   movies: PropTypes.array.isRequired
 };
 
-export default MoviesHOC(MovieList);
+export default MoviesHOC(MovieList, "favorites");

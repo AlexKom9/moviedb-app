@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import CallApi from "../../../api/api";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 
-export default Component =>
+export default (Component, key) =>
+  // console.log(key)
   AppConsumerHOC(
     class MoviesHOC extends React.Component {
       constructor() {

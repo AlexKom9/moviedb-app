@@ -1,61 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Like from "../UIComponents/Like";
+import LikeHOC from "../UIComponents/LikeHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 import CallApi from "../../api/api";
 
 class MovieItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      to_watch: false,
-      like: props.like
-    };
-    this.changeLike = this.changeLike.bind(this);
-  };
-
   // static getDerivedStateFromProps(props){
   //   return {
   //     like: props.like
   //   }
   // }
 
-  changeLike() {
-    const { session_id } = this.props;
-
-    if (!session_id) {
-    }
-    this.setState({
-      like: !this.state.like
-    }, () => {
-      const queryStringParams = {
-        session_id: this.props.session_id
-      };
-
-      const body = {
-        "media_type": "movie",
-        "media_id": this.props.item.id,
-        "favorite": this.state.like
-      };
-      CallApi.post(`/account/${this.props.user.id}/favorite?`, { params: queryStringParams, body: body });
-    });
-
-  };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.like !== this.props.like) {
-      this.setState({
-        like: this.props.like
-      });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.like !== this.props.like) {
+  //     this.setState({
+  //       like: this.props.like
+  //     });
+  //   }
+  // }
 
   render() {
     const { item } = this.props;
-    const {like} = this.state;
-
-
-    console.log(this.props);
     return (
       <div className="card" style={{ width: "100%" }}>
         <img
@@ -71,11 +37,9 @@ class MovieItem extends React.Component {
             {item.vote_average}
           </div>
 
-          <div className="movie-item__like float-right" onClick={this.changeLike}>
-            <FontAwesomeIcon icon={[like ? "fas": "far", "heart"]} />
+          <div className="movie-item__like float-right">
+            <Like id={item.id} />
           </div>
-          <span>{this.props.like}</span>
-
         </div>
       </div>
     );

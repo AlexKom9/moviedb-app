@@ -3,7 +3,7 @@ import MovieItem from "../MovieItem";
 import PropTypes from "prop-types";
 import MoviesHOC from "./MoviesHOC";
 
-const MovieList = ({ movies = [], favorite_movies = [] }) => {
+const MovieList = ({ movies = [] }) => {
   return (
     <div className="row">
       {movies.map(movie => (
@@ -21,4 +21,4 @@ MovieList.propTypes = {
   movies: PropTypes.array.isRequired
 };
 
-export default MoviesHOC(MovieList, "favorites");
+export default MoviesHOC(MovieList);

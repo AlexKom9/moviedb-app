@@ -4,15 +4,13 @@ import PropTypes from "prop-types";
 import CallApi from "../../../api/api";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 
-export default (Component, key) =>
+export default (Component) =>
   AppConsumerHOC(
     class MoviesHOC extends React.Component {
       constructor() {
         super();
         this.state = {
           movies: [],
-          favorite_movies: [],
-          watch_list: []
         };
       }
 

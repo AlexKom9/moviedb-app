@@ -28,6 +28,9 @@ class HeaderMenu extends React.Component {
         <span className="dropdown-item">
           <Link to="/account/favorites">Избранные</Link>
         </span>
+        <span className="dropdown-item">
+          <Link to="/account/watchlist">К просмотру</Link>
+        </span>
       </div>
     );
   }

@@ -24,10 +24,15 @@ class MovieItem extends React.Component {
             Рейтинг:
             {item.vote_average}
           </div>
-          <div className="movie-item__like float-right">
-            <MovieLike id={item.id} />
+
+          <div className="movie-item__like float-right ml-2">
             <MovieToWatch id={item.id} />
           </div>
+
+          <div className="movie-item__like float-right">
+            <MovieLike id={item.id} />
+          </div>
+
         </div>
       </div>
     );

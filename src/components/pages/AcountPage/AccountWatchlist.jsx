@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import { Redirect } from "react-router-dom";
 import MoviesList from "../../Movies/MoviesList/MoviesList";
 
-class AccountFavorites extends Component {
+class AccountWatchlist extends Component {
   render() {
     console.log(this.props.isAuth);
     return this.props.isAuth ? (
       <div className="container">
         <div className="row mt-4">
           <div className="col-8">
-            <MoviesList movies={this.props.favorite_movies} />
+            <MoviesList movies={this.props.watchlist} />
           </div>
         </div>
       </div>
@@ -21,6 +20,6 @@ class AccountFavorites extends Component {
   }
 }
 
-AccountFavorites.propTypes = {};
+AccountWatchlist.propTypes = {};
 
-export default AppConsumerHOC(AccountFavorites);
+export default AppConsumerHOC(AccountWatchlist);

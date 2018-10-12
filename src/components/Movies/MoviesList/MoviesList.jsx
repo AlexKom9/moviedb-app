@@ -21,4 +21,4 @@ MovieList.propTypes = {
   movies: PropTypes.array.isRequired
 };
 
-export default MoviesHOC(MovieList);
+export default MovieList;

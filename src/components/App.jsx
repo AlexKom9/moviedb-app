@@ -5,6 +5,7 @@ import MoviePage from "./pages/MoviePage/MoviePage";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import AccountFavorites from "./pages/AcountPage/AccountFavorites";
+import AccountWatchlist from "./pages/AcountPage/AccountWatchlist";
 
 import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
@@ -98,7 +99,9 @@ export default class App extends React.Component {
     this.setState({
       session_id: null,
       user: null,
-      isAuth: false
+      isAuth: false,
+      favorite_movies: [],
+      watchlist: []
     });
   };
 
@@ -181,6 +184,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={MoviesPage} />
           <Route path="/movie/:id" component={MoviePage} />
           <Route path="/account/favorites" component={AccountFavorites} />
+          <Route path="/account/watchlist" component={AccountWatchlist} />
         </AppContext.Provider>
       </BrowserRouter>
     ) : (

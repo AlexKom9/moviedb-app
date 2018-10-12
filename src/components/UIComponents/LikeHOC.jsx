@@ -9,7 +9,9 @@ export default (Component, key) =>
       constructor(props) {
         super(props);
         this.state = {
-          liked: false
+          liked: this.props.favorite_movies.findIndex(
+            movie => movie.id === this.props.id
+          ) !== -1
         };
         this.changeLike = this.changeLike.bind(this);
       }
@@ -53,6 +55,10 @@ export default (Component, key) =>
           });
         }
       }
+      //
+      // componentDidMount(){
+      //
+      // }
 
       render() {
         const { liked } = this.state;

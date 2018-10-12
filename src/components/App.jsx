@@ -49,13 +49,10 @@ export default class App extends React.Component {
   }
   updateUser = user => {
     console.log(user);
-    this.setState(
-      {
-        user: user,
-        isAuth: true
-      },
-      this.getFavoriteMovies
-    );
+    this.setState({
+      user: user,
+      isAuth: true
+    });
   };
 
   updateSessionId = session_id => {
@@ -82,11 +79,14 @@ export default class App extends React.Component {
       path: "/",
       maxAge: 2592000
     });
-    this.setState({
-      session_id,
-      user,
-      isAuth: true
-    });
+    this.setState(
+      {
+        session_id,
+        user,
+        isAuth: true
+      },
+      this.getFavoriteMovies
+    );
   };
 
   logOut = (user, session_id) => {
@@ -99,6 +99,7 @@ export default class App extends React.Component {
   };
 
   getFavoriteMovies = () => {
+    console.log("update favoriteMovies");
     const queryStringParams = {
       session_id: this.state.session_id
     };

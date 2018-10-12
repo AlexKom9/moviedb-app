@@ -63,7 +63,7 @@ export default class MoviesPage extends React.Component {
                 <h3>Фильтры:</h3>
                 <div className="mb-4">
                   <button
-                    className="btn btn-light"
+                    className="btn btn-light border"
                     onClick={() =>
                       this.setState({
                         ...initialState

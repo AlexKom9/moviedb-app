@@ -18,7 +18,7 @@ class MovieItem extends React.Component {
             item.poster_path}`}
           alt=""
         />
-        <div className="card-body">
+        <div className="card-body shadow-sm">
           <Link to={`/movie/${item.id}`}>{item.title}</Link>
           <div className="card-text">
             Рейтинг:

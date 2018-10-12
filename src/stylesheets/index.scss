@@ -1,10 +1,24 @@
+@import "./_base/variables";
+
 body {
-  background: rgba(gray, .1);
+  background: $background
 }
 
 ul {
-	list-style: none;
-	padding-left: 0;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar {
+  background-color: $primaryLight;
+}
+
+.header__home-link {
+  color: #fff;
+  font-size: 24px;
+  &:hover {
+    color: $background;
+  }
 }
 
 .invalid-feedback {
@@ -20,6 +34,7 @@ ul {
 .head-user {
   position: relative;
 }
+
 .user-head__menu {
   right: 0;
   position: absolute;

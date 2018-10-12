@@ -1,9 +1,18 @@
 body {
-  background: rgba(128, 128, 128, 0.1); }
+  background: #F9F9F9; }
 
 ul {
   list-style: none;
   padding-left: 0; }
+
+.navbar {
+  background-color: #3987e0; }
+
+.header__home-link {
+  color: #fff;
+  font-size: 24px; }
+  .header__home-link:hover {
+    color: #F9F9F9; }
 
 .invalid-feedback {
   display: block; }

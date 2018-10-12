@@ -4,7 +4,7 @@ export default class Paginator extends React.Component {
   render() {
     const { page, total_pages, onChangePage } = this.props;
     return (
-      <div>
+      <div className="text-center">
         <div className="btn-group" role="group" aria-label="Basic example">
           <button
             type="button"

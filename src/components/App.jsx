@@ -36,6 +36,7 @@ const initialState = {
   user: null,
   session_id: cookies.get("session_id"),
   favorite_movies: [],
+  watchlist: [],
   isAuth: false,
   showLoginForm: false
 };
@@ -85,7 +86,10 @@ export default class App extends React.Component {
         user,
         isAuth: true
       },
-      this.getFavoriteMovies
+      () => {
+        this.getWatchList();
+        this.getFavoriteMovies();
+      }
     );
   };
 
@@ -108,6 +112,20 @@ export default class App extends React.Component {
     }).then(data => {
       this.setState({
         favorite_movies: data.results
+      });
+    });
+  };
+
+  getWatchList = () => {
+    console.log("update watchlist");
+    const queryStringParams = {
+      session_id: this.state.session_id
+    };
+    CallApi.get(`/account/${this.state.user.id}/watchlist/movies?`, {
+      params: queryStringParams
+    }).then(data => {
+      this.setState({
+        watchlist: data.results
       });
     });
   };
@@ -146,12 +164,13 @@ export default class App extends React.Component {
             updateSessionId: this.updateSessionId,
             session_id: session_id,
             favorite_movies: this.state.favorite_movies,
+            watchlist: this.state.watchlist,
             isAuth: this.state.isAuth,
             updateAuth: this.updateAuth,
             logOut: this.logOut,
             showLoginForm: this.state.showLoginForm,
             toggleLoginForm: this.toggleLoginForm,
-            hideLoginForm: this.hideLoginForm
+            hideLoginForm: this.hideLoginForm,
           }}
         >
           <Header

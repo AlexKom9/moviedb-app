@@ -1,27 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Like from "../UIComponents/Like";
-import LikeHOC from "../UIComponents/LikeHOC";
+import Like from "./Markers/Like";
+import ToWatch from "./Markers/ToWatch";
+import markHOC from "./Markers/markHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
 class MovieItem extends React.Component {
-  // static getDerivedStateFromProps(props){
-  //   return {
-  //     like: props.like
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.like !== this.props.like) {
-  //     this.setState({
-  //       like: this.props.like
-  //     });
-  //   }
-  // }
-
   render() {
     const { item } = this.props;
-    // console.log(LikeHOC(<Like id={item.id} />));
+    const MovieLike = markHOC(Like, 'favorite_movies');
+    const MovieToWatch = markHOC(ToWatch, 'watchlist');
     return (
       <div className="card" style={{ width: "100%" }}>
         <img
@@ -36,9 +24,9 @@ class MovieItem extends React.Component {
             Рейтинг:
             {item.vote_average}
           </div>
-
           <div className="movie-item__like float-right">
-            <Like id={item.id} />
+            <MovieLike id={item.id} />
+            <MovieToWatch id={item.id} />
           </div>
         </div>
       </div>

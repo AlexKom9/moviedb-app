@@ -21,17 +21,6 @@ export default (Component, key) =>
               liked: !this.state.liked
             },
             () => {
-
-              // const { user, session_id } = this.props;
-              // console.log(user, session_id);
-              // const data = {
-              //   user,
-              //   session_id,
-              //   liked: this.state.liked,
-              //   id: this.props.id
-              // };
-              // this.props.changeLike(data);
-
               const queryStringParams = {
                 session_id: this.props.session_id
               };
@@ -47,31 +36,27 @@ export default (Component, key) =>
             }
           );
         } else {
-          //TODO: OPEN MODAL !!!
-          // console.log("else");
           this.props.toggleLoginForm();
         }
       }
 
       componentDidUpdate(prevProps) {
         if (
+          this.props.isAuth &&
           !_.isEqual(prevProps.favorite_movies, this.props.favorite_movies)
         ) {
           this.setState({
             liked:
-            this.props.favorite_movies.findIndex(
-              movie => movie.id === this.props.id
-            ) !== -1
+              this.props.favorite_movies.findIndex(
+                movie => movie.id === this.props.id
+              ) !== -1
           });
         }
       }
 
       render() {
-
         const { liked } = this.state;
-        return (
-         <Component liked={liked} changeLike={this.changeLike}/>
-        );
+        return <Component liked={liked} changeLike={this.changeLike} />;
       }
     }
   );

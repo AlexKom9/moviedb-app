@@ -9,7 +9,6 @@ export default (Component, key) =>
       constructor(props) {
         super(props);
         let apiList = [];
-        console.log(key);
         switch (key) {
           case "favorite_movies":
             apiList = this.props.favorite_movies;

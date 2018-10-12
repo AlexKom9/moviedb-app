@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Like from "../UIComponents/Like";
 import LikeHOC from "../UIComponents/LikeHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
-import CallApi from "../../api/api";
 
 class MovieItem extends React.Component {
   // static getDerivedStateFromProps(props){
@@ -22,6 +21,7 @@ class MovieItem extends React.Component {
 
   render() {
     const { item } = this.props;
+    // console.log(LikeHOC(<Like id={item.id} />));
     return (
       <div className="card" style={{ width: "100%" }}>
         <img

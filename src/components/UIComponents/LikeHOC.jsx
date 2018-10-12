@@ -55,11 +55,6 @@ export default (Component, key) =>
           });
         }
       }
-      //
-      // componentDidMount(){
-      //
-      // }
-
       render() {
         const { liked } = this.state;
         return <Component liked={liked} changeLike={this.changeLike} />;

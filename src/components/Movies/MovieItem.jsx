@@ -1,15 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Like from "./Markers/Like";
-import ToWatch from "./Markers/ToWatch";
+import LikeIcon from "./Markers/LikeIcon";
+import WatchIcon from "./Markers/WatchIcon";
 import MarkHOC from "./Markers/MarkHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
+
+
+
+const MovieLike = MarkHOC(LikeIcon, 'favorite_movies');
+const MovieToWatch = MarkHOC(WatchIcon, 'watchlist');
+
 class MovieItem extends React.Component {
+
   render() {
     const { item } = this.props;
-    const MovieLike = MarkHOC(Like, 'favorite_movies');
-    const MovieToWatch = MarkHOC(ToWatch, 'watchlist');
     return (
       <div className="card" style={{ width: "100%" }}>
         <img

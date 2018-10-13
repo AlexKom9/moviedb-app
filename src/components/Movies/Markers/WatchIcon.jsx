@@ -1,15 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-class Like extends React.Component {
+class WatchIcon extends React.Component {
     render() {
     const { marked, changeMark } = this.props;
     return (
       <div onClick={changeMark}>
-        <FontAwesomeIcon icon={[marked ? "fas" : "far", "heart"]} />
+        <FontAwesomeIcon icon={[marked ? "fas" : "far", "bookmark"]} />
       </div>
     );
   }
 }
 
-export default Like
+export default WatchIcon

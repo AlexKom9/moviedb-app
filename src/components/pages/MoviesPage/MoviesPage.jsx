@@ -1,9 +1,7 @@
 import React from "react";
 import Filters from "../../Filters/Filters";
-import MoviesHOC from '../../Movies/MoviesList/MoviesHOC'
-import Like from '../../Movies/Markers/Like'
+import MoviesHOC from "../../Movies/MoviesList/MoviesHOC";
 import MovieList from "../../Movies/MoviesList/MoviesList";
-
 
 const initialState = {
   filters: {
@@ -15,12 +13,12 @@ const initialState = {
   total_pages: ""
 };
 
-export default class MoviesPage extends React.Component {
+const MoviesContainer = MoviesHOC(MovieList);
+
+export default class MoviesPage extends React.PureComponent {
   constructor() {
     super();
-    this.state = {
-      ...initialState
-    };
+    this.state = initialState;
   }
 
   onChangeFilters = event => {
@@ -34,26 +32,24 @@ export default class MoviesPage extends React.Component {
   };
 
   onChangePage = page => {
-    if(page !== this.state.page ){
-      this.setState({
-        page
-      });
-    }
+    this.setState({
+      page
+    });
   };
 
   getTotalPages = totalPages => {
-    if(totalPages !== this.state.total_pages){
-      this.setState({
-        total_pages: totalPages
-      });
-    }
+    this.setState({
+      total_pages: totalPages
+    });
   };
 
-
+  // shouldComponentUpdate(nextProps, nextState) {
+  //
+  // }
 
   render() {
-    const MoviesContainer = MoviesHOC(MovieList);
     const { filters, page, total_pages } = this.state;
+    console.log("render MoviesPage");
     return (
       <div className="container">
         <div className="row mt-4">

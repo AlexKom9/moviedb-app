@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import CallApi from "../../../api/api";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 
-export default (Component) =>
+export default Component =>
   AppConsumerHOC(
-    class MoviesHOC extends React.Component {
+    class MoviesHOC extends React.PureComponent {
       constructor() {
         super();
         this.state = {
-          movies: [],
+          movies: []
         };
       }
 
@@ -27,13 +27,6 @@ export default (Component) =>
 
         let genreString = "";
 
-        for (let i = 0; i < with_genres.length; i++) {
-          if (i === 0) {
-            genreString += String(with_genres[i]);
-          } else {
-            genreString += `&with_genres=${with_genres[i]}`;
-          }
-        }
         const queryStringParams = {
           sort_by,
           language: "ru-RU",
@@ -41,6 +34,10 @@ export default (Component) =>
           primary_release_year,
           with_genres
         };
+
+        if (with_genres.length > 0) {
+          queryStringParams.with_genres = with_genres.join(",");
+        }
 
         CallApi.get(`/discover/movie?`, { params: queryStringParams }).then(
           data => {
@@ -57,7 +54,6 @@ export default (Component) =>
       }
 
       componentDidUpdate(prevProps) {
-        console.log("try ypdate movie List");
         if (!_.isEqual(this.props.filters, prevProps.filters)) {
           this.props.changePage(1);
           this.getMovies(this.props.filters, 1);

@@ -69,7 +69,6 @@ export default class App extends React.Component {
   };
 
   getFavoriteMovies = () => {
-    console.log("update favoriteMovies");
     const queryStringParams = {
       session_id: this.state.session_id
     };
@@ -83,7 +82,6 @@ export default class App extends React.Component {
   };
 
   getWatchList = () => {
-    console.log("update watchlist");
     const queryStringParams = {
       session_id: this.state.session_id
     };
@@ -121,6 +119,7 @@ export default class App extends React.Component {
 
   render() {
     const { user, session_id, isAuth } = this.state;
+    console.log('render -- App ')
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider

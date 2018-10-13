@@ -38,32 +38,6 @@ export default class App extends React.Component {
       showLoginForm: false,
     };
   }
-  updateUser = user => {
-    console.log(user);
-    this.setState({
-      user: user,
-      isAuth: true
-    });
-  };
-
-  updateSessionId = session_id => {
-    if (session_id) {
-      // console.log("session_id: ", session_id);
-      cookies.set("session_id", session_id, {
-        path: "/",
-        maxAge: 2592000
-      });
-      this.setState({
-        session_id: session_id
-      });
-    } else {
-      this.setState({
-        session_id: null,
-        user: null
-      });
-      cookies.remove("session_id");
-    }
-  };
 
   updateAuth = (user, session_id) => {
     cookies.set("session_id", session_id, {
@@ -152,8 +126,6 @@ export default class App extends React.Component {
         <AppContext.Provider
           value={{
             user: user,
-            updateUser: this.updateUser,
-            updateSessionId: this.updateSessionId,
             session_id: session_id,
             favorite_movies: this.state.favorite_movies,
             watchlist: this.state.watchlist,

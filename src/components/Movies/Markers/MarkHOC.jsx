@@ -5,7 +5,7 @@ import _ from "lodash";
 
 export default (Component, key) =>
   AppConsumerHOC(
-    class flagHOC extends React.Component {
+    class MarkHOC extends React.Component {
       constructor(props) {
         super(props);
         let apiList = [];

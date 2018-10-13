@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Like from "./Markers/Like";
 import ToWatch from "./Markers/ToWatch";
-import markHOC from "./Markers/markHOC";
+import MarkHOC from "./Markers/MarkHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
 class MovieItem extends React.Component {
   render() {
     const { item } = this.props;
-    const MovieLike = markHOC(Like, 'favorite_movies');
-    const MovieToWatch = markHOC(ToWatch, 'watchlist');
+    const MovieLike = MarkHOC(Like, 'favorite_movies');
+    const MovieToWatch = MarkHOC(ToWatch, 'watchlist');
     return (
       <div className="card" style={{ width: "100%" }}>
         <img

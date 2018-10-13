@@ -26,27 +26,16 @@ library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
 export const AppContext = React.createContext();
 
-const initialState = {
-  filters: {
-    sort_by: "vote_average.desc",
-    primary_release_year: "0",
-    with_genres: []
-  },
-  page: 1,
-  total_pages: "",
-  user: null,
-  session_id: cookies.get("session_id"),
-  favorite_movies: [],
-  watchlist: [],
-  isAuth: false,
-  showLoginForm: false
-};
-
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      ...initialState
+      user: null,
+      isAuth: false,
+      session_id: cookies.get("session_id"),
+      favorite_movies: [],
+      watchlist: [],
+      showLoginForm: false,
     };
   }
   updateUser = user => {
@@ -94,7 +83,7 @@ export default class App extends React.Component {
     );
   };
 
-  logOut = (user, session_id) => {
+  logOut = () => {
     cookies.remove("session_id");
     this.setState({
       session_id: null,
@@ -177,8 +166,6 @@ export default class App extends React.Component {
           }}
         >
           <Header
-            updateUser={this.updateUser}
-            updateSessionId={this.updateSessionId}
             user={user}
           />
           <Route exact path="/" component={MoviesPage} />

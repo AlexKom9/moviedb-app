@@ -25,6 +25,7 @@ const cookies = new Cookies();
 library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
 export const AppContext = React.createContext();
+export const AcountMoviesByTypeContext = React.createContext();
 
 export default class App extends React.Component {
   constructor() {
@@ -126,9 +127,9 @@ export default class App extends React.Component {
           value={{
             user: user,
             session_id: session_id,
+            isAuth: this.state.isAuth,
             favorite_movies: this.state.favorite_movies,
             watchlist: this.state.watchlist,
-            isAuth: this.state.isAuth,
             updateAuth: this.updateAuth,
             logOut: this.logOut,
             showLoginForm: this.state.showLoginForm,
@@ -136,6 +137,12 @@ export default class App extends React.Component {
             hideLoginForm: this.hideLoginForm,
           }}
         >
+          <AcountMoviesByTypeContext.Provider
+            value={{
+              favorite_movies: this.state.favorite_movies,
+              watchlist: this.state.watchlist
+            }}
+          >
           <Header
             user={user}
           />
@@ -143,6 +150,7 @@ export default class App extends React.Component {
           <Route path="/movie/:id" component={MoviePage} />
           <Route path="/account/favorites" component={AccountFavorites} />
           <Route path="/account/watchlist" component={AccountWatchlist} />
+          </AcountMoviesByTypeContext.Provider>
         </AppContext.Provider>
       </BrowserRouter>
     ) : (

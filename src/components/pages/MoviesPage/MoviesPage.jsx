@@ -43,10 +43,6 @@ export default class MoviesPage extends React.PureComponent {
     });
   };
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //
-  // }
-
   render() {
     const { filters, page, total_pages } = this.state;
     console.log("render MoviesPage");

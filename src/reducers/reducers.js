@@ -1,40 +1,12 @@
-import Cookies from "universal-cookie";
+import reducerAuthentication from "./reducerAuthentification";
+import reducerMovies from "./reducersMovies";
+import { combineReducers } from "redux";
+import reducerModals from "./reducersModals";
 
-const cookies = new Cookies();
+const reducers = combineReducers({
+  authentication: reducerAuthentication,
+  movies: reducerMovies,
+  modals: reducerModals
+});
 
-const initialState = {
-  user: null,
-  isAuth: false,
-  session_id: cookies.get("session_id"),
-  favorite_movies: [],
-  watchlist: [],
-  showLoginForm: false
-};
-
-const reducerApp = (state = initialState, action) => {
-  switch (action.type) {
-    case "UPDATE_AUTH":
-      cookies.set("session_id", action.payload.session_id, {
-        path: "/",
-        maxAge: 2592000
-      });
-      return {
-        ...state,
-        user: action.payload.user,
-        session_id: action.payload.session_id,
-        isAuth: true
-      };
-    case "LOGOUT":
-      cookies.remove("session_id");
-      return {
-        ...state,
-        user: null,
-        session_id: null,
-        isAuth: false
-      };
-    default:
-      return state;
-  }
-};
-
-export default reducerApp;
+export default reducers;

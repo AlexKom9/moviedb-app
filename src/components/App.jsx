@@ -20,7 +20,9 @@ import {
 import CallApi from "../api/api";
 import {
   actionCreatorUpdateAuth,
-  actionCreatorLogOut
+  actionCreatorLogOut,
+  actionCreatorToggleLoginForm,
+  actionCreatorHideLoginForm
 } from "../actions/actions";
 
 import { connect } from "react-redux";
@@ -36,51 +38,47 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      // user: null,
-      // isAuth: false,
-      // session_id: cookies.get("session_id"),
       favorite_movies: [],
       watchlist: [],
-      showLoginForm: false
     };
   }
 
-  updateAuth = (user, session_id) => {
-    // cookies.set("session_id", session_id, {
-    //   path: "/",
-    //   maxAge: 2592000
-    // });
-    // this.setState(
-    //   {
-    //     session_id,
-    //     user,
-    //     isAuth: true
-    //   },
-    //TODO: Question !!!
-    //   () => {
-    //     this.getWatchList();
-    //     this.getFavoriteMovies();
-    //   }
-    // );
-    this.props.store.dispatch(
-      actionCreatorUpdateAuth({
-        user,
-        session_id
-      })
-    );
-  };
+  // updateAuth = (user, session_id) => {
+  //   // cookies.set("session_id", session_id, {
+  //   //   path: "/",
+  //   //   maxAge: 2592000
+  //   // });
+  //   // this.setState(
+  //   //   {
+  //   //     session_id,
+  //   //     user,
+  //   //     isAuth: true
+  //   //   },
+  //   //TODO: Question !!!
+  //   //   () => {
+  //   //     this.getWatchList();
+  //   //     this.getFavoriteMovies();
+  //   //   }
+  //   // );
+  //   this.props.store.dispatch(
+  //     actionCreatorUpdateAuth({
+  //       user,
+  //       session_id
+  //     })
+  //   );
+  // };
 
-  logOut = () => {
-    // cookies.remove("session_id");
-    // this.setState({
-    //   session_id: null,
-    //   user: null,
-    //   isAuth: false,
-    //   favorite_movies: [],
-    //   watchlist: []
-    // });
-    this.props.store.dispatch(actionCreatorLogOut());
-  };
+  // logOut = () => {
+  //   // cookies.remove("session_id");
+  //   // this.setState({
+  //   //   session_id: null,
+  //   //   user: null,
+  //   //   isAuth: false,
+  //   //   favorite_movies: [],
+  //   //   watchlist: []
+  //   // });
+  //   this.props.store.dispatch(actionCreatorLogOut());
+  // };
 
   getFavoriteMovies = () => {
     const queryStringParams = {
@@ -108,6 +106,8 @@ class App extends React.Component {
     });
   };
 
+
+
   componentDidMount() {
     const { session_id } = this.props;
     if (session_id) {
@@ -121,21 +121,10 @@ class App extends React.Component {
     }
   }
 
-  toggleLoginForm = () => {
-    this.setState({
-      showLoginForm: !this.state.showLoginForm
-    });
-  };
-
-  hideLoginForm = () => {
-    this.setState({
-      showLoginForm: false
-    });
-  };
 
   render() {
     console.log("render -- App ", this.props);
-    const { user, session_id, isAuth, updateAuth, onLogOut } = this.props;
+    const { user, session_id, isAuth, updateAuth, onLogOut, toggleLoginForm, hideLoginForm } = this.props;
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider
@@ -147,9 +136,9 @@ class App extends React.Component {
             isAuth: this.state.isAuth,
             updateAuth,
             onLogOut,
-            showLoginForm: this.state.showLoginForm,
-            toggleLoginForm: this.toggleLoginForm,
-            hideLoginForm: this.hideLoginForm
+            showLoginForm: this.props.showLoginForm,
+            toggleLoginForm,
+            hideLoginForm,
           }}
         >
           <Header user={user} />
@@ -167,16 +156,20 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
-    session_id: state.session_id,
-    isAuth: state.isAuth
+    user: state.authentication.user,
+    session_id: state.authentication.session_id,
+    isAuth: state.authentication.isAuth,
+    showLoginForm: state.modals.showLoginForm
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     updateAuth: actionCreatorUpdateAuth,
-    onLogOut: actionCreatorLogOut
+    onLogOut: actionCreatorLogOut,
+    toggleLoginForm: actionCreatorToggleLoginForm,
+    hideLoginForm: actionCreatorHideLoginForm
+
   }, dispatch)
 };
 

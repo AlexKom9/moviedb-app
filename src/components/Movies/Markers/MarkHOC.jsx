@@ -16,9 +16,9 @@ export default (Component, key) =>
         const initialState = key => {
           switch (key) {
             case "favorite_movies":
-              return findMovieInArr(this.props.id, this.props.favorite_movies);
+              return this.findMovieInArr(this.props.id, this.props.favorite_movies);
             case "watchlist":
-              return findMovieInArr(this.props.id, this.props.watchlist);
+              return this.findMovieInArr(this.props.id, this.props.watchlist);
             default:
               return false;
           }
@@ -30,20 +30,22 @@ export default (Component, key) =>
 
         this.changeMark = this.changeMark.bind(this);
       }
-
+      findMovieInArr(id, arr) {
+        return arr.findIndex(movie => movie.id === id) !== -1;
+      }
       fetchMark() {
-        const fetchFavoritesMark = () => {
-          const queryStringParams = {
-            session_id: this.props.session_id
-          };
-          const body = {
-            media_type: "movie",
-            media_id: this.props.id,
-            favorite: this.state.marked
-          };
-          CallApi.post(`/account/${this.props.id}/favorite?`, {
-            params: queryStringParams,
-            body: body
+          const fetchFavoritesMark = () => {
+            const queryStringParams = {
+              session_id: this.props.session_id
+            };
+            const body = {
+              media_type: "movie",
+              media_id: this.props.id,
+              favorite: this.state.marked
+            };
+            CallApi.post(`/account/${this.props.id}/favorite?`, {
+              params: queryStringParams,
+              body: body
           });
         };
 
@@ -111,7 +113,7 @@ export default (Component, key) =>
             this.props.isAuth)
         ) {
           this.setState({
-            marked: findMovieInArr(this.props.id, arr)
+            marked: this.findMovieInArr(this.props.id, arr)
           });
         }
       }

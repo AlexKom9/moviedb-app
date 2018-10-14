@@ -5,13 +5,13 @@ import CallApi from "../../api/api";
 
 class HeaderMenu extends React.Component {
   logOut = () => {
-    const { session_id, logOut } = this.props;
+    const { session_id, onLogOut } = this.props;
     CallApi.delete("/authentication/session?", {
       body: { session_id: session_id }
     }).then(({ success = false }) => {
       if (success) {
         // updateSessionId(null);
-        logOut();
+        onLogOut();
       }
     });
   };

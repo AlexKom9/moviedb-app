@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import AccountFavorites from "./pages/AcountPage/AccountFavorites";
 import AccountWatchlist from "./pages/AcountPage/AccountWatchlist";
 
-import { API_KEY_3, API_URL, fetchApi } from "../api/api";
 import Cookies from "universal-cookie";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -24,13 +23,15 @@ import {
   actionCreatorLogOut
 } from "../actions/actions";
 
+import { connect } from "react-redux";
+
 const cookies = new Cookies();
 
 library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
 export const AppContext = React.createContext();
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -107,20 +108,14 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    const { store } = this.props;
-    store.subscribe(() => {
-      console.log("change", store.getState());
-      this.forceUpdate();
-    });
-
-    const { session_id } = store.getState();
+    const { session_id, updateAuth } = this.props;
     if (session_id) {
       CallApi.get("/account?", {
         params: {
           session_id
         }
       }).then(user => {
-        this.updateAuth(user, session_id);
+        updateAuth(user, session_id);
       });
     }
   }
@@ -138,8 +133,8 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { user, session_id, isAuth } = this.props.store.getState();
-    console.log("render -- App ");
+    console.log("render -- App ", this.props);
+    const { user, session_id, isAuth, updateAuth, onLogOut } = this.props;
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider
@@ -149,8 +144,8 @@ export default class App extends React.Component {
             favorite_movies: this.state.favorite_movies,
             watchlist: this.state.watchlist,
             isAuth: this.state.isAuth,
-            updateAuth: this.updateAuth,
-            logOut: this.logOut,
+            updateAuth,
+            onLogOut,
             showLoginForm: this.state.showLoginForm,
             toggleLoginForm: this.toggleLoginForm,
             hideLoginForm: this.hideLoginForm
@@ -168,3 +163,23 @@ export default class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    session_id: state.session_id,
+    isAuth: state.isAuth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateAuth: (user, session_id) => dispatch(actionCreatorUpdateAuth({user, session_id})),
+    onLogOut: () => dispatch(actionCreatorLogOut())
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

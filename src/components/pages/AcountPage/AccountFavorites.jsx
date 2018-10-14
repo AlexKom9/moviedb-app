@@ -10,7 +10,7 @@ class AccountFavorites extends Component {
       <div className="container">
         <div className="row mt-4">
           <div className="col-8">
-            <MoviesList movies={this.props.favorite_movies} />
+            <MoviesList movies={this.props.favorite} />
           </div>
         </div>
       </div>

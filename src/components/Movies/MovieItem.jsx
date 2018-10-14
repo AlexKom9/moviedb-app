@@ -8,7 +8,7 @@ import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
 
 
-const MovieLike = MarkHOC(LikeIcon, 'favorite_movies');
+const MovieLike = MarkHOC(LikeIcon, 'favorite');
 const MovieToWatch = MarkHOC(WatchIcon, 'watchlist');
 
 class MovieItem extends React.Component {

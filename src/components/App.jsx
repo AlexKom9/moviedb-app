@@ -36,7 +36,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      favorite_movies: [],
+      favorite: [],
       watchlist: []
     };
   }
@@ -51,7 +51,7 @@ class App extends React.Component {
       params: queryStringParams
     }).then(data => {
       this.setState({
-        favorite_movies: data.results
+        favorite: data.results
       });
     });
   };
@@ -109,7 +109,7 @@ class App extends React.Component {
           value={{
             user: user,
             session_id: session_id,
-            favorite_movies: this.state.favorite_movies,
+            favorite: this.state.favorite,
             watchlist: this.state.watchlist,
             isAuth,
             updateAuth,

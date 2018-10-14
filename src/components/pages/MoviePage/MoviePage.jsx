@@ -22,7 +22,7 @@ export default class MoviePage extends React.Component {
   }
 
   render() {
-    const MovieLike = MarkHOC(Like, 'favorite_movies');
+    const MovieLike = MarkHOC(Like, 'favorite');
     const MovieToWatch = MarkHOC(WatchIcon, 'watchlist');
     console.log(this.props);
     const { movie } = this.state;

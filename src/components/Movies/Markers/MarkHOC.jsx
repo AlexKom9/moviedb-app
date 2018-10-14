@@ -15,8 +15,8 @@ export default (Component, key) =>
 
         const initialState = key => {
           switch (key) {
-            case "favorite_movies":
-              return findMovieInArr(this.props.id, this.props.favorite_movies);
+            case "favorite":
+              return findMovieInArr(this.props.id, this.props.favorite);
             case "watchlist":
               return findMovieInArr(this.props.id, this.props.watchlist);
             default:
@@ -65,7 +65,7 @@ export default (Component, key) =>
         switch (key) {
           default:
             break;
-          case "favorite_movies":
+          case "favorite":
             fetchFavoritesMark();
 
             break;
@@ -91,8 +91,8 @@ export default (Component, key) =>
       componentDidUpdate(prevProps) {
         let arr = [];
         switch (key) {
-          case "favorite_movies":
-            arr = this.props.favorite_movies;
+          case "favorite":
+            arr = this.props.favorite;
             break;
           case "watchlist":
             arr = this.props.watchlist;
@@ -104,8 +104,8 @@ export default (Component, key) =>
         if (
           (this.props.isAuth &&
             !_.isEqual(
-              prevProps.favorite_movies,
-              this.props.favorite_movies
+              prevProps.favorite,
+              this.props.favorite
             )) ||
           (!_.isEqual(prevProps.watchlist, this.props.watchlist) &&
             this.props.isAuth)

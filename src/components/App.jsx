@@ -41,36 +41,6 @@ class App extends React.Component {
     };
   }
 
-  getFavoriteMovies = () => {
-    const { session_id } = this.props;
-
-    const queryStringParams = {
-      session_id
-    };
-    CallApi.get(`/account/${this.props.user.id}/favorite/movies?`, {
-      params: queryStringParams
-    }).then(data => {
-      this.setState({
-        favorite: data.results
-      });
-    });
-  };
-
-  getWatchList = () => {
-    const { session_id } = this.props;
-
-    const queryStringParams = {
-      session_id
-    };
-    CallApi.get(`/account/${this.props.user.id}/watchlist/movies?`, {
-      params: queryStringParams
-    }).then(data => {
-      this.setState({
-        watchlist: data.results
-      });
-    });
-  };
-
   componentDidMount() {
     const { session_id } = this.props;
     if (session_id) {
@@ -84,15 +54,6 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevPros, prevState) {
-    console.log(this.props.isAuth);
-    if (!_.isEqual(prevPros.user, this.props.user) && this.props.isAuth) {
-      console.log(this.props);
-      this.getFavoriteMovies();
-      this.getWatchList();
-    }
-  }
-
   render() {
     const {
       user,
@@ -101,7 +62,9 @@ class App extends React.Component {
       updateAuth,
       onLogOut,
       toggleLoginForm,
-      hideLoginForm
+      hideLoginForm,
+      favorite,
+      watchlist
     } = this.props;
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
@@ -109,8 +72,8 @@ class App extends React.Component {
           value={{
             user: user,
             session_id: session_id,
-            favorite: this.state.favorite,
-            watchlist: this.state.watchlist,
+            favorite,
+            watchlist,
             isAuth,
             updateAuth,
             onLogOut,
@@ -137,7 +100,9 @@ const mapStateToProps = state => {
     user: state.authentication.user,
     session_id: state.authentication.session_id,
     isAuth: state.authentication.isAuth,
-    showLoginForm: state.modals.showLoginForm
+    showLoginForm: state.modals.showLoginForm,
+    favorite: state.account.favorite,
+    watchlist: state.account.watchlist,
   };
 };
 

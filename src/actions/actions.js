@@ -1,10 +1,30 @@
 import CallApi from "../api/api";
 
-export const actionCreatorUpdateAuth = payload => {
-  return {
+export const actionCreatorUpdateAuth = payload => dispatch => {
+  dispatch({
     type: "UPDATE_AUTH",
     payload
+  });
+  const queryStringParams = {
+    session_id: payload.session_id
   };
+
+  CallApi.get(`/account/${payload.user.id}/favorite/movies?`, {
+    params: queryStringParams
+  }).then(data => {
+    dispatch({
+      type: "UPDATE_FAVORITE",
+      payload: data.results
+    })
+  });
+  CallApi.get(`/account/${payload.user.id}/watchlist/movies?`, {
+    params: queryStringParams
+  }).then(data => {
+    dispatch({
+      type: "UPDATE_WATCHLIST",
+      payload: data.results
+    })
+  });
 };
 
 export const actionCreatorLogOut = () => {
@@ -49,4 +69,11 @@ export const actionCreatorGetMovies = params => dispatch => {
         payload: error
       });
     });
+};
+
+export const actionCreatorUpdateFavorite = payload => {
+  return {
+    type: "UPDATE_FAVORITES",
+    payload
+  }
 };

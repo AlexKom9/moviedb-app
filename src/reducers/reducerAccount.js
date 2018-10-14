@@ -1,37 +1,23 @@
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
-
 const initialState = {
-  user: null,
-  isAuth: false,
-  session_id: cookies.get("session_id"),
+  favorite: [],
+  watchlist: []
 };
 
-const reducerAuthentication = (state = initialState, action) => {
+const reducerAccount = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_AUTH":
-      cookies.set("session_id", action.payload.session_id, {
-        path: "/",
-        maxAge: 2592000
-      });
+    case "UPDATE_FAVORITE":
       return {
         ...state,
-        user: action.payload.user,
-        session_id: action.payload.session_id,
-        isAuth: true
+        favorite: action.payload
       };
-    case "LOGOUT":
-      cookies.remove("session_id");
+    case "UPDATE_WATCHLIST":
       return {
         ...state,
-        user: null,
-        session_id: null,
-        isAuth: false
+        watchlist: action.payload
       };
     default:
       return state;
   }
 };
 
-export default reducerAuthentication;
+export default reducerAccount;

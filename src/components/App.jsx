@@ -19,6 +19,10 @@ import {
   faBookmark as farBookmark
 } from "@fortawesome/free-regular-svg-icons";
 import CallApi from "../api/api";
+import {
+  actionCreatorUpdateAuth,
+  actionCreatorLogOut
+} from "../actions/actions";
 
 const cookies = new Cookies();
 
@@ -30,42 +34,50 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null,
-      isAuth: false,
-      session_id: cookies.get("session_id"),
+      // user: null,
+      // isAuth: false,
+      // session_id: cookies.get("session_id"),
       favorite_movies: [],
       watchlist: [],
-      showLoginForm: false,
+      showLoginForm: false
     };
   }
 
   updateAuth = (user, session_id) => {
-    cookies.set("session_id", session_id, {
-      path: "/",
-      maxAge: 2592000
-    });
-    this.setState(
-      {
-        session_id,
+    // cookies.set("session_id", session_id, {
+    //   path: "/",
+    //   maxAge: 2592000
+    // });
+    // this.setState(
+    //   {
+    //     session_id,
+    //     user,
+    //     isAuth: true
+    //   },
+    //TODO: Question !!!
+    //   () => {
+    //     this.getWatchList();
+    //     this.getFavoriteMovies();
+    //   }
+    // );
+    this.props.store.dispatch(
+      actionCreatorUpdateAuth({
         user,
-        isAuth: true
-      },
-      () => {
-        this.getWatchList();
-        this.getFavoriteMovies();
-      }
+        session_id
+      })
     );
   };
 
   logOut = () => {
-    cookies.remove("session_id");
-    this.setState({
-      session_id: null,
-      user: null,
-      isAuth: false,
-      favorite_movies: [],
-      watchlist: []
-    });
+    // cookies.remove("session_id");
+    // this.setState({
+    //   session_id: null,
+    //   user: null,
+    //   isAuth: false,
+    //   favorite_movies: [],
+    //   watchlist: []
+    // });
+    this.props.store.dispatch(actionCreatorLogOut());
   };
 
   getFavoriteMovies = () => {
@@ -95,11 +107,19 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    const { session_id } = this.state;
+    const { store } = this.props;
+    store.subscribe(() => {
+      console.log("change", store.getState());
+      this.forceUpdate();
+    });
+
+    const { session_id } = store.getState();
     if (session_id) {
-      fetchApi(
-        `${API_URL}/account?api_key=${API_KEY_3}&session_id=${session_id}`
-      ).then(user => {
+      CallApi.get("/account?", {
+        params: {
+          session_id
+        }
+      }).then(user => {
         this.updateAuth(user, session_id);
       });
     }
@@ -118,8 +138,8 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { user, session_id, isAuth } = this.state;
-    console.log('render -- App ')
+    const { user, session_id, isAuth } = this.props.store.getState();
+    console.log("render -- App ");
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider
@@ -133,12 +153,10 @@ export default class App extends React.Component {
             logOut: this.logOut,
             showLoginForm: this.state.showLoginForm,
             toggleLoginForm: this.toggleLoginForm,
-            hideLoginForm: this.hideLoginForm,
+            hideLoginForm: this.hideLoginForm
           }}
         >
-          <Header
-            user={user}
-          />
+          <Header user={user} />
           <Route exact path="/" component={MoviesPage} />
           <Route path="/movie/:id" component={MoviePage} />
           <Route path="/account/favorites" component={AccountFavorites} />

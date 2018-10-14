@@ -86,7 +86,7 @@ class LoginForm extends React.Component {
         return CallApi.get("/account?", { params: { session_id: data.session_id } });
       })
       .then(user => {
-        console.log(user);
+        // console.log(user);
         this.setState(
           {
             submitting: false

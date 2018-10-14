@@ -24,6 +24,7 @@ import {
 } from "../actions/actions";
 
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const cookies = new Cookies();
 
@@ -108,14 +109,14 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const { session_id, updateAuth } = this.props;
+    const { session_id } = this.props;
     if (session_id) {
       CallApi.get("/account?", {
         params: {
           session_id
         }
       }).then(user => {
-        updateAuth(user, session_id);
+        this.props.updateAuth({user, session_id});
       });
     }
   }
@@ -173,10 +174,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    updateAuth: (user, session_id) => dispatch(actionCreatorUpdateAuth({user, session_id})),
-    onLogOut: () => dispatch(actionCreatorLogOut())
-  }
+  return bindActionCreators({
+    updateAuth: actionCreatorUpdateAuth,
+    onLogOut: actionCreatorLogOut
+  }, dispatch)
 };
 
 export default connect(

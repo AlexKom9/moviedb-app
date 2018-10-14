@@ -4,6 +4,10 @@ import WatchIcon from '../../Movies/Markers/WatchIcon'
 import CallApi from "../../../api/api";
 import MarkHOC from "../../Movies/Markers/MarkHOC";
 
+const MovieLike = MarkHOC(Like, 'favorite_movies');
+const MovieToWatch = MarkHOC(WatchIcon, 'watchlist');
+
+
 export default class MoviePage extends React.Component {
   constructor(props) {
     super(props);
@@ -22,8 +26,7 @@ export default class MoviePage extends React.Component {
   }
 
   render() {
-    const MovieLike = MarkHOC(Like, 'favorite_movies');
-    const MovieToWatch = MarkHOC(WatchIcon, 'watchlist');
+
     console.log(this.props);
     const { movie } = this.state;
     console.log(movie);

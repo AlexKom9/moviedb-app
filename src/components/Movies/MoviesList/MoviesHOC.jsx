@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import { connect } from "react-redux";
 import {
-  actionCreatorUpdateMovies,
   actionCreatorGetMovies
 } from "../../../actions/actions";
 import { bindActionCreators } from "redux";

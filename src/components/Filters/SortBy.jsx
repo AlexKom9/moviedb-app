@@ -29,7 +29,7 @@ export default class SortBy extends React.PureComponent {
 
   render() {
     const { onChangeFilters, sort_by, options } = this.props;
-    console.log('render SortBy');
+    // console.log('render SortBy');
     return (
       <div className="form-group">
         <label htmlFor="sort_by">Сортировать по:</label>

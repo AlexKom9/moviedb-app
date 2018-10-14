@@ -19,7 +19,7 @@ export default class UISelect extends React.Component {
     const {
       id, name, value, onChange, label,
     } = this.props;
-    console.log('render UISelect');
+    // console.log('render UISelect');
     return (
       <div className="form-group">
         <UILabel id={id}>{label}</UILabel>

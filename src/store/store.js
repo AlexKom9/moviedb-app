@@ -8,7 +8,7 @@ const logger = ({ getState, dispatch }) => next => action => {
 };
 
 const async = ({ getState, dispatch }) => next => action => {
-  console.log(action);
+  // console.log(action);
   if (typeof action === "function") {
     action(dispatch);
   } else {

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import { Redirect } from "react-router-dom";
 import MoviesList from "../../Movies/MoviesList/MoviesList";

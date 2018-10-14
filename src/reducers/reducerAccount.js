@@ -29,11 +29,6 @@ const reducerAuthentication = (state = initialState, action) => {
         session_id: null,
         isAuth: false
       };
-    case "TOGGLE_LOGIN_FORM":
-      return {
-        ...state,
-        showLoginForm: !state.showLoginForm
-      };
     default:
       return state;
   }

@@ -1,6 +1,8 @@
 import React from "react";
-import { AppContext } from "../App";
+// import { AppContext } from "../App";
 import HeaderMenu from "./HeaderMenu";
+import { connect } from "react-redux";
+import { bindActionCreatores } from "redux";
 
 class User extends React.Component {
   constructor() {
@@ -32,11 +34,11 @@ class User extends React.Component {
     }
   }
 
-  closeMenu(){
+  closeMenu() {
     this.setState({
       showMenu: false
-    })
-  };
+    });
+  }
 
   render() {
     const { user } = this.props;
@@ -50,27 +52,38 @@ class User extends React.Component {
             user.avatar.gravatar.hash
           }.jpg?s=64`}
           alt="user avatar"
-
           onClick={() => {
             this.setState({ showMenu: !this.state.showMenu });
           }}
         />
-        <div className="user-head__menu">{showMenu && <HeaderMenu closeMenu={this.closeMenu}/>}</div>
+        <div className="user-head__menu">
+          {showMenu && <HeaderMenu closeMenu={this.closeMenu} />}
+        </div>
       </div>
     );
   }
 }
 
-const UserContainer = props => {
-  return (
-    <AppContext.Consumer>
-      {context => {
-        return <User user={context.user} {...props} />;
-      }}
-    </AppContext.Consumer>
-  );
-};
+// const UserContainer = props => {
+//   return (
+//     <AppContext.Consumer>
+//       {context => {
+//         return <User user={context.user} {...props} />;
+//       }}
+//     </AppContext.Consumer>
+//   );
+// };
+//
+// UserContainer.displayName = "UserContainer";
+// export default UserContainer;
 
-UserContainer.displayName = "UserContainer";
+const mapStateToProps = store => ({
+  user: store.authentication.user
+});
 
-export default UserContainer;
+const mapDispatchToProps = dispatch => {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(User);

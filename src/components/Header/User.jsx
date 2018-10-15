@@ -2,7 +2,6 @@ import React from "react";
 // import { AppContext } from "../App";
 import HeaderMenu from "./HeaderMenu";
 import { connect } from "react-redux";
-import { bindActionCreatores } from "redux";
 
 class User extends React.Component {
   constructor() {
@@ -63,19 +62,6 @@ class User extends React.Component {
     );
   }
 }
-
-// const UserContainer = props => {
-//   return (
-//     <AppContext.Consumer>
-//       {context => {
-//         return <User user={context.user} {...props} />;
-//       }}
-//     </AppContext.Consumer>
-//   );
-// };
-//
-// UserContainer.displayName = "UserContainer";
-// export default UserContainer;
 
 const mapStateToProps = store => ({
   user: store.authentication.user

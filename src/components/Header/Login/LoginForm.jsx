@@ -1,6 +1,11 @@
 import React from "react";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import CallApi from "../../../api/api";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import {
+  actionCreatorHideLoginForm,
+  actionCreatorUpdateAuth
+} from "../../../actions/actions";
 
 class LoginForm extends React.Component {
   state = {
@@ -27,10 +32,8 @@ class LoginForm extends React.Component {
   handleBlur = event => {
     console.log("on blur");
     const errors = this.validateFields();
-    // console.log('errors -- ',errors);
     const name = event.target.name;
     const errorByName = errors[name];
-    // console.log('errorByName --- ',errorByName);
     if (errorByName) {
       this.setState(prevState => ({
         errors: {
@@ -54,7 +57,6 @@ class LoginForm extends React.Component {
     if (this.state.password.length < 5) {
       errors.password = "Password must be at least 5 character";
     }
-
     return errors;
   };
 
@@ -80,18 +82,18 @@ class LoginForm extends React.Component {
         });
       })
       .then(data => {
-        // this.props.updateSessionId(data.session_id);
         session_id = data.session_id;
-        return CallApi.get("/account?", { params: { session_id: data.session_id } });
+        return CallApi.get("/account?", {
+          params: { session_id: data.session_id }
+        });
       })
       .then(user => {
-        // console.log(user);
         this.setState(
           {
             submitting: false
           },
           () => {
-            this.props.updateAuth({user, session_id});
+            this.props.updateAuth({ user, session_id });
           }
         );
       })
@@ -121,7 +123,7 @@ class LoginForm extends React.Component {
     }
   };
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.hideLoginForm();
   }
 
@@ -204,9 +206,21 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
-  // updateUser: PropTypes.func.isRequired,
-  // updateSessionId: PropTypes.func.isRequired
+const mapStateToProps = () => {
+  return {};
 };
 
-export default AppConsumerHOC(LoginForm);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateAuth: actionCreatorUpdateAuth,
+      hideLoginForm: actionCreatorHideLoginForm
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);

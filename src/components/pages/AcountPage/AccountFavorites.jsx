@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import { Redirect } from "react-router-dom";
 import MoviesList from "../../Movies/MoviesList/MoviesList";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class AccountFavorites extends Component {
   render() {
@@ -22,4 +23,18 @@ class AccountFavorites extends Component {
 
 AccountFavorites.propTypes = {};
 
-export default AppConsumerHOC(AccountFavorites);
+const mapStateToProps = store => {
+  return {
+    isAuth: store.authentication.isAuth,
+    favorite: store.account.favorite
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+
+  }, dispatch)
+};
+
+export default connect(mapStateToProps)(AccountFavorites);
+

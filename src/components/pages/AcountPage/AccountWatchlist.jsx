@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import { Redirect } from "react-router-dom";
 import MoviesList from "../../Movies/MoviesList/MoviesList";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class AccountWatchlist extends Component {
   render() {
-    console.log(this.props.isAuth);
     return this.props.isAuth ? (
       <div className="container">
         <div className="row mt-4">
@@ -20,6 +20,17 @@ class AccountWatchlist extends Component {
   }
 }
 
-AccountWatchlist.propTypes = {};
+const mapStateToProps = store => {
+  return {
+    isAuth: store.authentication.isAuth,
+    watchlist: store.account.watchlist
+  };
+};
 
-export default AppConsumerHOC(AccountWatchlist);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+
+  }, dispatch)
+};
+
+export default connect(mapStateToProps)(AccountWatchlist);

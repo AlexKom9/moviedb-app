@@ -1,18 +1,35 @@
 import React from "react";
-import AppConsumerHOC from "../../HOC/AppConsumerHOC";
 import CallApi from "../../../api/api";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from '../../../actions/actions'
 
 function findMovieInArr(id, arr) {
   return arr.findIndex(movie => movie.id === id) !== -1;
 }
 
+const mapStateToProps = store => {
+  return {
+    user: store.authentication.user,
+    session_id: store.authentication.session_id,
+    isAuth: store.authentication.isAuth,
+    watchlist: store.account.watchlist,
+    favorite: store.account.favorite
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    toggleLoginForm: actions.actionCreatorToggleLoginForm
+  }, dispatch);
+};
+
 export default (Component, key) =>
-  AppConsumerHOC(
+  connect(mapStateToProps, mapDispatchToProps)(
     class MarkHOC extends React.Component {
       constructor(props) {
         super(props);
-
         const initialState = key => {
           switch (key) {
             case "favorite":
@@ -98,15 +115,11 @@ export default (Component, key) =>
             arr = this.props.watchlist;
             break;
           default:
-          break;
+            break;
         }
-
         if (
           (this.props.isAuth &&
-            !_.isEqual(
-              prevProps.favorite,
-              this.props.favorite
-            )) ||
+            !_.isEqual(prevProps.favorite, this.props.favorite)) ||
           (!_.isEqual(prevProps.watchlist, this.props.watchlist) &&
             this.props.isAuth)
         ) {

@@ -21,7 +21,7 @@ const reducerAuthentication = (state = initialState, action) => {
         session_id: action.payload.session_id,
         isAuth: true
       };
-    case "LOGOUT":
+    case "ON_LOGOUT":
       cookies.remove("session_id");
       return {
         ...state,

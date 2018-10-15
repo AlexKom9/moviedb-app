@@ -40,6 +40,6 @@ export const actionCreatorUpdateAuth = payload => dispatch => {
 
 export const actionCreatorLogOut = () => {
   return {
-    type: "LOGOUT"
+    type: "ON_LOGOUT"
   };
 };

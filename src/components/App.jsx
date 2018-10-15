@@ -17,12 +17,12 @@ import {
   faHeart as farFaHeart,
   faBookmark as farBookmark
 } from "@fortawesome/free-regular-svg-icons";
-import CallApi from "../api/api";
 import {
   actionCreatorUpdateAuth,
   actionCreatorLogOut,
   actionCreatorToggleLoginForm,
-  actionCreatorHideLoginForm
+  actionCreatorHideLoginForm,
+  actionCreatorGetAccount
 } from "../actions/actions";
 
 import { connect } from "react-redux";
@@ -33,24 +33,11 @@ library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 export const AppContext = React.createContext();
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      favorite: [],
-      watchlist: []
-    };
-  }
 
   componentDidMount() {
-    const { session_id } = this.props;
+    const { session_id, getAccount } = this.props;
     if (session_id) {
-      CallApi.get("/account?", {
-        params: {
-          session_id
-        }
-      }).then(user => {
-        this.props.updateAuth({ user, session_id });
-      });
+      getAccount({session_id})
     }
   }
 
@@ -113,7 +100,8 @@ const mapDispatchToProps = dispatch => {
       updateAuth: actionCreatorUpdateAuth,
       onLogOut: actionCreatorLogOut,
       toggleLoginForm: actionCreatorToggleLoginForm,
-      hideLoginForm: actionCreatorHideLoginForm
+      hideLoginForm: actionCreatorHideLoginForm,
+      getAccount: actionCreatorGetAccount,
     },
     dispatch
   );

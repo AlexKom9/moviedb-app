@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import LoginForm from "./LoginForm";
-import AppConsumerHOC from '../../HOC/AppConsumerHOC'
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreatorToggleLoginForm } from "../../../actions/actions";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const {toggleLoginForm, showLoginForm } = this.props;
     return (
       <div>
         <button
           className="btn btn-success"
           type="button"
-          onClick={this.props.toggleLoginForm}
+          onClick={toggleLoginForm}
         >
           Login
         </button>
 
-        <Modal isOpen={this.props.showLoginForm} toggle={this.props.toggleLoginForm}>
+        <Modal
+          isOpen={showLoginForm}
+          toggle={toggleLoginForm}
+        >
           <ModalBody>
-            <LoginForm/>
+            <LoginForm />
           </ModalBody>
         </Modal>
       </div>
@@ -29,6 +31,16 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {};
+const mapStateToProps = state => {
+  return {
+    showLoginForm: state.modals.showLoginForm
+  };
+};
 
-export default AppConsumerHOC(Login);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    toggleLoginForm: actionCreatorToggleLoginForm
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

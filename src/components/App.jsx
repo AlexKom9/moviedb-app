@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./Header/Header";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
-import _ from "lodash";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import AccountFavorites from "./pages/AcountPage/AccountFavorites";

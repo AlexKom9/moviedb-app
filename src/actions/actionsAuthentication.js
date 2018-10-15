@@ -33,6 +33,7 @@ export const actionCreatorUpdateAuth = payload => dispatch => {
   });
   CallApi.get(`/account/${payload.user.id}/watchlist/movies?`, {
     params: queryStringParams
+
   }).then(data => {
     dispatch(actionCreatorUpdateWatchList(data))
   });

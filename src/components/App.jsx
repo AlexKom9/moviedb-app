@@ -32,11 +32,10 @@ library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 export const AppContext = React.createContext();
 
 class App extends React.Component {
-
   componentDidMount() {
     const { session_id, getAccount } = this.props;
     if (session_id) {
-      getAccount({session_id})
+      getAccount({ session_id });
     }
   }
 
@@ -45,36 +44,16 @@ class App extends React.Component {
       user,
       session_id,
       isAuth,
-      updateAuth,
-      onLogOut,
-      toggleLoginForm,
-      hideLoginForm,
-      favorite,
-      watchlist,
-      showLoginForm,
     } = this.props;
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
-        <AppContext.Provider
-          value={{
-            user: user,
-            session_id,
-            favorite,
-            watchlist,
-            isAuth,
-            updateAuth,
-            onLogOut,
-            showLoginForm,
-            toggleLoginForm,
-            hideLoginForm
-          }}
-        >
+        <div>
           <Header user={user} />
           <Route exact path="/" component={MoviesPage} />
           <Route path="/movie/:id" component={MoviePage} />
           <Route path="/account/favorites" component={AccountFavorites} />
           <Route path="/account/watchlist" component={AccountWatchlist} />
-        </AppContext.Provider>
+        </div>
       </BrowserRouter>
     ) : (
       <p>Loading...</p>
@@ -89,7 +68,7 @@ const mapStateToProps = state => {
     isAuth: state.authentication.isAuth,
     showLoginForm: state.modals.showLoginForm,
     favorite: state.account.favorite,
-    watchlist: state.account.watchlist,
+    watchlist: state.account.watchlist
   };
 };
 
@@ -100,7 +79,7 @@ const mapDispatchToProps = dispatch => {
       onLogOut: actionCreatorLogOut,
       toggleLoginForm: actionCreatorToggleLoginForm,
       hideLoginForm: actionCreatorHideLoginForm,
-      getAccount: actionCreatorGetAccount,
+      getAccount: actionCreatorGetAccount
     },
     dispatch
   );

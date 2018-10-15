@@ -1,79 +1,34 @@
-import CallApi from "../api/api";
+import {
+  actionCreatorUpdateAuth,
+  actionCreatorLogOut,
+  actionCreatorGetAccount
+} from "./actionsAuthentication";
+import {
+  actionCreatorUpdateFavorite,
+  actionCreatorUpdateWatchList,
+} from "./actionsAccount";
+import {
+  actionCreatorToggleLoginForm,
+  actionCreatorHideLoginForm
+} from "./actionsModals";
 
-export const actionCreatorUpdateAuth = payload => dispatch => {
-  dispatch({
-    type: "UPDATE_AUTH",
-    payload
-  });
-  const queryStringParams = {
-    session_id: payload.session_id
-  };
+import {
+  actionCreatorUpdateMovies,
+  actionCreatorGetMovies
+} from "./actionsMovies";
 
-  CallApi.get(`/account/${payload.user.id}/favorite/movies?`, {
-    params: queryStringParams
-  }).then(data => {
-    dispatch({
-      type: "UPDATE_FAVORITE",
-      payload: data.results
-    })
-  });
-  CallApi.get(`/account/${payload.user.id}/watchlist/movies?`, {
-    params: queryStringParams
-  }).then(data => {
-    dispatch({
-      type: "UPDATE_WATCHLIST",
-      payload: data.results
-    })
-  });
+// actionsAuthentication
+export {
+  actionCreatorUpdateAuth,
+  actionCreatorLogOut,
+  actionCreatorGetAccount
 };
 
-export const actionCreatorLogOut = () => {
-  return {
-    type: "LOGOUT"
-  };
-};
+// actionsAccount
+export { actionCreatorUpdateFavorite, actionCreatorUpdateWatchList };
 
-export const actionCreatorToggleLoginForm = () => {
-  return {
-    type: "TOGGLE_LOGIN_FORM"
-  };
-};
+// actionsModals
+export { actionCreatorToggleLoginForm, actionCreatorHideLoginForm };
 
-export const actionCreatorHideLoginForm = () => {
-  return {
-    type: "HIDE_LOGIN_FORM"
-  };
-};
-
-export const actionCreatorUpdateMovies = movies => {
-  return {
-    type: "UPDATE_MOVIES",
-    payload: movies
-  };
-};
-
-export const actionCreatorGetMovies = params => dispatch => {
-  dispatch({
-    type: "FETCHING_MOVIES"
-  });
-  CallApi.get(`/discover/movie?`, { params: params })
-    .then(data => {
-      dispatch({
-        type: "UPDATE_MOVIES",
-        payload: data.results
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: "ERROR_GET_MOVIES",
-        payload: error
-      });
-    });
-};
-
-export const actionCreatorUpdateFavorite = payload => {
-  return {
-    type: "UPDATE_FAVORITES",
-    payload
-  }
-};
+// actionsMovies
+export { actionCreatorUpdateMovies, actionCreatorGetMovies };

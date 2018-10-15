@@ -5,22 +5,13 @@ import MovieList from "../../Movies/MoviesList/MoviesList";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  actionCreatorChangePage,
-  actionCreatorUpdateFilters,
-  actionCreatorResetFilters
-} from "../../../actions/actions";
+import * as actions from "../../../actions/actions";
 const MoviesContainer = MoviesHOC(MovieList);
 
 class MoviesPage extends React.PureComponent {
 
   onChangeFilters = event => {
-    const { filters, updateFilters } = this.props;
-    const newFilters = {
-      ...filters,
-      [event.target.name]: event.target.value
-    };
-    updateFilters(newFilters);
+     this.props.updateFilters({[event.target.name]: event.target.value});
   };
 
   render() {
@@ -81,9 +72,9 @@ const mapStateToProps = ({ movies }) => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      onChangePage: actionCreatorChangePage,
-      updateFilters: actionCreatorUpdateFilters,
-      resetFilters: actionCreatorResetFilters
+      onChangePage: actions.actionCreatorChangePage,
+      updateFilters: actions.actionCreatorUpdateFilters,
+      resetFilters: actions.actionCreatorResetFilters
     },
     dispatch
   );

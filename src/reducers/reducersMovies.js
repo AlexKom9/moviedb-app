@@ -26,7 +26,10 @@ const reducerMovies = (state = initialState, action) => {
     case "UPDATE_FILTERS":
       return {
         ...state,
-        filters: action.payload
+        filters: {
+          ...state.filters,
+          ...action.payload
+        }
       };
     case "RESET_FILTERS":
       return initialState;

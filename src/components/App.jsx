@@ -64,20 +64,21 @@ class App extends React.Component {
       toggleLoginForm,
       hideLoginForm,
       favorite,
-      watchlist
+      watchlist,
+      showLoginForm,
     } = this.props;
     return (session_id && isAuth) || !session_id ? (
       <BrowserRouter>
         <AppContext.Provider
           value={{
             user: user,
-            session_id: session_id,
+            session_id,
             favorite,
             watchlist,
             isAuth,
             updateAuth,
             onLogOut,
-            showLoginForm: this.props.showLoginForm,
+            showLoginForm,
             toggleLoginForm,
             hideLoginForm
           }}

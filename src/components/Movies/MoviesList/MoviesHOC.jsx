@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { actionCreatorGetMovies } from "../../../actions/actions";
 import { bindActionCreators } from "redux";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ movies }) => {
   return {
-    movies: state.movies.data
+    movies: movies.data,
+    total_pages: movies.total_pages
   };
 };
 
@@ -28,17 +29,13 @@ export default Component =>
     class MoviesHOC extends React.PureComponent {
       static propTypes = {
         filters: PropTypes.object.isRequired,
-        getTotalPages: PropTypes.func.isRequired,
-        changePage: PropTypes.func.isRequired,
+        getTotalPages: PropTypes.func,
+        changePage: PropTypes.func,
         page: PropTypes.number.isRequired
       };
 
       getMovies = (filters, page) => {
-        const { getTotalPages } = this.props;
         const { sort_by, primary_release_year, with_genres } = filters;
-
-        let genreString = "";
-
         const queryStringParams = {
           sort_by,
           language: "ru-RU",
@@ -46,16 +43,8 @@ export default Component =>
           primary_release_year,
           with_genres
         };
-
         if (with_genres.length > 0)
           queryStringParams.with_genres = with_genres.join(",");
-
-        // CallApi.get(`/discover/movie?`, { params: queryStringParams }).then(
-        //   data => {
-        //     getTotalPages(data.total_pages);
-        //     // this.props.updateMovies(data.results);
-        //   }
-        // );
         this.props.getMovies(queryStringParams);
       };
 
@@ -72,16 +61,6 @@ export default Component =>
         if (this.props.page !== prevProps.page) {
           this.getMovies(this.props.filters, this.props.page);
         }
-        //TODO: optimize
-        // if (
-        //   !_.isEqual(
-        //     _.get(prevProps, "user.id"),
-        //     _.get(this.props, "user.id")
-        //   ) &&
-        //   _.get(this.props, "user.id")
-        // ) {
-        //   this.getFavoriteMovies();
-        // }
       }
 
       render() {

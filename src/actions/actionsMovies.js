@@ -1,9 +1,16 @@
-import CallApi from '../api/api'
+import CallApi from "../api/api";
 
 export const actionCreatorUpdateMovies = data => {
   return {
     type: "UPDATE_MOVIES",
-    payload: data.results
+    payload: data
+  };
+};
+
+export const actionCreatorChangePage = payload => {
+  return {
+    type: "CHANGE_PAGE",
+    payload: payload
   };
 };
 
@@ -23,3 +30,15 @@ export const actionCreatorGetMovies = params => dispatch => {
     });
 };
 
+export const actionCreatorUpdateFilters = payload => {
+  return {
+    type: "UPDATE_FILTERS",
+    payload
+  };
+};
+
+export const actionCreatorResetFilters = payload => {
+  return {
+    type: "RESET_FILTERS",
+  };
+};

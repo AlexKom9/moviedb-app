@@ -14,7 +14,10 @@ import {
 
 import {
   actionCreatorUpdateMovies,
-  actionCreatorGetMovies
+  actionCreatorGetMovies,
+  actionCreatorChangePage,
+  actionCreatorUpdateFilters,
+  actionCreatorResetFilters
 } from "./actionsMovies";
 
 // actionsAuthentication
@@ -31,4 +34,6 @@ export { actionCreatorUpdateFavorite, actionCreatorUpdateWatchList };
 export { actionCreatorToggleLoginForm, actionCreatorHideLoginForm };
 
 // actionsMovies
-export { actionCreatorUpdateMovies, actionCreatorGetMovies };
+export { actionCreatorUpdateMovies, actionCreatorGetMovies, actionCreatorChangePage,
+  actionCreatorUpdateFilters,
+  actionCreatorResetFilters };

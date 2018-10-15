@@ -3,48 +3,34 @@ import Filters from "../../Filters/Filters";
 import MoviesHOC from "../../Movies/MoviesList/MoviesHOC";
 import MovieList from "../../Movies/MoviesList/MoviesList";
 
-const initialState = {
-  filters: {
-    sort_by: "vote_average.desc",
-    primary_release_year: "0",
-    with_genres: []
-  },
-  page: 1,
-  total_pages: ""
-};
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+  actionCreatorChangePage,
+  actionCreatorUpdateFilters,
+  actionCreatorResetFilters
+} from "../../../actions/actions";
 const MoviesContainer = MoviesHOC(MovieList);
 
-export default class MoviesPage extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = initialState;
-  }
+class MoviesPage extends React.PureComponent {
 
   onChangeFilters = event => {
+    const { filters, updateFilters } = this.props;
     const newFilters = {
-      ...this.state.filters,
+      ...filters,
       [event.target.name]: event.target.value
     };
-    this.setState({
-      filters: newFilters
-    });
-  };
-
-  onChangePage = page => {
-    this.setState({
-      page
-    });
-  };
-
-  getTotalPages = totalPages => {
-    this.setState({
-      total_pages: totalPages
-    });
+    updateFilters(newFilters);
   };
 
   render() {
-    const { filters, page, total_pages } = this.state;
+    const {
+      total_pages,
+      onChangePage,
+      resetFilters,
+      filters,
+      page
+    } = this.props;
     console.log("render MoviesPage");
     return (
       <div className="container">
@@ -56,11 +42,7 @@ export default class MoviesPage extends React.PureComponent {
                 <div className="mb-4">
                   <button
                     className="btn btn-light border"
-                    onClick={() =>
-                      this.setState({
-                        ...initialState
-                      })
-                    }
+                    onClick={resetFilters}
                   >
                     Очистить фильры
                   </button>
@@ -68,7 +50,7 @@ export default class MoviesPage extends React.PureComponent {
                 <Filters
                   filters={filters}
                   onChangeFilters={this.onChangeFilters}
-                  onChangePage={this.onChangePage}
+                  onChangePage={onChangePage}
                   total_pages={total_pages}
                   page={page}
                 />
@@ -78,8 +60,7 @@ export default class MoviesPage extends React.PureComponent {
           <div className="col-8">
             <MoviesContainer
               filters={filters}
-              changePage={this.onChangePage}
-              getTotalPages={this.getTotalPages}
+              changePage={onChangePage}
               page={page}
             />
           </div>
@@ -88,3 +69,27 @@ export default class MoviesPage extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = ({ movies }) => {
+  return {
+    total_pages: movies.total_pages,
+    page: movies.page,
+    filters: movies.filters
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      onChangePage: actionCreatorChangePage,
+      updateFilters: actionCreatorUpdateFilters,
+      resetFilters: actionCreatorResetFilters
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoviesPage);

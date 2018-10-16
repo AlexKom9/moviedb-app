@@ -6,6 +6,8 @@ import {
 import {
   actionCreatorUpdateFavorite,
   actionCreatorUpdateWatchList,
+  actionCreatorGetFavorite,
+  actionCreatorGetWatchlist
 } from "./actionsAccount";
 import {
   actionCreatorToggleLoginForm,

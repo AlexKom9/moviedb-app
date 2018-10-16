@@ -4,7 +4,7 @@ export const actionCreatorGetFavorite = ({session_id, user_id }) => dispatch => 
   const queryStringParams = {
     session_id
   };
-  CallApi.get(`/account/${user_id}/favorite/movies?`, {
+  CallApi.get(`/account/${user_id}/favorite/movies`, {
     params: queryStringParams
   }).then(data => {
     dispatch(
@@ -17,7 +17,7 @@ export const actionCreatorGetWatchlist = ({session_id, user_id }) => dispatch =>
   const queryStringParams = {
     session_id
   };
-  CallApi.get(`/account/${user_id}/watchlist/movies?`, {
+  CallApi.get(`/account/${user_id}/watchlist/movies`, {
     params: queryStringParams
   }).then(data => {
     dispatch(

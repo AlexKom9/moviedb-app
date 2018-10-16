@@ -16,7 +16,7 @@ export default Component => class GenresContainer extends React.Component {
   };
 
   componentDidMount() {
-    CallApi.get('/genre/movie/list?')
+    CallApi.get('/genre/movie/list')
       .then(data => {
         this.setState({
           allGenres: data.genres

@@ -7,7 +7,7 @@ import {
 
 export const actionCreatorGetAccount = payload => dispatch => {
   const { session_id } = payload;
-  CallApi.get("/account?", {
+  CallApi.get("/account", {
     params: {
       session_id
     }

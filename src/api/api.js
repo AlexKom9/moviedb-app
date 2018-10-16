@@ -44,7 +44,7 @@ export default class CallApi {
     // primary_release_year: primary_release_year
     //}
     return fetchApi(
-      `${API_URL}${url}${queryString.stringify(queryStringParams)}`,
+      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
       {
         mode: "cors",
         headers: {
@@ -55,14 +55,14 @@ export default class CallApi {
   }
   static post(url, options = {}) {
     const { params = {}, body = {} } = options;
-    console.log(params, body)
+    console.log(params, body);
     const queryStringParams = {
       api_key: API_KEY_3,
       language: "ru-RU",
       ...params
     };
     return fetchApi(
-      `${API_URL}${url}${queryString.stringify(queryStringParams)}`,
+      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
       {
         method: "POST",
         mode: "cors",
@@ -82,7 +82,7 @@ export default class CallApi {
       ...params
     };
     return fetchApi(
-      `${API_URL}${url}${queryString.stringify(queryStringParams)}`,
+      `${API_URL}${url}?${queryString.stringify(queryStringParams)}`,
       {
         method: "Delete",
         mode: "cors",

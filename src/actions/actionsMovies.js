@@ -18,7 +18,7 @@ export const actionCreatorGetMovies = params => dispatch => {
   dispatch({
     type: "FETCHING_MOVIES"
   });
-  CallApi.get(`/discover/movie?`, { params: params })
+  CallApi.get(`/discover/movie`, { params: params })
     .then(data => {
       dispatch(actionCreatorUpdateMovies(data));
     })

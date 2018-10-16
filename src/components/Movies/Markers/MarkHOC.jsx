@@ -58,7 +58,7 @@ export default (Component, key) =>
             media_id: this.props.id,
             favorite: this.state.marked
           };
-          CallApi.post(`/account/${this.props.id}/favorite?`, {
+          CallApi.post(`/account/${this.props.id}/favorite`, {
             params: queryStringParams,
             body: body
           });
@@ -73,7 +73,7 @@ export default (Component, key) =>
             media_id: this.props.id,
             watchlist: this.state.marked
           };
-          CallApi.post(`/account/${this.props.id}/watchlist?`, {
+          CallApi.post(`/account/${this.props.id}/watchlist`, {
             params: queryStringParams,
             body: body
           });

@@ -3,7 +3,11 @@ import CallApi from "../../../api/api";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as actions from '../../../actions/actions'
+import {
+  actionCreatorGetWatchlist,
+  actionCreatorGetFavorite
+} from "../../../actions/actionsAccount";
+import * as actions from "../../../actions/actions";
 
 function findMovieInArr(id, arr) {
   return arr.findIndex(movie => movie.id === id) !== -1;
@@ -20,13 +24,21 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    toggleLoginForm: actions.actionCreatorToggleLoginForm
-  }, dispatch);
+  return bindActionCreators(
+    {
+      toggleLoginForm: actions.actionCreatorToggleLoginForm,
+      getFavorite: actionCreatorGetFavorite,
+      getWatchlist: actionCreatorGetWatchlist
+    },
+    dispatch
+  );
 };
 
 export default (Component, key) =>
-  connect(mapStateToProps, mapDispatchToProps)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(
     class MarkHOC extends React.Component {
       constructor(props) {
         super(props);
@@ -49,6 +61,8 @@ export default (Component, key) =>
       }
 
       fetchMark() {
+        const { getFavorite, getWatchlist, session_id, user } = this.props;
+
         const fetchFavoritesMark = () => {
           const queryStringParams = {
             session_id: this.props.session_id
@@ -61,6 +75,9 @@ export default (Component, key) =>
           CallApi.post(`/account/${this.props.id}/favorite`, {
             params: queryStringParams,
             body: body
+          }).then(() => {
+            console.log(session_id, user);
+            getFavorite({ session_id, user_id: user.id });
           });
         };
 
@@ -76,7 +93,7 @@ export default (Component, key) =>
           CallApi.post(`/account/${this.props.id}/watchlist`, {
             params: queryStringParams,
             body: body
-          });
+          }).then(getWatchlist({session_id, user_id: user.id}));
         };
 
         switch (key) {
@@ -104,7 +121,6 @@ export default (Component, key) =>
           this.props.toggleLoginForm();
         }
       }
-
       componentDidUpdate(prevProps) {
         let arr = [];
         switch (key) {

@@ -31,7 +31,7 @@ export default Component =>
         filters: PropTypes.object.isRequired,
         getTotalPages: PropTypes.func,
         changePage: PropTypes.func,
-        page: PropTypes.number.isRequired
+        // page: PropTypes.number.isRequired
       };
 
       getMovies = (filters, page) => {

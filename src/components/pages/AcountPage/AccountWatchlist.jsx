@@ -6,16 +6,16 @@ import { bindActionCreators } from "redux";
 import { actionCreatorGetWatchlist } from "../../../actions/actionsAccount";
 
 class AccountWatchlist extends Component {
-  componentDidMount() {
-    const { isAuth, session_id, user } = this.props;
-    console.log(user);
-    if (isAuth) {
-      this.props.getWatchlist({
-        session_id,
-        user_id: user.id
-      });
-    }
-  }
+  // componentDidMount() {
+  //   const { isAuth, session_id, user } = this.props;
+  //   console.log(user);
+  //   if (isAuth) {
+  //     this.props.getWatchlist({
+  //       session_id,
+  //       user_id: user.id
+  //     });
+  //   }
+  // }
   render() {
     return this.props.isAuth ? (
       <div className="container">

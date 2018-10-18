@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { actionCreatorGetFavorite } from "../../../actions/actionsAccount";
 
-class AccountFavorites extends Component {
+class AccountFavoritesPage extends Component {
   // componentDidMount() {
   //   const { isAuth, session_id, user } = this.props;
   //   if (isAuth) this.props.getFavorites({ session_id, user_id: user.id });
@@ -26,7 +26,7 @@ class AccountFavorites extends Component {
   }
 }
 
-AccountFavorites.propTypes = {};
+AccountFavoritesPage.propTypes = {};
 
 const mapStateToProps = store => {
   return {
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountFavorites);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountFavoritesPage);

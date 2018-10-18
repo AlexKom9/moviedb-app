@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreatorGetWatchlist } from "../../../actions/actionsAccount";
 
-class AccountWatchlist extends Component {
+class AccountWatchlistPage extends Component {
   // componentDidMount() {
   //   const { isAuth, session_id, user } = this.props;
   //   console.log(user);
@@ -52,4 +52,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AccountWatchlist);
+)(AccountWatchlistPage);

@@ -4,18 +4,12 @@ import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
 
 import { BrowserRouter, Route } from "react-router-dom";
-import AccountFavorites from "./pages/AcountPage/AccountFavorites";
-import AccountWatchlist from "./pages/AcountPage/AccountWatchlist";
+import AccountFavoritesPage from "./pages/AcountPage/AccountFavoritesPage";
+import AccountWatchlistPage from "./pages/AcountPage/AccountWatchlistPage";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faHeart as fasFaHeart,
-  faBookmark as fasBookmark
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faHeart as farFaHeart,
-  faBookmark as farBookmark
-} from "@fortawesome/free-regular-svg-icons";
+import '../fortawesome/fortawesome'
+
+
 import {
   actionCreatorUpdateAuth,
   actionCreatorLogOut,
@@ -27,7 +21,6 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-library.add(fasFaHeart, farFaHeart, fasBookmark, farBookmark);
 
 export const AppContext = React.createContext();
 
@@ -51,8 +44,8 @@ class App extends React.Component {
           <Header user={user} />
           <Route exact path="/" component={MoviesPage} />
           <Route path="/movie/:id" component={MoviePage} />
-          <Route path="/account/favorites" component={AccountFavorites} />
-          <Route path="/account/watchlist" component={AccountWatchlist} />
+          <Route path="/account/favorites" component={AccountFavoritesPage} />
+          <Route path="/account/watchlist" component={AccountWatchlistPage} />
         </div>
       </BrowserRouter>
     ) : (

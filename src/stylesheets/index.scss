@@ -25,10 +25,12 @@ ul {
   display: block;
 }
 
-.dropdown-menu {
-  display: block;
-  right: 0;
-  left: unset;
+.user-head__menu {
+  .dropdown-menu {
+    display: block;
+    right: 0;
+    left: unset;
+  }
 }
 
 .head-user {
@@ -44,5 +46,25 @@ ul {
 .card-img--height {
   max-height: 161.84px;
   object-fit: cover;
+}
+
+.rating-btn {
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
+  &__drop {
+    min-width: unset;
+  }
+  &__inner {
+    padding: 0 10px;
+  }
+  &__star {
+    display: inline-block;
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 

@@ -17,7 +17,7 @@ ul {
 .invalid-feedback {
   display: block; }
 
-.dropdown-menu {
+.user-head__menu .dropdown-menu {
   display: block;
   right: 0;
   left: unset; }
@@ -33,3 +33,17 @@ ul {
 .card-img--height {
   max-height: 161.84px;
   object-fit: cover; }
+
+.rating-btn {
+  display: inline-block; }
+  .rating-btn:hover {
+    cursor: pointer; }
+  .rating-btn__drop {
+    min-width: unset; }
+  .rating-btn__inner {
+    padding: 0 10px; }
+  .rating-btn__star {
+    display: inline-block;
+    margin-right: 5px; }
+    .rating-btn__star:last-child {
+      margin-right: 0; }

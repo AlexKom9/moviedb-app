@@ -66,9 +66,9 @@ class LoginForm extends React.Component {
       submitting: true
     });
     let session_id = null;
-    CallApi.get("/authentication/token/new?")
+    CallApi.get("/authentication/token/new")
       .then(data => {
-        return CallApi.post("/authentication/token/validate_with_login?", {
+        return CallApi.post("/authentication/token/validate_with_login", {
           body: {
             username: this.state.username,
             password: this.state.password,
@@ -77,13 +77,13 @@ class LoginForm extends React.Component {
         });
       })
       .then(data => {
-        return CallApi.post("/authentication/session/new?", {
+        return CallApi.post("/authentication/session/new", {
           body: { request_token: data.request_token }
         });
       })
       .then(data => {
         session_id = data.session_id;
-        return CallApi.get("/account?", {
+        return CallApi.get("/account", {
           params: { session_id: data.session_id }
         });
       })

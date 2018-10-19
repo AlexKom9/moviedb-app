@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import CallApi from "../../../api/api";
-import MoviesList from '../../Movies/MoviesList/MoviesList'
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -10,12 +7,6 @@ class MovieDetails extends Component {
       movies: []
     };
   }
-
-  componentDidMount() {
-
-
-  }
-
   render() {
     const {movie} = this.props;
     return (

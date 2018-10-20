@@ -8,7 +8,7 @@ import MovieImages from "./MovieImages";
 import SimilarMovies from "./SimilarMovies";
 import MovieDetails from './MovieDetails'
 
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, NavLink } from "react-router-dom";
 
 const MovieLike = MarkHOC(Like, "favorite");
 const MovieToWatch = MarkHOC(WatchIcon, "watchlist");
@@ -32,22 +32,14 @@ export default class MoviePage extends React.Component {
 
   render() {
     const { movie } = this.state;
-    console.log(movie);
+    // console.log(movie);
     let { history, match, location } = this.props;
-    const tab = /[^/]*$/.exec(location.pathname)[0];
-    console.log(tab);
-    return (
-      movie && (
-        <div className="container">
+    // const tab = /[^/]*$/.exec(location.pathname)[0];
+    // console.log(tab);
+    return movie && <div className="container">
           <div className="row mt-4">
             <div className="col-4">
-              <img
-                className="card-img-top card-img--height"
-                src={`https://image.tmdb.org/t/p/w500${(movie &&
-                  movie.backdrop_path) ||
-                  (movie && movie.poster_path)}`}
-                alt=""
-              />
+              <img className="card-img-top card-img--height" src={`https://image.tmdb.org/t/p/w500${(movie && movie.backdrop_path) || (movie && movie.poster_path)}`} alt="" />
             </div>
             <div className="col-8">
               <h2 className="title mb-4">{movie && movie.title}</h2>
@@ -68,54 +60,30 @@ export default class MoviePage extends React.Component {
             <div className="col-12">
               <ul className="nav nav-tabs">
                 <li className="nav-item">
-                  <Link
-                    to={`${match.url}/images`}
-                    className={
-                      "nav-link" + (tab === "images" ? " active" : "")
-                    }
-                  >
-                    Images
-                  </Link>
+                  <NavLink to={`${match.url}/images`} className="nav-link" activeClassName="active">
+                      Images
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    to={`${match.url}/similar`}
-                    className={
-                      "nav-link" + (tab === "similar" ? " active" : "")
-                    }
-                  >
+                  <NavLink to={`${match.url}/similar`} className="nav-link" activeClassName="active">
                     Similar
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    to={`${match.url}/details`}
-                    className={
-                      "nav-link" + (tab === "details" ? " active" : "")
-                    }
-                  >
+                  <NavLink to={`${match.url}/details`} className="nav-link" activeCalssName="active">
                     Details
-                  </Link>
+                  </NavLink>
                 </li>
-
               </ul>
               <div className="tab-content">
                 <Switch>
-                  <Route path={`${match.url}/images`} component={() => <MovieImages movieId={movie.id}/>} />
-                  <Route
-                    path={`${match.url}/similar`}
-                    component={() => <SimilarMovies movieId={movie.id}/>}
-                  />
-                  <Route
-                    path={`${match.url}/details`}
-                    component={() => <MovieDetails movie={movie}/>}
-                  />
+                  <Route path={`${match.url}/images`} component={() => <MovieImages movieId={movie.id} />} />
+                  <Route path={`${match.url}/similar`} component={() => <SimilarMovies movieId={movie.id} />} />
+                  <Route path={`${match.url}/details`} component={() => <MovieDetails movie={movie} />} />
                 </Switch>
               </div>
             </div>
           </div>
-        </div>
-      )
-    );
+        </div>;
   }
 }

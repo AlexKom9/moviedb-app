@@ -4,11 +4,8 @@ import WatchIcon from "../../Movies/Markers/WatchIcon";
 import CallApi from "../../../api/api";
 import MarkHOC from "../../Movies/Markers/MarkHOC";
 import RatingBtn from "./RatingBtn";
-import MovieImages from "./MovieImages";
-import SimilarMovies from "./SimilarMovies";
-import MovieDetails from './MovieDetails'
+import MovieTabs from './MovieTabs'
 
-import { Switch, Route, Link, NavLink } from "react-router-dom";
 
 const MovieLike = MarkHOC(Like, "favorite");
 const MovieToWatch = MarkHOC(WatchIcon, "watchlist");
@@ -58,30 +55,7 @@ export default class MoviePage extends React.Component {
           </div>
           <div className="row mt-4">
             <div className="col-12">
-              <ul className="nav nav-tabs">
-                <li className="nav-item">
-                  <NavLink to={`${match.url}/images`} className="nav-link" activeClassName="active">
-                      Images
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to={`${match.url}/similar`} className="nav-link" activeClassName="active">
-                    Similar
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to={`${match.url}/details`} className="nav-link" activeCalssName="active">
-                    Details
-                  </NavLink>
-                </li>
-              </ul>
-              <div className="tab-content">
-                <Switch>
-                  <Route path={`${match.url}/images`} component={() => <MovieImages movieId={movie.id} />} />
-                  <Route path={`${match.url}/similar`} component={() => <SimilarMovies movieId={movie.id} />} />
-                  <Route path={`${match.url}/details`} component={() => <MovieDetails movie={movie} />} />
-                </Switch>
-              </div>
+              <MovieTabs movie={movie} url={this.props.match.url}/>
             </div>
           </div>
         </div>;

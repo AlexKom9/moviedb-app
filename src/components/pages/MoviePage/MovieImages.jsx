@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import CallApi from "../../../api/api";
 
 class MovieImages extends Component {
@@ -12,11 +11,9 @@ class MovieImages extends Component {
   }
 
   componentDidMount() {
-    const { movieId } = this.props;
-    // this.setState({
-    //   data: [1,2,3]
-    // })
-    CallApi.get(`/movie/${movieId}/images`).then( data => {
+    const { movieId, movieURLID} = this.props;
+
+    CallApi.get(`/movie/${movieURLID}/images`).then( data => {
       this.setState({
         backdrops: data.backdrops,
         posters: data.posters,

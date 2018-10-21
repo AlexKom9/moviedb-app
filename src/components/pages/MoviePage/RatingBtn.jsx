@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -41,7 +40,6 @@ class RatingBtn extends Component {
   };
 
   setRating = index => {
-    // console.log(isAuth);
     const {session_id, movieId} = this.props;
     this.setState({
       choosedRating: index

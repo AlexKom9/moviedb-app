@@ -5,11 +5,13 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import MovieImages from "./MovieImages";
 import SimilarMovies from "./SimilarMovies";
 import MovieDetails from './MovieDetails'
+import ActorsList from "./ActorsList";
 
 
 class MovieTabs extends Component {
   render() {
     const { movie, url } = this.props;
+    console.log(this.props)
     return (
       <div>
         <ul className="nav nav-tabs">
@@ -40,12 +42,21 @@ class MovieTabs extends Component {
               Details
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              to={`${url}/actors`}
+              className="nav-link"
+              activeCalssName="active"
+            >
+              Actors
+            </NavLink>
+          </li>
         </ul>
         <div className="tab-content">
           <Switch>
             <Route
               path={`${url}/images`}
-              component={() => <MovieImages movieId={movie.id} />}
+              component={() => <MovieImages movieURLID={this.props.movieURLID} movieId={movie.id} />}
             />
             <Route
               path={`${url}/similar`}
@@ -54,6 +65,10 @@ class MovieTabs extends Component {
             <Route
               path={`${url}/details`}
               component={() => <MovieDetails movie={movie} />}
+            />
+            <Route
+              path={`${url}/actors`}
+              component={() => <ActorsList movieURLID={this.props.movieURLID} movie={movie} />}
             />
           </Switch>
         </div>

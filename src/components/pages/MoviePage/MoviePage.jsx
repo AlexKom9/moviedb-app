@@ -29,8 +29,9 @@ export default class MoviePage extends React.Component {
 
   render() {
     const { movie } = this.state;
+    console.log(this.props);
     // console.log(movie);
-    let { history, match, location } = this.props;
+    // let { history, match, location } = this.props;
     // const tab = /[^/]*$/.exec(location.pathname)[0];
     // console.log(tab);
     return movie && <div className="container">
@@ -55,7 +56,7 @@ export default class MoviePage extends React.Component {
           </div>
           <div className="row mt-4">
             <div className="col-12">
-              <MovieTabs movie={movie} url={this.props.match.url}/>
+              <MovieTabs movieURLID={this.props.match.params.id} movie={movie} url={this.props.match.url}/>
             </div>
           </div>
         </div>;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import CallApi from "../../../api/api";
 import MoviesList from '../../Movies/MoviesList/MoviesList'
 

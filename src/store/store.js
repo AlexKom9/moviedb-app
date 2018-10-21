@@ -4,6 +4,7 @@ import {
   actionCreatorGetFavorite,
   actionCreatorGetWatchlist
 } from "../actions/actionsAccount";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const logger = ({ getState, dispatch }) => next => action => {
   // console.log("dispatch ", dispatch );
@@ -40,7 +41,7 @@ const getAccountLists = ({ getState, dispatch }) => next => action => {
 const store = createStore(
   reducers,
   {},
-  applyMiddleware(logger, async, getAccountLists)
+  composeWithDevTools(applyMiddleware(logger, async, getAccountLists))
 );
 
 export default store;

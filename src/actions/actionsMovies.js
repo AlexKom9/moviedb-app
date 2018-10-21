@@ -1,22 +1,24 @@
 import CallApi from "../api/api";
 
+import * as constants from "../constants/constants";
+
 export const actionCreatorUpdateMovies = data => {
   return {
-    type: "UPDATE_MOVIES",
+    type: constants.UPDATE_MOVIES,
     payload: data
   };
 };
 
 export const actionCreatorChangePage = payload => {
   return {
-    type: "CHANGE_PAGE",
+    type: constants.CHANGE_PAGE,
     payload: payload
   };
 };
 
 export const actionCreatorGetMovies = params => dispatch => {
   dispatch({
-    type: "FETCHING_MOVIES"
+    type: constants.FETCHING_MOVIES
   });
   CallApi.get(`/discover/movie`, { params: params })
     .then(data => {
@@ -24,7 +26,7 @@ export const actionCreatorGetMovies = params => dispatch => {
     })
     .catch(error => {
       dispatch({
-        type: "ERROR_GET_MOVIES",
+        type: constants.ERROR_GET_MOVIES,
         payload: error
       });
     });
@@ -32,13 +34,13 @@ export const actionCreatorGetMovies = params => dispatch => {
 
 export const actionCreatorUpdateFilters = payload => {
   return {
-    type: "UPDATE_FILTERS",
+    type: constants.UPDATE_FILTERS,
     payload
   };
 };
 
 export const actionCreatorResetFilters = payload => {
   return {
-    type: "RESET_FILTERS",
+    type: constants.RESET_FILTERS
   };
 };

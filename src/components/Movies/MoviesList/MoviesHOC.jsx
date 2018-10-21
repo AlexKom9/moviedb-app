@@ -53,14 +53,14 @@ export default Component =>
       }
 
       componentDidUpdate(prevProps) {
-        if (!_.isEqual(this.props.filters, prevProps.filters)) {
-          this.props.changePage(1);
-          this.getMovies(this.props.filters, 1);
-          console.log(this.props.filters);
-        }
-        if (this.props.page !== prevProps.page) {
-          this.getMovies(this.props.filters, this.props.page);
-        }
+        // if (!_.isEqual(this.props.filters, prevProps.filters)) {
+        //   this.props.changePage(1);
+        //   this.getMovies(this.props.filters, 1);
+        //   console.log(this.props.filters);
+        // }
+        // if (this.props.page !== prevProps.page) {
+        //   this.getMovies(this.props.filters, this.props.page);
+        // }
       }
 
       render() {

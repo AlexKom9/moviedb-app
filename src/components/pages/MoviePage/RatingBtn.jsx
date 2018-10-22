@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {actionCreatorToggleLoginForm} from '../../../actions/actionsModals'
-import CallApi from '../../../api/api'
+import { actionCreatorToggleLoginForm } from "../../../actions/actionsModals";
+import CallApi from "../../../api/api";
 
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
@@ -22,8 +22,8 @@ class RatingBtn extends Component {
   }
 
   toggle() {
-    const {toggleLoginForm, isAuth} = this.props;
-    if (isAuth){
+    const { toggleLoginForm, isAuth } = this.props;
+    if (isAuth) {
       this.setState(prevState => ({
         dropdownRating: !prevState.dropdownRating,
         rating: this.state.choosedRating
@@ -40,18 +40,24 @@ class RatingBtn extends Component {
   };
 
   setRating = index => {
-    const {session_id, movieId} = this.props;
-    this.setState({
-      choosedRating: index
-    }, () => {
-      const queryStringParams = {
-        session_id,
-      };
-      const body = {
-        value: index*2
-      };
-     CallApi.post(`/movie/${movieId}/rating`,{params: queryStringParams, body})
-    });
+    const { session_id, movie_id } = this.props;
+    this.setState(
+      {
+        choosedRating: index
+      },
+      () => {
+        const queryStringParams = {
+          session_id
+        };
+        const body = {
+          value: index * 2
+        };
+            CallApi.post(`/movie/${movie_id}/rating`, {
+          params: queryStringParams,
+          body
+        });
+      }
+    );
   };
 
   createStars = () => {
@@ -74,17 +80,19 @@ class RatingBtn extends Component {
     return stars;
   };
 
-  componentDidMount(){
-    const {session_id, movieId} = this.props;
+  componentDidMount() {
+    const { session_id, movie_id } = this.props;
     const queryStringParam = {
       session_id
     };
 
-    CallApi.get(`/movie/${movieId}/account_states`, {params: queryStringParam}).then(data => {
+    CallApi.get(`/movie/${movie_id}/account_states`, {
+      params: queryStringParam
+    }).then(data => {
       this.setState({
-        choosedRating: data.rated.value/2,
-      })
-    })
+        choosedRating: data.rated.value / 2
+      });
+    });
   }
 
   render() {
@@ -110,9 +118,15 @@ const mapStateToProps = ({ authentication }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  toggleLoginForm: actionCreatorToggleLoginForm
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleLoginForm: actionCreatorToggleLoginForm
+    },
+    dispatch
+  );
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(RatingBtn);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RatingBtn);

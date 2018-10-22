@@ -30,6 +30,8 @@ export default class MoviePage extends React.Component {
   render() {
     const { movie } = this.state;
     console.log(this.props);
+    const movie_id = Number(this.props.match.params.id);
+    // console.log(movie_id)
     // console.log(movie);
     // let { history, match, location } = this.props;
     // const tab = /[^/]*$/.exec(location.pathname)[0];
@@ -44,19 +46,20 @@ export default class MoviePage extends React.Component {
               <p className="mb-4">{movie && movie.overview}</p>
               <div>
                 <div className="movie-item__like float-right ml-2">
-                  <MovieToWatch id={movie.id} />
+                  <MovieToWatch id={movie_id} />
                 </div>
                 <div className="movie-item__like float-right">
-                  <MovieLike id={movie.id} />
+                  <MovieLike id={movie_id} />
                 </div>
-                <div className="movie-item__star" />
-                <RatingBtn movieId={movie.id} />
+                <div className="movie-item__star">
+                  <RatingBtn movie_id={movie_id} />
+                </div>
               </div>
             </div>
           </div>
           <div className="row mt-4">
             <div className="col-12">
-              <MovieTabs movieURLID={this.props.match.params.id} movie={movie} url={this.props.match.url}/>
+              <MovieTabs movie_id={movie_id} movie={movie} url={this.props.match.url}/>
             </div>
           </div>
         </div>;

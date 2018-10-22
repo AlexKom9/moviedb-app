@@ -11,7 +11,7 @@ class MovieImages extends Component {
   }
 
   componentDidMount() {
-    const { movieId, movieURLID} = this.props;
+    const { movieURLID} = this.props;
 
     CallApi.get(`/movie/${movieURLID}/images`).then( data => {
       this.setState({

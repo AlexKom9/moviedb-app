@@ -11,7 +11,6 @@ import ActorsList from "./ActorsList";
 class MovieTabs extends Component {
   render() {
     const { movie, url } = this.props;
-    console.log(this.props)
     return (
       <div>
         <ul className="nav nav-tabs">
@@ -19,7 +18,6 @@ class MovieTabs extends Component {
             <NavLink
               to={`${url}/images`}
               className="nav-link"
-              activeClassName="active"
             >
               Images
             </NavLink>
@@ -28,7 +26,6 @@ class MovieTabs extends Component {
             <NavLink
               to={`${url}/similar`}
               className="nav-link"
-              activeClassName="active"
             >
               Similar
             </NavLink>
@@ -37,7 +34,6 @@ class MovieTabs extends Component {
             <NavLink
               to={`${url}/details`}
               className="nav-link"
-              activeCalssName="active"
             >
               Details
             </NavLink>
@@ -46,7 +42,7 @@ class MovieTabs extends Component {
             <NavLink
               to={`${url}/actors`}
               className="nav-link"
-              activeCalssName="active"
+              activeClassName="active"
             >
               Actors
             </NavLink>
@@ -56,7 +52,7 @@ class MovieTabs extends Component {
           <Switch>
             <Route
               path={`${url}/images`}
-              component={() => <MovieImages movieURLID={this.props.movieURLID} movieId={movie.id} />}
+              component={() => <MovieImages movieURLID={this.props.movieURLID} />}
             />
             <Route
               path={`${url}/similar`}

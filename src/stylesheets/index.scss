@@ -48,8 +48,16 @@ ul {
   object-fit: cover;
 }
 
+.movie-item {
+  &__star {
+    float: left;
+  }
+}
+
 .rating-btn {
   display: inline-block;
+  widtth: auto;
+  clear: both;
   &:hover {
     cursor: pointer;
   }
@@ -58,9 +66,11 @@ ul {
   }
   &__inner {
     padding: 0 10px;
+    display: flex;
   }
   &__star {
     display: inline-block;
+    clear: both;
     margin-right: 5px;
     &:last-child {
       margin-right: 0;

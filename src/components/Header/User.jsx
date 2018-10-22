@@ -26,7 +26,7 @@ class User extends React.Component {
   }
 
   handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+    if (this.state.showMenu && this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({
         showMenu: false
       });
@@ -64,10 +64,10 @@ class User extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  user: store.authentication.user
+  user: store.authentication.user,
 });
 
-const mapDispatchToProps = dispatch => {};
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

@@ -34,16 +34,23 @@ ul {
   max-height: 161.84px;
   object-fit: cover; }
 
+.movie-item__star {
+  float: left; }
+
 .rating-btn {
-  display: inline-block; }
+  display: inline-block;
+  widtth: auto;
+  clear: both; }
   .rating-btn:hover {
     cursor: pointer; }
   .rating-btn__drop {
     min-width: unset; }
   .rating-btn__inner {
-    padding: 0 10px; }
+    padding: 0 10px;
+    display: flex; }
   .rating-btn__star {
     display: inline-block;
+    clear: both;
     margin-right: 5px; }
     .rating-btn__star:last-child {
       margin-right: 0; }

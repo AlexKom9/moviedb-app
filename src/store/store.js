@@ -8,7 +8,7 @@ import {
 } from "../actions/actionsAccount";
 
 import {actionCreatorGetMovies} from '../actions/actionsMovies'
-import {initialState as initiaMovieState}  from '../reducers/reducersMovies'
+import {initialState as initialMovieState}  from '../reducers/reducersMovies'
 
 const async = ({ getState, dispatch }) => next => action => {
   if (typeof action === "function") {
@@ -58,7 +58,7 @@ const getMovies = ({ getState, dispatch }) => next => action => {
 
   if (action.type === "RESET_FILTERS") {
     dispatch(
-      actionCreatorGetMovies(initiaMovieState.filters, 1)
+      actionCreatorGetMovies(initialMovieState.filters, 1)
     );
   }
   return next(action);

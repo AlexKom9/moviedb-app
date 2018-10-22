@@ -10,13 +10,7 @@ import AccountWatchlistPage from "./pages/AcountPage/AccountWatchlistPage";
 import '../fortawesome/fortawesome'
 
 
-import {
-  actionCreatorUpdateAuth,
-  actionCreatorLogOut,
-  actionCreatorToggleLoginForm,
-  actionCreatorHideLoginForm,
-  actionCreatorGetAccount
-} from "../actions/actions";
+import * as actions from "../actions/actions";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -54,25 +48,18 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = store => {
   return {
-    user: state.authentication.user,
-    session_id: state.authentication.session_id,
-    isAuth: state.authentication.isAuth,
-    showLoginForm: state.modals.showLoginForm,
-    favorite: state.account.favorite,
-    watchlist: state.account.watchlist
+    session_id: store.authentication.session_id,
+    isAuth: store.authentication.isAuth,
+    user: store.authentication.user,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateAuth: actionCreatorUpdateAuth,
-      onLogOut: actionCreatorLogOut,
-      toggleLoginForm: actionCreatorToggleLoginForm,
-      hideLoginForm: actionCreatorHideLoginForm,
-      getAccount: actionCreatorGetAccount
+      getAccount: actions.actionCreatorGetAccount
     },
     dispatch
   );

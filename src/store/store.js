@@ -10,12 +10,6 @@ import {
 import {actionCreatorGetMovies} from '../actions/actionsMovies'
 import {initialState as initiaMovieState}  from '../reducers/reducersMovies'
 
-const logger = ({ getState, dispatch }) => next => action => {
-  // console.log("dispatch ", dispatch );
-  // console.log(action.type, action);
-  return next(action);
-};
-
 const async = ({ getState, dispatch }) => next => action => {
   if (typeof action === "function") {
     action(dispatch);
@@ -76,7 +70,7 @@ const appMiddleWare = [getAccountLists, getMovies];
 const store = createStore(
   reducers,
   {},
-  composeWithDevTools(applyMiddleware(logger, async, getAccountLists, getMovies))
+  composeWithDevTools(applyMiddleware(async, ...appMiddleWare))
 );
 
 export default store;

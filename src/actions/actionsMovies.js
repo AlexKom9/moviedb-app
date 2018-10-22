@@ -33,6 +33,7 @@ export const actionCreatorGetMovies = params => dispatch => {
 };
 
 export const actionCreatorUpdateFilters = payload => {
+  console.log(payload);
   return {
     type: constants.UPDATE_FILTERS,
     payload

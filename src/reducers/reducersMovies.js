@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   data: [],
   filters: {
     sort_by: "vote_average.desc",

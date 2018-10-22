@@ -8,6 +8,7 @@ import {
   actionCreatorGetFavorite
 } from "../../../actions/actionsAccount";
 import * as actions from "../../../actions/actions";
+import PropTypes from 'prop-types'
 
 function findMovieInArr(id, arr) {
   return arr.findIndex(movie => movie.id === id) !== -1;
@@ -52,13 +53,16 @@ export default (Component, key) =>
               return false;
           }
         };
-
         this.state = {
           marked: initialState(key)
         };
 
         this.changeMark = this.changeMark.bind(this);
       }
+
+      static propTypes = {
+        id: PropTypes.number.isRequired
+      };
 
       fetchMark() {
         const { getFavorite, getWatchlist, session_id, user } = this.props;
@@ -93,7 +97,7 @@ export default (Component, key) =>
           CallApi.post(`/account/${this.props.id}/watchlist`, {
             params: queryStringParams,
             body: body
-          }).then(getWatchlist({session_id, user_id: user.id}));
+          }).then(getWatchlist({ session_id, user_id: user.id }));
         };
 
         switch (key) {
@@ -150,3 +154,4 @@ export default (Component, key) =>
       }
     }
   );
+

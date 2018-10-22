@@ -2,20 +2,23 @@ import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { actionCreatorGetMovies } from "../../../actions/actions";
 import { bindActionCreators } from "redux";
+import * as actions from "../../../actions/actions";
 
 const mapStateToProps = ({ movies }) => {
   return {
     movies: movies.data,
-    total_pages: movies.total_pages
+    total_pages: movies.total_pages,
+    filters: movies.filters,
+    page: movies.page,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getMovies: actionCreatorGetMovies
+      getMovies: actions.actionCreatorGetMovies,
+      changePage: actions.actionCreatorChangePage,
     },
     dispatch
   );
@@ -35,7 +38,7 @@ export default Component =>
       };
 
       getMovies = (filters, page) => {
-        const { sort_by, primary_release_year, with_genres } = filters;
+        const { sort_by, primary_release_year, with_genres } = this.props.filters;
         const queryStringParams = {
           sort_by,
           language: "ru-RU",
@@ -53,6 +56,7 @@ export default Component =>
       }
 
       componentDidUpdate(prevProps) {
+        // todo: movie it to middleware
         if (!_.isEqual(this.props.filters, prevProps.filters)) {
           this.props.changePage(1);
           this.getMovies(this.props.filters, 1);

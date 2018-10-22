@@ -1,6 +1,9 @@
 import React from 'react';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as actions from "../../actions/actions";
 
-export default class Paginator extends React.Component {
+class Paginator extends React.Component {
   render() {
     const { page, total_pages, onChangePage } = this.props;
     return (
@@ -33,3 +36,25 @@ of
     );
   }
 }
+
+const mapStateToProps = ({ movies }) => {
+  return {
+    page: movies.page,
+    total_pages: movies.total_pages,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      onChangePage: actions.actionCreatorChangePage,
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Paginator);
+

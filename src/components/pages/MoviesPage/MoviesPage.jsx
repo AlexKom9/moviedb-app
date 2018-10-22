@@ -8,20 +8,9 @@ import { bindActionCreators } from "redux";
 import * as actions from "../../../actions/actions";
 const MoviesContainer = MoviesHOC(MovieList);
 
-class MoviesPage extends React.PureComponent {
-
-  onChangeFilters = event => {
-     this.props.updateFilters({[event.target.name]: event.target.value});
-  };
-
+class MoviesPage extends React.Component {
   render() {
-    const {
-      total_pages,
-      onChangePage,
-      resetFilters,
-      filters,
-      page
-    } = this.props;
+    const { resetFilters } = this.props;
     console.log("render MoviesPage");
     return (
       <div className="container">
@@ -38,22 +27,12 @@ class MoviesPage extends React.PureComponent {
                     Очистить фильры
                   </button>
                 </div>
-                <Filters
-                  filters={filters}
-                  onChangeFilters={this.onChangeFilters}
-                  onChangePage={onChangePage}
-                  total_pages={total_pages}
-                  page={page}
-                />
+                <Filters />
               </div>
             </div>
           </div>
           <div className="col-8">
-            <MoviesContainer
-              filters={filters}
-              changePage={onChangePage}
-              page={page}
-            />
+            <MoviesContainer />
           </div>
         </div>
       </div>
@@ -61,24 +40,15 @@ class MoviesPage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({ movies }) => {
-  return {
-    total_pages: movies.total_pages,
-    page: movies.page,
-    filters: movies.filters
-  };
-};
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
     {
-      onChangePage: actions.actionCreatorChangePage,
-      updateFilters: actions.actionCreatorUpdateFilters,
       resetFilters: actions.actionCreatorResetFilters
     },
     dispatch
   );
-};
 
 export default connect(
   mapStateToProps,

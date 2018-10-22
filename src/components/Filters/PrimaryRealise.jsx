@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UISelect from '../UIComponents/UISelect';
-// import _ from 'lodash'
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as actions from "../../actions/actions";
 
-export default class PrimaryRealise extends React.PureComponent {
+class PrimaryRealise extends React.PureComponent {
+
   static propTypes = {
-    onChangeFilters: PropTypes.func.isRequired,
+    updateFilters: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -30,22 +33,15 @@ export default class PrimaryRealise extends React.PureComponent {
     ],
   };
 
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return !_.isEqual(nextProps, this.props)
-  // }
-
-
   render() {
-    const { onChangeFilters, primary_release_year, options } = this.props;
+    const { updateFilters, primary_release_year, options } = this.props;
     return (
       <UISelect
         id={primary_release_year}
         name="primary_release_year"
         value={primary_release_year}
-        onChange={onChangeFilters}
+        onChange={(event) => updateFilters({[event.target.name]: event.target.value})}
         label={() => <p>Год релиза:</p>}
-        // options={options}
       >
         {options.map(option => (
           <option key={option.value} value={option.value}>
@@ -57,3 +53,23 @@ export default class PrimaryRealise extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = ({ movies }) => {
+  return {
+    primary_release_year: movies.filters.primary_release_year
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateFilters: actions.actionCreatorUpdateFilters,
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrimaryRealise);

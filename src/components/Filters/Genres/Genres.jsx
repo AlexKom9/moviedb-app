@@ -30,5 +30,4 @@ Genres.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 Genres.displayName = "Genres";
-
-export default GenresHOC(Genres);
+ export default GenresHOC(Genres)

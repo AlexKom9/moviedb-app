@@ -10,6 +10,7 @@ const mapStateToProps = ({ movies }) => {
     total_pages: movies.total_pages,
     filters: movies.filters,
     page: movies.page,
+    isFetching: movies.isFetching
   };
 };
 
@@ -17,7 +18,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       getMovies: actions.actionCreatorGetMovies,
-      changePage: actions.actionCreatorChangePage,
+      changePage: actions.actionCreatorChangePage
     },
     dispatch
   );
@@ -39,8 +40,15 @@ export default Component =>
       }
 
       render() {
-        console.log("render MoviesHOC");
-        return <Component {...this.props} movies={this.props.movies} />;
+        return this.props.isFetching ? (
+          <h1>isFetching</h1>
+        ) : (
+          <Component
+          {...this.props}
+          movies={this.props.movies}
+          success={this.props.success}
+          error={this.props.error} />
+        );
       }
     }
   );

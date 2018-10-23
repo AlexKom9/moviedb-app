@@ -6,6 +6,7 @@ import MovieList from "../../Movies/MoviesList/MoviesList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../../actions/actions";
+
 const MoviesContainer = MoviesHOC(MovieList);
 
 class MoviesPage extends React.Component {

@@ -40,7 +40,6 @@ const getMovies = ({ getState, dispatch }) => next => action => {
   if (action.type === "UPDATE_FILTERS") {
     const pervStore = getState();
     const newFilters = {...pervStore.movies.filters, ...action.payload};
-    console.log(newFilters);
     dispatch(
       actionCreatorGetMovies(newFilters, 1)
     );
@@ -50,7 +49,6 @@ const getMovies = ({ getState, dispatch }) => next => action => {
     const pervStore = getState();
     const prevFilters = pervStore.movies.filters;
     const page = action.payload;
-    console.log(prevFilters);
     dispatch(
       actionCreatorGetMovies(prevFilters, page)
     );

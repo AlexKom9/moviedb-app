@@ -10,7 +10,8 @@ const mapStateToProps = ({ movies }) => {
     total_pages: movies.total_pages,
     filters: movies.filters,
     page: movies.page,
-    isFetching: movies.isFetching
+    isFetching: movies.isFetching,
+    success: movies.success,
   };
 };
 

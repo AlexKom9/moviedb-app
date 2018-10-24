@@ -11,7 +11,7 @@ import * as actions from "../../../actions/actions";
 import PropTypes from 'prop-types'
 
 function findMovieInArr(id, arr) {
-  return arr.findIndex(movie => movie.id === id) !== -1;
+  return arr.findIndex(movie => String(movie.id) === String(id)) !== -1;
 }
 
 const mapStateToProps = store => {

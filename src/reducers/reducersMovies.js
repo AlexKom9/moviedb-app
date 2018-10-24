@@ -1,20 +1,25 @@
 import * as constants from "../constants/constants";
 
-export const initialState = {
-  data: [],
+const initialFilters = {
   filters: {
     sort_by: "vote_average.desc",
     primary_release_year: "0",
     with_genres: []
-  },
+  }
+};
+
+export const initialMoviesState = {
+  ...initialFilters,
+  data: [],
+  page: null,
+  total_pages: null,
   success: null,
   isFetching: false,
   error: false,
-  page: null,
-  total_pages: null
 };
 
-const reducerMovies = (state = initialState, action) => {
+
+const reducerMovies = (state = initialMoviesState, action) => {
   switch (action.type) {
     case constants.FETCHING_MOVIES:
       return {
@@ -28,7 +33,7 @@ const reducerMovies = (state = initialState, action) => {
         page: action.payload.page,
         total_pages: action.payload.total_pages,
         isFetching: false,
-        success: true,
+        success: true
       };
     case constants.CHANGE_PAGE:
       return {
@@ -44,7 +49,7 @@ const reducerMovies = (state = initialState, action) => {
         }
       };
     case constants.RESET_FILTERS:
-      return { ...initialState, isFetching: true };
+      return { ...initialMoviesState };
     default:
       return state;
   }

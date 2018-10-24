@@ -8,7 +8,7 @@ import {
 } from "../actions/actionsAccount";
 
 import {actionCreatorGetMovies} from '../actions/actionsMovies'
-import {initialState as initialMovieState}  from '../reducers/reducersMovies'
+import { initialMoviesState }  from '../reducers/reducersMovies'
 
 const async = ({ getState, dispatch }) => next => action => {
   if (typeof action === "function") {
@@ -38,10 +38,8 @@ const getAccountListsAfterUpdatAuth = ({ getState, dispatch }) => next => action
 
 const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action => {
   if (action.type === "UPDATE_FILTERS") {
-    const pervStore = getState();
-    const newFilters = {...pervStore.movies.filters, ...action.payload};
     dispatch(
-      actionCreatorGetMovies(newFilters, 1)
+      actionCreatorGetMovies({...getState().movies.filters, ...action.payload}, 1)
     );
   }
 
@@ -56,7 +54,7 @@ const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action
 
   if (action.type === "RESET_FILTERS") {
     dispatch(
-      actionCreatorGetMovies(initialMovieState.filters, 1)
+      actionCreatorGetMovies(initialMoviesState.filters, 1)
     );
   }
   return next(action);

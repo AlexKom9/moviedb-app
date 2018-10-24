@@ -56,6 +56,6 @@ export const actionCreatorUpdateFilters = payload => {
 
 export const actionCreatorResetFilters = payload => {
   return {
-    type: constants.RESET_FILTERS
+    type: constants.RESET_FILTERS,
   };
 };

@@ -1,7 +1,8 @@
 @import "./_base/variables";
+@import "./_loader.scss";
 
 body {
-  background: $background
+  background: $background;
 }
 
 ul {

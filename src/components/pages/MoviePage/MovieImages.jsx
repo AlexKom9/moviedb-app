@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CallApi from "../../../api/api";
+import { withRouter } from "react-router-dom";
 
 class MovieImages extends Component {
   constructor(props) {
@@ -11,29 +12,39 @@ class MovieImages extends Component {
   }
 
   componentDidMount() {
-    const { movieURLID} = this.props;
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
 
-    CallApi.get(`/movie/${movieURLID}/images`).then( data => {
+    CallApi.get(`/movie/${id}/images`).then(data => {
       this.setState({
         backdrops: data.backdrops,
-        posters: data.posters,
-      })
+        posters: data.posters
+      });
     });
   }
 
   render() {
     const { backdrops, posters } = this.state;
-    return (<div>
+    return (
       <div>
-      {backdrops.map(item => <span>{item}</span>)}
+        <div>
+          {backdrops.map(item => (
+            <span>{item}</span>
+          ))}
+        </div>
+        <div>
+          {posters.map(item => (
+            <span>{item}</span>
+          ))}
+        </div>
       </div>
-      <div>
-        {posters.map(item => <span>{item}</span>)}
-      </div>
-      </div>)
+    );
   }
 }
 
 MovieImages.propTypes = {};
 
-export default MovieImages;
+export default withRouter(MovieImages);

@@ -53,6 +53,7 @@ export default (Component, key) =>
               return false;
           }
         };
+
         this.state = {
           marked: initialState(key)
         };
@@ -61,7 +62,7 @@ export default (Component, key) =>
       }
 
       static propTypes = {
-        id: PropTypes.number.isRequired
+        id: PropTypes.any.isRequired
       };
 
       fetchMark() {

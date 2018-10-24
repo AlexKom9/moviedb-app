@@ -18,7 +18,7 @@ const async = ({ getState, dispatch }) => next => action => {
   }
 };
 
-const getAccountLists = ({ getState, dispatch }) => next => action => {
+const getAccountListsAfterUpdatAuth = ({ getState, dispatch }) => next => action => {
   if (action.type === "UPDATE_AUTH") {
     dispatch(
       actionCreatorGetFavorite({
@@ -36,7 +36,7 @@ const getAccountLists = ({ getState, dispatch }) => next => action => {
   return next(action);
 };
 
-const getMovies = ({ getState, dispatch }) => next => action => {
+const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action => {
   if (action.type === "UPDATE_FILTERS") {
     const pervStore = getState();
     const newFilters = {...pervStore.movies.filters, ...action.payload};
@@ -62,7 +62,7 @@ const getMovies = ({ getState, dispatch }) => next => action => {
   return next(action);
 };
 
-const appMiddleWare = [getAccountLists, getMovies];
+const appMiddleWare = [getAccountListsAfterUpdatAuth, getMoviesAfterChangingFilters];
 
 
 const store = createStore(

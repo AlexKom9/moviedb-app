@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreatorToggleLoginForm } from "../../../actions/actionsModals";
 import CallApi from "../../../api/api";
+import { withRouter } from "react-router-dom";
 
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 
@@ -40,7 +41,13 @@ class RatingBtn extends Component {
   };
 
   setRating = index => {
-    const { session_id, movie_id } = this.props;
+    const {
+      session_id,
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    console.log(id);
     this.setState(
       {
         choosedRating: index
@@ -52,7 +59,7 @@ class RatingBtn extends Component {
         const body = {
           value: index * 2
         };
-            CallApi.post(`/movie/${movie_id}/rating`, {
+        CallApi.post(`/movie/${id}/rating`, {
           params: queryStringParams,
           body
         });
@@ -81,12 +88,16 @@ class RatingBtn extends Component {
   };
 
   componentDidMount() {
-    const { session_id, movie_id } = this.props;
+    const {
+      session_id,
+      match: {
+        params: { id }
+      }
+    } = this.props;
     const queryStringParam = {
       session_id
     };
-
-    CallApi.get(`/movie/${movie_id}/account_states`, {
+    CallApi.get(`/movie/${id}/account_states`, {
       params: queryStringParam
     }).then(data => {
       this.setState({
@@ -129,4 +140,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RatingBtn);
+)(withRouter(RatingBtn));

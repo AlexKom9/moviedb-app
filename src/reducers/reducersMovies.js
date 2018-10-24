@@ -49,7 +49,7 @@ const reducerMovies = (state = initialMoviesState, action) => {
         }
       };
     case constants.RESET_FILTERS:
-      return { ...initialMoviesState };
+      return { ...state, ...initialFilters };
     default:
       return state;
   }

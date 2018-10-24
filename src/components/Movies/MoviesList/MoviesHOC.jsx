@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../../actions/actions";
+import Loader from '../../Loader'
 
 const mapStateToProps = ({ movies }) => {
   return {
@@ -42,7 +43,7 @@ export default Component =>
 
       render() {
         return this.props.isFetching ? (
-          <h1>isFetching</h1>
+          <Loader/>
         ) : (
           <Component
           {...this.props}

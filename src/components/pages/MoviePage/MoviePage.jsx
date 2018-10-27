@@ -55,6 +55,7 @@ export default class MoviePage extends React.Component {
             <div className="col-8">
               <h2 className="title mb-4">{movie && movie.title}</h2>
               <p className="mb-4">{movie && movie.overview}</p>
+              <span>Рейтинг Пользователей: {movie.vote_average}</span>
               <div>
                 <div className="movie-item__like float-right ml-2">
                   <MovieToWatch id={id} />

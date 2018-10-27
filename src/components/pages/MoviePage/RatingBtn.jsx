@@ -14,9 +14,8 @@ class RatingBtn extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownRating: false,
-      choosedRating: null,
-      rating: 0,
       rated: null,
+      hoverRating: null,
       favorite: null,
       watchlist: null
     };
@@ -27,7 +26,7 @@ class RatingBtn extends Component {
     if (isAuth) {
       this.setState(prevState => ({
         dropdownRating: !prevState.dropdownRating,
-        rating: this.state.choosedRating
+        rating: this.state.rated
       }));
     } else {
       toggleLoginForm();
@@ -36,7 +35,13 @@ class RatingBtn extends Component {
 
   handleHover = index => {
     this.setState({
-      rating: index
+      hoverRating: index
+    });
+  };
+
+  onLeaveDropDown = () => {
+    this.setState({
+      hoverRating: this.state.rated
     });
   };
 
@@ -50,7 +55,7 @@ class RatingBtn extends Component {
     console.log(id);
     this.setState(
       {
-        choosedRating: index
+        rated: index
       },
       () => {
         const queryStringParams = {
@@ -67,27 +72,7 @@ class RatingBtn extends Component {
     );
   };
 
-  createStars = () => {
-    let stars = [];
-    for (let i = 1; i < 6; i++) {
-      stars.push(
-        <div
-          className="rating-btn__star"
-          onMouseEnter={() => this.handleHover(i)}
-          onClick={() => this.setRating(i)}
-          key={i}
-        >
-          <FontAwesomeIcon
-            icon={[i <= this.state.rating ? "fas" : "far", "star"]}
-            color={i <= this.state.choosedRating ? "black" : "gray"}
-          />
-        </div>
-      );
-    }
-    return stars;
-  };
-
-  componentDidMount() {
+  getAccountState() {
     const {
       session_id,
       match: {
@@ -101,9 +86,34 @@ class RatingBtn extends Component {
       params: queryStringParam
     }).then(data => {
       this.setState({
-        choosedRating: data.rated.value / 2
+        rated: data.rated.value / 2,
+        hoverRating: data.rated.value / 2
       });
     });
+  }
+
+  createStars = () => {
+    let stars = [];
+    for (let i = 1; i < 6; i++) {
+      stars.push(
+        <div
+          className="rating-btn__star"
+          onMouseEnter={() => this.handleHover(i)}
+          onClick={() => this.setRating(i)}
+          key={i}
+        >
+          <FontAwesomeIcon
+            icon={[i <= this.state.hoverRating ? "fas" : "far", "star"]}
+            color={i <= this.state.rated ? "black" : "gray"}
+          />
+        </div>
+      );
+    }
+    return stars;
+  };
+
+  componentDidMount() {
+    this.getAccountState();
   }
 
   render() {
@@ -111,8 +121,12 @@ class RatingBtn extends Component {
       <Dropdown isOpen={this.state.dropdownRating} toggle={this.toggle}>
         <DropdownToggle className="rating-btn" tag="div">
           <FontAwesomeIcon icon={["far", "star"]} />
+          <span> Ваш рейтинг : {this.state.rated *2 } </span>
         </DropdownToggle>
-        <DropdownMenu className="rating-btn__drop">
+        <DropdownMenu
+          className="rating-btn__drop"
+          onMouseLeave={() => this.onLeaveDropDown()}
+        >
           <div className="rating-btn__inner">{this.createStars()}</div>
         </DropdownMenu>
       </Dropdown>

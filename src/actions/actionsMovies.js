@@ -17,9 +17,7 @@ export const actionCreatorChangePage = payload => {
 };
 
 export const actionCreatorGetMovies = (filters, page) => dispatch => {
-
   const { sort_by, primary_release_year, with_genres } = filters;
-
   const queryStringParams = {
     sort_by,
     language: "ru-RU",

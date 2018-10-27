@@ -7,7 +7,7 @@ import {
   actionCreatorGetWatchlist
 } from "../actions/actionsAccount";
 
-import {actionCreatorGetMovies} from '../actions/actionsMovies'
+import { actionCreatorGetMovies } from "../actions/actionsMovies";
 import { initialMoviesState }  from '../reducers/reducersMovies'
 
 const async = ({ getState, dispatch }) => next => action => {

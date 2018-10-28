@@ -79,3 +79,9 @@ ul {
   }
 }
 
+//gallery
+.tile-viewport {
+  img {
+    object-fit: contain;
+  }
+}

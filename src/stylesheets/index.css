@@ -130,3 +130,6 @@ ul {
     margin-right: 5px; }
     .rating-btn__star:last-child {
       margin-right: 0; }
+
+.tile-viewport img {
+  object-fit: contain; }

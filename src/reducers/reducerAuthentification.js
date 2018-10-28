@@ -1,8 +1,9 @@
 import Cookies from "universal-cookie";
+import * as constants from "../constants/constants";
 
 const cookies = new Cookies();
 
-const initialState = {
+export const initialState = {
   user: null,
   isAuth: false,
   session_id: cookies.get("session_id"),
@@ -10,7 +11,7 @@ const initialState = {
 
 const reducerAuthentication = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_AUTH":
+    case constants.UPDATE_AUTH:
       cookies.set("session_id", action.payload.session_id, {
         path: "/",
         maxAge: 2592000
@@ -19,9 +20,9 @@ const reducerAuthentication = (state = initialState, action) => {
         ...state,
         user: action.payload.user,
         session_id: action.payload.session_id,
-        isAuth: true
+        isAuth: true,
       };
-    case "ON_LOGOUT":
+    case constants.LOG_OUT:
       cookies.remove("session_id");
       return {
         ...state,

@@ -7,7 +7,7 @@ import {
   actionCreatorUpdateAuth
 } from "../../../actions/actions";
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
   state = {
     username: "",
     password: "",
@@ -33,12 +33,11 @@ class LoginForm extends React.Component {
     console.log("on blur");
     const errors = this.validateFields();
     const name = event.target.name;
-    const errorByName = errors[name];
-    if (errorByName) {
+    if (errors[name]) {
       this.setState(prevState => ({
         errors: {
           ...prevState.errors,
-          [name]: errorByName
+          [name]: errors[name]
         }
       }));
     }

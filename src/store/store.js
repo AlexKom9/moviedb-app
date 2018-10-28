@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import reducers from "../reducers/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
+import * as constants from '../constants/constants'
 
 import {
   actionCreatorGetFavorite,
@@ -18,8 +19,8 @@ const async = ({ getState, dispatch }) => next => action => {
   }
 };
 
-const getAccountListsAfterUpdatAuth = ({ getState, dispatch }) => next => action => {
-  if (action.type === "UPDATE_AUTH") {
+const getAccountListsAfterUpdateAuth = ({ getState, dispatch }) => next => action => {
+  if (action.type === constants.UPDATE_AUTH) {
     dispatch(
       actionCreatorGetFavorite({
         session_id: action.payload.session_id,
@@ -37,13 +38,13 @@ const getAccountListsAfterUpdatAuth = ({ getState, dispatch }) => next => action
 };
 
 const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action => {
-  if (action.type === "UPDATE_FILTERS") {
+  if (action.type === constants.UPDATE_FILTERS) {
     dispatch(
       actionCreatorGetMovies({...getState().movies.filters, ...action.payload}, 1)
     );
   }
 
-  if (action.type === "CHANGE_PAGE") {
+  if (action.type === constants.CHANGE_PAGE) {
     const pervStore = getState();
     const prevFilters = pervStore.movies.filters;
     const page = action.payload;
@@ -52,7 +53,7 @@ const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action
     );
   }
 
-  if (action.type === "RESET_FILTERS") {
+  if (action.type === constants.RESET_FILTERS) {
     dispatch(
       actionCreatorGetMovies(initialMoviesState.filters, 1)
     );
@@ -60,7 +61,7 @@ const getMoviesAfterChangingFilters = ({ getState, dispatch }) => next => action
   return next(action);
 };
 
-const appMiddleWare = [getAccountListsAfterUpdatAuth, getMoviesAfterChangingFilters];
+const appMiddleWare = [getAccountListsAfterUpdateAuth, getMoviesAfterChangingFilters];
 
 
 const store = createStore(

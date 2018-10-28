@@ -1,4 +1,5 @@
 import CallApi from "../api/api";
+import * as constants from '../constants/constants'
 
 export const actionCreatorGetAccount = payload => dispatch => {
   const { session_id } = payload;
@@ -11,12 +12,12 @@ export const actionCreatorGetAccount = payload => dispatch => {
   });
 };
 
-export const actionCreatorUpdateAuth = payload => {
-  return { type: "UPDATE_AUTH", payload };
+export const actionCreatorUpdateAuth = ({ user, session_id, isAuth }) => {
+  return { type: constants.UPDATE_AUTH, payload: { user, session_id, isAuth} };
 };
 
 export const actionCreatorLogOut = () => {
   return {
-    type: "ON_LOGOUT"
+    type: constants.LOG_OUT
   };
 };

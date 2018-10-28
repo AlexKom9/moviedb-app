@@ -5,3 +5,9 @@ export const UPDATE_FILTERS = "UPDATE_FILTERS";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const ERROR_GET_MOVIES = "ERROR_GET_MOVIES";
 
+
+export const UPDATE_AUTH = "UPDATE_AUTH";
+export const LOG_OUT = "LOG_OUT";
+
+
+

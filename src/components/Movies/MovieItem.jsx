@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LikeIcon from "./Markers/LikeIcon";
 import WatchIcon from "./Markers/WatchIcon";
-import MarkHOC from "./Markers/MarkHOC";
+import MarkHOC from "../HOC/MarkHOC";
 import AppConsumerHOC from "../HOC/AppConsumerHOC";
 
 

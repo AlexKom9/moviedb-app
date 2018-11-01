@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CallApi from "./../../../api/api";
+import CallApi from "../../api/api";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as actions from "../../../actions/actions";
+import * as actions from "../../actions/actions";
 
 const mapStateToProps = ({ movies }) => {
   return {

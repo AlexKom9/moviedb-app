@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import GenresHOC from "./GenresHOC";
+import GenresHOC from "../../HOC/GenresHOC";
 import UICheckBox from "../../UIComponents/UICheckbox";
 
 const Genres = ({ allGenres, onChange, with_genres }) => (

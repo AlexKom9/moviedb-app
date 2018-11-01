@@ -84,6 +84,11 @@ ul {
 .navbar {
   background-color: #3987e0; }
 
+.nav-link {
+  color: unset; }
+  .nav-link:hover {
+    color: unset; }
+
 .header__home-link {
   color: #fff;
   font-size: 24px; }

@@ -1,13 +1,13 @@
 import React from "react";
-import CallApi from "../../../api/api";
+import CallApi from "../../api/api";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   actionCreatorGetWatchlist,
   actionCreatorGetFavorite
-} from "../../../actions/actionsAccount";
-import * as actions from "../../../actions/actions";
+} from "../../actions/actionsAccount";
+import * as actions from "../../actions/actions";
 import PropTypes from 'prop-types'
 
 function findMovieInArr(id, arr) {

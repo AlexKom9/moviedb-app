@@ -14,6 +14,13 @@ ul {
   background-color: $primaryLight;
 }
 
+.nav-link {
+  color: unset;
+  &:hover {
+    color: unset;
+  }
+}
+
 .header__home-link {
   color: #fff;
   font-size: 24px;

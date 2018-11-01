@@ -19,27 +19,29 @@ class MovieTabs extends Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
+            <NavLink to={`/movie/${id}/details`} className="nav-link">
+              Детали
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
             <NavLink to={`/movie/${id}/images`} className="nav-link">
-              Images
+              Изображения
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to={`/movie/${id}/similar`} className="nav-link">
-              Similar
+              Похожие фильмы
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink to={`/movie/${id}/details`} className="nav-link">
-              Details
-            </NavLink>
-          </li>
+
           <li className="nav-item">
             <NavLink
               to={`/movie/${id}/actors`}
               className="nav-link"
               activeClassName="active"
             >
-              Actors
+              Актеры
             </NavLink>
           </li>
         </ul>

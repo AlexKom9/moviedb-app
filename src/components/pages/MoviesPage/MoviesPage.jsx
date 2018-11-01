@@ -1,6 +1,6 @@
 import React from "react";
 import Filters from "../../Filters/Filters";
-import MoviesHOC from "../../Movies/MoviesList/MoviesHOC";
+import MoviesHOC from "../../HOC/MoviesHOC";
 import MovieList from "../../Movies/MoviesList/MoviesList";
 
 import { connect } from "react-redux";

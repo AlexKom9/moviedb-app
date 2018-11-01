@@ -2,7 +2,7 @@ import React from "react";
 import Like from "../../Movies/Markers/LikeIcon";
 import WatchIcon from "../../Movies/Markers/WatchIcon";
 import CallApi from "../../../api/api";
-import MarkHOC from "../../Movies/Markers/MarkHOC";
+import MarkHOC from "../../HOC/MarkHOC";
 import RatingBtn from "./RatingBtn";
 import MovieTabs from "./MovieTabs";
 

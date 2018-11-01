@@ -12,8 +12,8 @@ export const actionCreatorGetAccount = payload => dispatch => {
   });
 };
 
-export const actionCreatorUpdateAuth = ({ user, session_id, isAuth }) => {
-  return { type: constants.UPDATE_AUTH, payload: { user, session_id, isAuth} };
+export const actionCreatorUpdateAuth = ({ user, session_id }) => {
+  return { type: constants.UPDATE_AUTH, payload: { user, session_id } };
 };
 
 export const actionCreatorLogOut = () => {

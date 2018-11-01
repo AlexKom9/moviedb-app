@@ -1,4 +1,5 @@
 import CallApi from "../api/api";
+import * as constants from '../constants/constants'
 
 export const actionCreatorGetFavorite = ({
   session_id,
@@ -30,14 +31,14 @@ export const actionCreatorGetWatchlist = ({
 
 export const actionCreatorUpdateFavorite = data => {
   return {
-    type: "UPDATE_FAVORITE",
+    type: constants.UPDATE_FAVORITE,
     payload: data.results
   };
 };
 
 export const actionCreatorUpdateWatchList = data => {
   return {
-    type: "UPDATE_WATCHLIST",
+    type: constants.UPDATE_WATCHLIST,
     payload: data.results
   };
 };

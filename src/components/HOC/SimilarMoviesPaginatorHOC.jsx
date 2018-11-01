@@ -1,7 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types'
-
-// const { page, total_pages, onChangePage } = this.props;
 
 export default Component =>
   class SimilarMoviesPaginatorHOC extends React.Component {

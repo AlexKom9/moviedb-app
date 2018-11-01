@@ -27,17 +27,11 @@ export default class MoviePage extends React.Component {
 
   render() {
     const { movie } = this.state;
-    console.log(this.props);
     const {
       match: {
         params: { id }
       }
     } = this.props;
-    // console.log(movie_id)
-    // console.log(movie);
-    // let { history, match, location } = this.props;
-    // const tab = /[^/]*$/.exec(location.pathname)[0];
-    // console.log(tab);
     return (
       movie && (
         <div className="container">

@@ -5,7 +5,9 @@ import * as constants from '../constants/constants'
 
 import {
   actionCreatorGetFavorite,
-  actionCreatorGetWatchlist
+  actionCreatorGetWatchlist,
+  actionCreatorUpdateFavorite,
+  actionCreatorUpdateWatchList,
 } from "../actions/actionsAccount";
 
 import { actionCreatorGetMovies } from "../actions/actionsMovies";
@@ -32,6 +34,14 @@ const getAccountListsAfterUpdateAuth = ({ getState, dispatch }) => next => actio
         session_id: action.payload.session_id,
         user_id: action.payload.user.id
       })
+    );
+  }
+  if (action.type === constants.LOG_OUT) {
+    dispatch(
+      actionCreatorUpdateFavorite([])
+    );
+    dispatch(
+      actionCreatorUpdateWatchList([])
     );
   }
   return next(action);

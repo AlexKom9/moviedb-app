@@ -3,7 +3,6 @@
 exports[`actionsAuthentication actionCreatorUpdateAuth 1`] = `
 Object {
   "payload": Object {
-    "isAuth": true,
     "session_id": 1,
     "user": 1,
   },

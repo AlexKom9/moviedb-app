@@ -1,18 +1,14 @@
 import {
-  actionCreatorUpdateAuth,
-  actionCreatorLogOut
-} from "../../actions/actionsAuthentication";
+  actionCreatorUpdateFavorite,
+  actionCreatorUpdateWatchlist
+} from "../../actions/actionsAccount";
 import * as constants from "../../constants/constants";
 
-describe("actionsAuthentication", () => {
+describe("actionsAccount", () => {
   test("actionCreatorUpdateAuth", () => {
-    const payload = {
-      user: 1,
-      session_id: 1,
-      isAuth: true
-    };
+    const data = [];
 
-    const result = actionCreatorUpdateAuth(payload);
+    const result = actionCreatorUpdateFavorite(data);
     // expect(result.type).toBe(constants.UPDATE_AUTH);
     // expect(result.payload.user).toBe(payload.user);
     // expect(result.payload.session_id).toBe(payload.session_id);

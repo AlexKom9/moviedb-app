@@ -145,7 +145,7 @@ export class LoginForm extends React.Component {
               type="text"
               className="form-control"
               id="username"
-              placeholder="Пользователь"
+              placeholder="Пользователь: alexander_komar"
               name="username"
               value={username}
               onChange={this.onChange}
@@ -161,7 +161,7 @@ export class LoginForm extends React.Component {
               type="password"
               className="form-control"
               id="password"
-              placeholder="Пароль"
+              placeholder="Пароль: 12345678"
               name="password"
               value={password}
               onBlur={this.handleBlur}

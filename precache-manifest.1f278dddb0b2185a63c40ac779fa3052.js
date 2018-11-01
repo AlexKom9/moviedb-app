@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/moviedb-app/static/js/runtime~main.e81c94a6.js"
   },
   {
-    "revision": "c4e764fba4d9ecfee9a3",
-    "url": "/moviedb-app/static/js/main.c4e764fb.chunk.js"
+    "revision": "ed318a824a02b71cd08e",
+    "url": "/moviedb-app/static/js/main.ed318a82.chunk.js"
   },
   {
-    "revision": "eb624decc99cd6b406d8",
-    "url": "/moviedb-app/static/js/1.eb624dec.chunk.js"
+    "revision": "b47277b4763fca470bf6",
+    "url": "/moviedb-app/static/js/1.b47277b4.chunk.js"
   },
   {
-    "revision": "c4e764fba4d9ecfee9a3",
+    "revision": "ed318a824a02b71cd08e",
     "url": "/moviedb-app/static/css/main.ef88bc47.chunk.css"
   },
   {
-    "revision": "eb624decc99cd6b406d8",
+    "revision": "b47277b4763fca470bf6",
     "url": "/moviedb-app/static/css/1.f5709737.chunk.css"
   },
   {
-    "revision": "23327f226f69ef89c0a229b54aadad76",
+    "revision": "efc591e9b6235b751d3771851168e9c3",
     "url": "/moviedb-app/index.html"
   }
 ];

@@ -19,7 +19,6 @@ export default class MoviePage extends React.Component {
 
   componentDidMount() {
     CallApi.get(`/movie/${this.props.match.params.id}`).then(data => {
-      console.log(data);
       this.setState({
         movie: data
       });

@@ -45,7 +45,6 @@ export const actionCreatorGetMovies = (filters, page) => dispatch => {
 };
 
 export const actionCreatorUpdateFilters = payload => {
-  console.log(payload);
   return {
     type: constants.UPDATE_FILTERS,
     payload

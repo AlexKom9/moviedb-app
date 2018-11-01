@@ -24,7 +24,6 @@ class ActorsList extends Component {
       isFetching: true
     });
     CallApi.get(`/movie/${id}/credits`).then(data => {
-      console.log(data);
       const filteredActorsByImage = data.cast.filter(item => {
         return item.profile_path;
       });

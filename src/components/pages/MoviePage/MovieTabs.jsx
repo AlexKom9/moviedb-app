@@ -14,7 +14,6 @@ class MovieTabs extends Component {
       movie,
       match: { params: { id } }
     } = this.props;
-    console.log(id);
     return (
       <div>
         <ul className="nav nav-tabs">

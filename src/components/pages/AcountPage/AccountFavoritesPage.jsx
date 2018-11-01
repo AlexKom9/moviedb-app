@@ -6,12 +6,7 @@ import { connect } from "react-redux";
 import { actionCreatorGetFavorite } from "../../../actions/actionsAccount";
 
 class AccountFavoritesPage extends Component {
-  // componentDidMount() {
-  //   const { isAuth, session_id, user } = this.props;
-  //   if (isAuth) this.props.getFavorites({ session_id, user_id: user.id });
-  // }
   render() {
-    console.log(this.props.isAuth);
     return this.props.isAuth ? (
       <div className="container">
         <div className="row mt-4">

@@ -12,7 +12,6 @@ const MoviesContainer = MoviesHOC(MovieList);
 class MoviesPage extends React.Component {
   render() {
     const { resetFilters } = this.props;
-    console.log("render MoviesPage");
     return (
       <div className="container">
         <div className="row mt-4">

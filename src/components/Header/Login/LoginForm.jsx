@@ -30,7 +30,6 @@ export class LoginForm extends React.Component {
   };
 
   handleBlur = event => {
-    console.log("on blur");
     const errors = this.validateFields();
     const name = event.target.name;
     if (errors[name]) {

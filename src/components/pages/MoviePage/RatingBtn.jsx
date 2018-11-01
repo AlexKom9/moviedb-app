@@ -65,7 +65,6 @@ class RatingBtn extends Component {
         params: { id }
       }
     } = this.props;
-    console.log(id);
     this.setState(
       {
         rated: index

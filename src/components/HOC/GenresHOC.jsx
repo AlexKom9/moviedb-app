@@ -49,11 +49,8 @@ export default Component =>
       }
 
       changeHandler = event => {
-        console.log(event);
         const { with_genres, updateFilters } = this.props;
-
         const currentId = event.target.id;
-
         let value = [];
         if (with_genres.includes(currentId)) {
           value = with_genres.filter(id => id !== currentId);

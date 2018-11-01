@@ -81,7 +81,6 @@ export default (Component, key) =>
             params: queryStringParams,
             body: body
           }).then(() => {
-            console.log(session_id, user);
             getFavorite({ session_id, user_id: user.id });
           });
         };

@@ -2,7 +2,7 @@ import * as constants from "../constants/constants";
 
 const initialFilters = {
   filters: {
-    sort_by: "vote_average.desc",
+    sort_by: "popularity.desc",
     primary_release_year: "0",
     with_genres: []
   }

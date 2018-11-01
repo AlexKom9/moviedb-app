@@ -1,0 +1,15 @@
+{
+  "main.css": "/moviedb-app/static/css/main.ef88bc47.chunk.css",
+  "main.js": "/moviedb-app/static/js/main.49b8de5a.chunk.js",
+  "main.js.map": "/moviedb-app/static/js/main.49b8de5a.chunk.js.map",
+  "static/css/1.f5709737.chunk.css": "/moviedb-app/static/css/1.f5709737.chunk.css",
+  "static/js/1.b47277b4.chunk.js": "/moviedb-app/static/js/1.b47277b4.chunk.js",
+  "static/js/1.b47277b4.chunk.js.map": "/moviedb-app/static/js/1.b47277b4.chunk.js.map",
+  "runtime~main.js": "/moviedb-app/static/js/runtime~main.e81c94a6.js",
+  "runtime~main.js.map": "/moviedb-app/static/js/runtime~main.e81c94a6.js.map",
+  "static/css/1.f5709737.chunk.css.map": "/moviedb-app/static/css/1.f5709737.chunk.css.map",
+  "static/css/main.ef88bc47.chunk.css.map": "/moviedb-app/static/css/main.ef88bc47.chunk.css.map",
+  "index.html": "/moviedb-app/index.html",
+  "precache-manifest.c06e30285ae0260fbd9c34af8d87d4ac.js": "/moviedb-app/precache-manifest.c06e30285ae0260fbd9c34af8d87d4ac.js",
+  "service-worker.js": "/moviedb-app/service-worker.js"
+}

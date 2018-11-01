@@ -3,54 +3,26 @@ import PropTypes from "prop-types";
 import Gallery from "react-grid-gallery";
 import CallApi from "../../../api/api";
 import { withRouter } from "react-router-dom";
-
-const IMAGES = [
-  {
-    src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
-    thumbnail:
-      "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_n.jpg",
-    thumbnailWidth: 320,
-    thumbnailHeight: 174,
-    caption: "After Rain (Jeshu John - designerspics.com)"
-  },
-  {
-    src: "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_b.jpg",
-    thumbnail:
-      "https://c2.staticflickr.com/9/8356/28897120681_3b2c0f43e0_n.jpg",
-    thumbnailWidth: 320,
-    thumbnailHeight: 212,
-    tags: [
-      { value: "Ocean", title: "Ocean" },
-      { value: "People", title: "People" }
-    ],
-    caption: "Boats (Jeshu John - designerspics.com)"
-  },
-
-  {
-    src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-    thumbnail:
-      "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_n.jpg",
-    thumbnailWidth: 320,
-    thumbnailHeight: 212
-  }
-];
+import Loader from "../../Loader";
 
 class ActorsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      actor_gallery: []
+      actor_gallery: [],
+      isFetching: false
     };
   }
 
-  componentDidMount() {
-    // const { movie: { id } } = this.props;
+  getActorsList = () => {
     const {
       match: {
         params: { id }
       }
     } = this.props;
-
+    this.setState({
+      isFetching: true
+    });
     CallApi.get(`/movie/${id}/credits`).then(data => {
       console.log(data);
       const filteredActorsByImage = data.cast.filter(item => {
@@ -62,17 +34,22 @@ class ActorsList extends Component {
           thumbnail: `https://image.tmdb.org/t/p/w500/${actor.profile_path}`,
           thumbnailWidth: 120,
           thumbnailHeight: 180,
-          caption: actor.character
-        }))
+          caption: actor.character,
+        })),
+        isFetching: false
       });
     });
+  };
+
+  componentDidMount() {
+    this.getActorsList();
   }
 
   render() {
-    const { actor_gallery } = this.state;
+    const { actor_gallery, isFetching } = this.state;
     return (
       <div className="mt-4">
-        <Gallery images={actor_gallery} enableImageSelection={false} />
+        {isFetching ? <Loader/> : actor_gallery.length ? <Gallery images={actor_gallery} enableImageSelection={false} /> : <p className="text-center">Актеры не найдены</p>}
       </div>
     );
   }

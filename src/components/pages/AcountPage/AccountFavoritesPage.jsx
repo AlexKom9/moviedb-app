@@ -15,9 +15,7 @@ class AccountFavoritesPage extends Component {
     return this.props.isAuth ? (
       <div className="container">
         <div className="row mt-4">
-          <div className="col-8">
-            <MoviesList movies={this.props.favorite} />
-          </div>
+          <MoviesList movies={this.props.favorite} col={'col-4'} />
         </div>
       </div>
     ) : (

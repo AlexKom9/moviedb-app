@@ -60,8 +60,8 @@ class ActorsList extends Component {
         actor_gallery: filteredActorsByImage.map(actor => ({
           src: `https://image.tmdb.org/t/p/w500/${actor.profile_path}`,
           thumbnail: `https://image.tmdb.org/t/p/w500/${actor.profile_path}`,
-          thumbnailWidth: "auto",
-          thumbnailHeight: "auto",
+          thumbnailWidth: 120,
+          thumbnailHeight: 180,
           caption: actor.character
         }))
       });
@@ -71,18 +71,8 @@ class ActorsList extends Component {
   render() {
     const { actor_gallery } = this.state;
     return (
-      <div>
+      <div className="mt-4">
         <Gallery images={actor_gallery} enableImageSelection={false} />
-        {/*<div className="row">*/}
-        {/*{data.map(item => (*/}
-        {/*<div key={item.id} className={`col-3 mb-4`}>*/}
-        {/*<img*/}
-        {/*src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}*/}
-        {/*alt=""*/}
-        {/*/>*/}
-        {/*</div>*/}
-        {/*))}*/}
-        {/*</div>*/}
       </div>
     );
   }

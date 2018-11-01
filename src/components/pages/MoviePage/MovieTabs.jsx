@@ -22,12 +22,11 @@ class MovieTabs extends Component {
               Детали
             </NavLink>
           </li>
-
-          <li className="nav-item">
-            <NavLink to={`/movie/${id}/images`} className="nav-link">
-              Изображения
-            </NavLink>
-          </li>
+          {/*<li className="nav-item">*/}
+            {/*<NavLink to={`/movie/${id}/images`} className="nav-link">*/}
+              {/*Изображения*/}
+            {/*</NavLink>*/}
+          {/*</li>*/}
           <li className="nav-item">
             <NavLink to={`/movie/${id}/similar`} className="nav-link">
               Похожие фильмы

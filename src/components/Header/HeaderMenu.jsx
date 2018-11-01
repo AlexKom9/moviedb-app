@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 
 class HeaderMenu extends React.Component {
   logOut = () => {
+    this.props.closeMenu();
     const { session_id, onLogOut } = this.props;
     CallApi.delete("/authentication/session?", {
       body: { session_id: session_id }
@@ -18,6 +19,7 @@ class HeaderMenu extends React.Component {
   };
 
   render() {
+    const {closeMenu} = this.props;
     return (
       <div className="dropdown-menu">
         <h6 className="dropdown-header">Меню</h6>
@@ -26,10 +28,10 @@ class HeaderMenu extends React.Component {
           Выйти
         </span>
         <span className="dropdown-item">
-          <Link to="/account/favorites">Избранные</Link>
+          <Link to="/account/favorites" onClick={closeMenu}>Избранные</Link>
         </span>
         <span className="dropdown-item">
-          <Link to="/account/watchlist">К просмотру</Link>
+          <Link to="/account/watchlist" onClick={closeMenu}>К просмотру</Link>
         </span>
       </div>
     );

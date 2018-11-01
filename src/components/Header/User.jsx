@@ -33,7 +33,7 @@ class User extends React.Component {
     }
   }
 
-  closeMenu() {
+  closeMenu = () => {
     this.setState({
       showMenu: false
     });

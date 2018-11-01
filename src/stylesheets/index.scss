@@ -62,6 +62,20 @@ ul {
   &:hover {
     cursor: pointer;
   }
+  &__your-rating {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  &__circle {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 10px;
+    .CircularProgressbar .CircularProgressbar-text {
+      font-size: 50px;
+      fill: $primaryLight;
+    }
+  }
   &__drop {
     min-width: unset;
   }

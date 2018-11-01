@@ -5,8 +5,21 @@ import { bindActionCreators } from "redux";
 import { actionCreatorToggleLoginForm } from "../../../actions/actionsModals";
 import CallApi from "../../../api/api";
 import { withRouter } from "react-router-dom";
+import CircularProgressbar from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
+
+const circleDiagram = (rated) => (
+  <div className="rating-btn__circle">
+    <CircularProgressbar
+      percentage={rated * 2 * 10}
+      text={`${rated * 2}`}
+      style={{path: {fill: '#3987e0'}, text: {fill: '#3987e0'}}}
+      initialAnimation={true}
+    />
+  </div>
+);
 
 class RatingBtn extends Component {
   constructor(props) {
@@ -120,8 +133,8 @@ class RatingBtn extends Component {
     return (
       <Dropdown isOpen={this.state.dropdownRating} toggle={this.toggle}>
         <DropdownToggle className="rating-btn" tag="div">
-          <FontAwesomeIcon icon={["far", "star"]} />
-         { this.state.rated ? <span> Ваш рейтинг : {this.state.rated *2} </span>: null}
+          <FontAwesomeIcon icon={[this.state.rated ? 'fas':'far', "star"]} />
+          {this.state.rated ? <div className="rating-btn__your-rating">Ваш рейтинг : {circleDiagram(this.state.rated)}</div>: null}
         </DropdownToggle>
         <DropdownMenu
           className="rating-btn__drop"

@@ -119,6 +119,17 @@ ul {
   clear: both; }
   .rating-btn:hover {
     cursor: pointer; }
+  .rating-btn__your-rating {
+    display: inline-block;
+    margin-left: 10px; }
+  .rating-btn__circle {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 10px; }
+    .rating-btn__circle .CircularProgressbar .CircularProgressbar-text {
+      font-size: 50px;
+      fill: #3987e0; }
   .rating-btn__drop {
     min-width: unset; }
   .rating-btn__inner {

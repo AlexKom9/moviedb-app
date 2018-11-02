@@ -133,7 +133,7 @@ class RatingBtn extends Component {
       <Dropdown isOpen={this.state.dropdownRating} toggle={this.toggle}>
         <DropdownToggle className="rating-btn" tag="div">
           <FontAwesomeIcon icon={[this.state.rated ? 'fas':'far', "star"]} />
-          {this.state.rated ? <div className="rating-btn__your-rating">Ваш рейтинг : {circleDiagram(this.state.rated)}</div>: null}
+          {this.state.rated ? <div className="rating-btn__your-rating">Ваш рейтинг : {circleDiagram(this.state.rated)}</div>: <p className="rating-btn__your-rating">Укажите рейтинг</p>}
         </DropdownToggle>
         <DropdownMenu
           className="rating-btn__drop"

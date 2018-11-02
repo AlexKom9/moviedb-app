@@ -1,3 +1,5 @@
+import * as constants from '../constants/constants'
+
 const initialState = {
   favorite: [],
   watchlist: []
@@ -5,12 +7,12 @@ const initialState = {
 
 const reducerAccount = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_FAVORITE":
+    case constants.UPDATE_FAVORITE:
       return {
         ...state,
         favorite: action.payload
       };
-    case "UPDATE_WATCHLIST":
+    case constants.UPDATE_WATCHLIST:
       return {
         ...state,
         watchlist: action.payload

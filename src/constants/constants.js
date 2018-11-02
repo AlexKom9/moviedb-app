@@ -16,5 +16,12 @@ export const LOG_OUT = "LOG_OUT";
 export const UPDATE_FAVORITE = "UPDATE_FAVORITE";
 export const UPDATE_WATCHLIST = "UPDATE_WATCHLIST";
 
+//Login form
+export const TOGGLE_LOGIN_FORM = "TOGGLE_LOGIN_FORM";
+export const HIDE_LOGIN_FORM = "HIDE_LOGIN_FORM";
+
+
+
+
 
 

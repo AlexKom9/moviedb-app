@@ -1,5 +1,4 @@
 import CallApi from "../api/api";
-
 import * as constants from "../constants/constants";
 
 export const actionCreatorUpdateMovies = data => {

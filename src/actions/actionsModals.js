@@ -1,12 +1,14 @@
+import * as constants from '../constants/constants'
+
 export const actionCreatorToggleLoginForm = () => {
   return {
-    type: "TOGGLE_LOGIN_FORM"
+    type: constants.TOGGLE_LOGIN_FORM
   };
 };
 
 export const actionCreatorHideLoginForm = () => {
   return {
-    type: "HIDE_LOGIN_FORM"
+    type: constants.HIDE_LOGIN_FORM
   };
 };
 

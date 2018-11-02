@@ -1,3 +1,5 @@
+import * as constants from '../constants/constants'
+
 const initialState = {
   showLoginForm: false
 };
@@ -5,12 +7,12 @@ const initialState = {
 const reducerModals = (state = initialState, action) => {
   switch (action.type) {
 
-    case "TOGGLE_LOGIN_FORM":
+    case constants.TOGGLE_LOGIN_FORM:
       return {
         ...state,
         showLoginForm: !state.showLoginForm
       };
-    case "HIDE_LOGIN_FORM":
+    case constants.HIDE_LOGIN_FORM:
       return {
         ...state,
         showLoginForm: false

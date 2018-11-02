@@ -18,7 +18,6 @@ export default class MoviePage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps.match.params.id, this.props.match.params.id);
     if(prevProps.match.params.id !== this.props.match.params.id) {
       this.getMovie(this.props.match.params.id);
     }

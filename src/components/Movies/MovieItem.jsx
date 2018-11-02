@@ -24,7 +24,7 @@ class MovieItem extends React.Component {
           alt=""
         />
         <div className="card-body shadow-sm">
-          <Link to={`/movie/${item.id}`}>{item.title}</Link>
+          <Link to={`/movie/${item.id}/details`}>{item.title}</Link>
           <div className="card-text">
             Рейтинг:
             {item.vote_average}

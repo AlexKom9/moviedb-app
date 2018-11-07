@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header/Header";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
+import Loader from './Loader'
 
 import { BrowserRouter, Route } from "react-router-dom";
 import AccountFavoritesPage from "./pages/AcountPage/AccountFavoritesPage";
@@ -43,7 +44,7 @@ class App extends React.Component {
         </div>
       </BrowserRouter>
     ) : (
-      <p>Loading...</p>
+      <Loader/>
     );
   }
 }

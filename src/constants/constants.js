@@ -12,7 +12,6 @@ export const UPDATE_AUTH = "UPDATE_AUTH";
 export const LOG_OUT = "LOG_OUT";
 
 //Account
-
 export const UPDATE_FAVORITE = "UPDATE_FAVORITE";
 export const UPDATE_WATCHLIST = "UPDATE_WATCHLIST";
 
